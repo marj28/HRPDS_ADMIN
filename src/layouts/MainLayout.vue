@@ -46,6 +46,16 @@
                REQUEST UPDATE
               </q-item-section>
             </q-item>
+
+            <q-item clickable v-ripple exact to="/Announcement">
+              <q-item-section avatar>
+                <q-icon name="campaign" />
+              </q-item-section>
+
+              <q-item-section>
+               ANNOUNCEMENT
+              </q-item-section>
+            </q-item>
           </q-list>
         </q-scroll-area>
 

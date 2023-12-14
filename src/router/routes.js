@@ -15,6 +15,10 @@ const routes = [
         path: "/RequestUpdate",
         component: () => import("pages/RequestUpdate.vue"),
       },
+      {
+        path: "/Announcement",
+        component: () => import("pages/AnnouncementPage.vue"),
+      },
     ],
   },
 
