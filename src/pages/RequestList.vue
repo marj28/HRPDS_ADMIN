@@ -7,371 +7,6 @@
             <b><p style="font-size: 20px; color: #0c0c0c">Request List</p></b>
           </div>
 
-          <q-dialog v-model="dialogpersonal" persistent>
-            <q-card style="width: 50%; height: 75%">
-              <q-card-section>
-                <div class="text-h6">Personal Details</div>
-              </q-card-section>
-
-              <q-separator />
-
-              <div class="row">
-                <div class="col-12 col-sm-6 col-md-3 col-lg-6">
-                  <div class="q-pa-sm q-ml-xl">
-                    <label>
-                      <img
-                        v-if="imageUrl"
-                        :src="imageUrl"
-                        alt="Selected Image"
-                        style="
-                          cursor: pointer;
-                          max-width: 200%;
-                          max-height: 195px;
-                        "
-                        @click="openFileInput"
-                      />
-                      <div v-else class="placeholder" style="cursor: pointer">
-                        Click to add an image
-                      </div>
-                      <input
-                        ref="fileInput"
-                        type="file"
-                        style="display: none"
-                        @change="handleFileChange"
-                      />
-                    </label>
-                  </div>
-                </div>
-
-                <div class="col-12 col-sm-6 col-md-3 col-lg-6 q-pa-sm">
-                  <q-input
-                    filled
-                    label="Nationality"
-                    v-model="fixedValue_Nationality"
-                    dense
-                    class="q-pa-sm"
-                  />
-                </div>
-              </div>
-
-              <q-card-section style="max-height: 50vh" class="scroll">
-                <q-form>
-                  <div class="row">
-                    <div class="col-lg-6 col-md-6 col-sm-12">
-                      <q-input
-                        filled
-                        label="First Name"
-                        dense
-                        class="q-pa-sm"
-                      />
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-sm-12">
-                      <q-input
-                        filled
-                        label="Middle Name"
-                        dense
-                        class="q-pa-sm"
-                      />
-                    </div>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-lg-12 col-md-6 col-sm-12">
-                      <q-input filled label="Last Name" dense class="q-pa-sm" />
-                    </div>
-
-                    <div class="col-lg-12 col-md-6 col-sm-12">
-                      <q-input
-                        filled
-                        label="Occupation"
-                        dense
-                        class="q-pa-sm"
-                      />
-                    </div>
-
-                    <div class="col-lg-6 col-md-6 col-sm-12">
-                      <q-input filled label="Age" dense class="q-pa-sm" />
-                    </div>
-
-                    <div class="col-lg-6 col-md-6 col-sm-12">
-                      <!--  <q-input filled label="Sex" dense class="q-pa-sm" /> -->
-                      <!--   <q-select
-                        class="q-pa-sm"
-                        label="Sex"
-                        transition-show="jump-up"
-                        transition-hide="jump-up"
-                        filled
-                        dense
-                        v-model="model"
-                        :options="options_sex"
-                      /> -->
-                    </div>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-lg-12 col-md-6 col-sm-12">
-                      <q-input
-                        filled
-                        label="Place of Work"
-                        dense
-                        class="q-pa-sm"
-                      />
-                    </div>
-                  </div>
-                  <q-separator class="q-mb-sm"></q-separator>
-                </q-form>
-              </q-card-section>
-            </q-card>
-            <q-card style="width: 50%; height: 75%">
-              <q-card-section>
-                <div class="text-h6">Health Details</div>
-              </q-card-section>
-
-              <q-separator />
-
-              <q-card-section style="max-height: 50vh" class="scroll">
-                <q-form>
-                  <div class="row justify-center q-ma-sm">
-                    <div class="col-lg-12">
-                      <q-card class="imunizationbackgroundcolor">
-                        <p class="row justify-center">Immunization</p>
-                      </q-card>
-                    </div>
-                  </div>
-
-                  <div class="row q-ma-sm">
-                    <div class="col-lg-4 col-md-6 col-sm-12">
-                      <q-card>
-                        <p
-                          class="row justify-center imunizationbackgroundcolor_caption"
-                        >
-                          Date
-                        </p>
-                      </q-card>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-12">
-                      <q-card>
-                        <p
-                          class="row justify-center imunizationbackgroundcolor_caption"
-                        >
-                          Kind
-                        </p>
-                      </q-card>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-12">
-                      <q-card>
-                        <p
-                          class="row justify-center imunizationbackgroundcolor_caption"
-                        >
-                          Result
-                        </p>
-                      </q-card>
-                    </div>
-                  </div>
-
-                  <div class="row rowup">
-                    <div class="col-lg-4 col-md-6 col-sm-12">
-                      <q-input filled type="date" dense class="q-pa-sm" />
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-12">
-                      <q-input filled dense class="q-pa-sm" />
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-12">
-                      <q-input filled dense class="q-pa-sm" />
-                    </div>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-lg-4 col-md-6 col-sm-12">
-                      <q-input filled type="date" dense class="q-pa-sm" />
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-12">
-                      <q-input filled dense class="q-pa-sm" />
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-12">
-                      <q-input filled dense class="q-pa-sm" />
-                    </div>
-                  </div>
-                </q-form>
-              </q-card-section>
-
-              <q-card-section style="max-height: 50vh" class="rowup1">
-                <q-form>
-                  <div class="row justify-center q-ma-sm rowup1">
-                    <div class="col-lg-12">
-                      <q-card class="imunizationbackgroundcolor">
-                        <p class="row justify-center">X-Ray/Sputum</p>
-                      </q-card>
-                    </div>
-                  </div>
-
-                  <div class="row q-ma-sm">
-                    <div class="col-lg-4 col-md-6 col-sm-12">
-                      <q-card>
-                        <p
-                          class="row justify-center imunizationbackgroundcolor_caption"
-                        >
-                          Date
-                        </p>
-                      </q-card>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-12">
-                      <q-card>
-                        <p
-                          class="row justify-center imunizationbackgroundcolor_caption"
-                        >
-                          Kind
-                        </p>
-                      </q-card>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-12">
-                      <q-card>
-                        <p
-                          class="row justify-center imunizationbackgroundcolor_caption"
-                        >
-                          Result
-                        </p>
-                      </q-card>
-                    </div>
-                  </div>
-
-                  <div class="row rowup1">
-                    <div class="col-lg-4 col-md-6 col-sm-12">
-                      <q-input filled type="date" dense class="q-pa-sm" />
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-12">
-                      <q-input
-                        v-model="fixedValue_xray"
-                        filled
-                        input-style="text-align: center"
-                        dense
-                        class="q-pa-sm"
-                      />
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-12">
-                      <q-input filled dense class="q-pa-sm" />
-                    </div>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-lg-4 col-md-6 col-sm-12">
-                      <q-input filled type="date" dense class="q-pa-sm" />
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-12">
-                      <q-input
-                        filled
-                        v-model="fixedValue_Sputum"
-                        input-style="text-align: center"
-                        dense
-                        class="q-pa-sm"
-                      />
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-12">
-                      <q-input filled dense class="q-pa-sm" />
-                    </div>
-                  </div>
-                  <q-separator class="q-mb-sm"></q-separator>
-                </q-form>
-              </q-card-section>
-
-              <q-card-section style="max-height: 50vh" class="rowup1">
-                <q-form>
-                  <div class="row justify-center q-ma-sm rowup">
-                    <div class="col-lg-12">
-                      <q-card class="imunizationbackgroundcolor">
-                        <p class="row justify-center">
-                          Stool and Other Exam. RQD.
-                        </p>
-                      </q-card>
-                    </div>
-                  </div>
-
-                  <div class="row q-ma-sm">
-                    <div class="col-lg-4 col-md-6 col-sm-12">
-                      <q-card>
-                        <p
-                          class="row justify-center imunizationbackgroundcolor_caption"
-                        >
-                          Date
-                        </p>
-                      </q-card>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-12">
-                      <q-card>
-                        <p
-                          class="row justify-center imunizationbackgroundcolor_caption"
-                        >
-                          Kind
-                        </p>
-                      </q-card>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-12">
-                      <q-card>
-                        <p
-                          class="row justify-center imunizationbackgroundcolor_caption"
-                        >
-                          Result
-                        </p>
-                      </q-card>
-                    </div>
-                  </div>
-
-                  <div class="row rowup">
-                    <div class="col-lg-4 col-md-6 col-sm-12">
-                      <q-input filled type="date" dense class="q-pa-sm" />
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-12">
-                      <q-input
-                        filled
-                        input-style="text-align: center"
-                        v-model="fixedValue_Stool"
-                        dense
-                        class="q-pa-sm"
-                      />
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-12">
-                      <q-input filled dense class="q-pa-sm" />
-                    </div>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-lg-4 col-md-6 col-sm-12">
-                      <q-input filled type="date" dense class="q-pa-sm" />
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-12">
-                      <q-input
-                        filled
-                        dense
-                        input-style="text-align: center"
-                        v-model="fixedValue_Urine"
-                        class="q-pa-sm"
-                      />
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-12">
-                      <q-input filled dense class="q-pa-sm" />
-                    </div>
-                  </div>
-                  <q-separator class="q-mb-sm"></q-separator>
-                </q-form>
-              </q-card-section>
-              <q-card-actions align="right">
-                <q-btn
-                  flat
-                  label="Cancel"
-                  color="primary"
-                  v-close-popup
-                  size="md"
-                />
-                <q-btn
-                  label="Save"
-                  color="secondary"
-                  size="md"
-                  v-close-popup
-                  @click="save"
-                />
-              </q-card-actions>
-            </q-card>
-          </q-dialog>
 
           <!--       <div class="col-8 q-pa-sm">
             <q-btn
@@ -413,15 +48,20 @@
           flat
           bordered
           :filter="filter"
-          :rows="seed"
+          :rows="userrequest"
           :columns="columns"
+
+
+
+          :rows-per-page-options="[5,10,15,20,100]"
+
           :loading="loading"
           row-key="Controlno"
           virtual-scroll
           :virtual-scroll-item-size="48"
           :virtual-scroll-sticky-size-start="48"
           :pagination="pagination"
-          :rows-per-page-options="[0]"
+
           @virtual-scroll="onScroll"
         >
           <template v-slot:body="props">
@@ -454,6 +94,7 @@
 
 import { defineComponent } from "vue";
 import { ref, computed, nextTick } from "vue";
+import { useDashboardStore } from "../stores/Dashboard";
 export default defineComponent({
   name: "App",
 
@@ -474,7 +115,7 @@ export default defineComponent({
           name: "Controlno",
           align: "center",
           label: "Control no",
-          field: "Controlno",
+          field: row=>row.controlno,
           sortable: true,
         },
         {
@@ -482,8 +123,8 @@ export default defineComponent({
           required: true,
           label: "Full Name",
           align: "center",
-          field: (row) => row.fullname,
-          format: (val) => val,
+          field: "name1",
+
 
           sortable: true,
         },
@@ -491,56 +132,26 @@ export default defineComponent({
         {
           name: "Designation",
           label: "Designation",
-          field: "Designation",
+          field: "designation",
           sortable: true,
         },
-        { name: "Status", label: "Status", field: "Status" },
+        { name: "Status", label: "Status", field: "status", },
       ],
 
-      seed: [
-        {
-          Controlno: "0323232",
-          fullname: "Joemarie Rendon",
-          Designation: "Programmer",
-          Status: "Married",
-        },
-        {
-          Controlno: "0323232",
-          fullname: "Jograd Mahusay",
-          Designation: "Web Developer",
-          Status: "Single",
-        },
-        {
-          Controlno: "0323232",
-          fullname: "Pablo Escobar",
-          Designation: "Delivery Boy",
-          Status: "Single",
-        },
-        {
-          Controlno: "0323232",
-          fullname: "Stepehn Curry",
-          Designation: "Buss Driver",
-          Status: "Single",
-        },
-        {
-          Controlno: "019807",
-          fullname: "Honey Marjie Curay",
-          Designation: "Front End Web Dev",
-          Status: "Single",
-        },
-        {
-          Controlno: "0323232",
-          fullname: "Carlo QUEZON",
-          Designation: "Network Administrator",
-          Status: "Single",
-        },
-      ],
+
+      userrequest:[],
     };
   },
 
   computed: {},
 
-  created() {},
+  created() {
+    const store=useDashboardStore();
+
+//  console.log("imgurl=",store.users);
+ this.userrequest=store.users
+
+  },
 
   methods: {
     handleRowClick(row) {
@@ -583,6 +194,17 @@ export default defineComponent({
       this.dialogpersonal = true;
     },
   },
+  setup(){
+    // const store=useDashboardStore();
+
+    //  console.log("imgurl=",store.users);
+    //  this.userrequest=Object.values(store.users)
+    return {
+      // store,
+
+
+    }
+  }
 });
 </script>
 

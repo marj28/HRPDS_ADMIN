@@ -5,10 +5,33 @@
     <div class="column items-center" style="">
       <div class="col" style="width: 90%;">
         <q-card class="q-pa-sm" style="text-align: center;">
-          <h4 class="q-mb-md q-mt-md">13</h4>
+          <h4 class="q-mb-md q-mt-md">{{ store.request.length }}</h4>
           <p>REQUEST FOR UPDATE</p>
         </q-card>
       </div>
     </div>
   </div>
 </template>
+<script>
+import { useDashboardStore } from "../stores/Dashboard";
+export default {
+data(){
+  return{
+
+  }
+},
+
+
+  setup () {
+
+    const store=useDashboardStore();
+    store.getrequest();
+    // console.log("imgurl=",imgurl);
+    return {
+      store,
+
+
+    }
+  },
+}
+</script>

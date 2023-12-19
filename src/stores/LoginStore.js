@@ -25,7 +25,7 @@ export const useLoginStore = defineStore("LoginStore", {
       // `http://10.0.1.23:82/HRPORTAL/login.php`
       let res = await axios.post(
 
-        `http://10.0.1.23:82/HRPORTAL/login.php`,
+        `http://10.0.1.23:82/HRPORTAL/loginadmin.php`,
         payload
       )
       // console.log("data=",res.data);
