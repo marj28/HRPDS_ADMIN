@@ -16,6 +16,10 @@ const routes = [
         component: () => import("pages/RequestUpdate.vue"),
       },
       {
+        path: "/RequestList",
+        component: () => import("pages/RequestList.vue"),
+      },
+      {
         path: "/Announcement",
         component: () => import("pages/AnnouncementPage.vue"),
       },

@@ -37,7 +37,7 @@
               </q-item-section>
             </q-item>
 
-            <q-item clickable v-ripple exact to="/RequestUpdate">
+            <q-item clickable v-ripple exact to="/RequestList">
               <q-item-section avatar>
                 <q-icon name="border_color" />
               </q-item-section>

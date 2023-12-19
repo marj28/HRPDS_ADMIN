@@ -2,8 +2,12 @@
   <div>
     <div>
       <h5 class="q-ml-lg">REQUEST UPDATE</h5>
+
       <div class="column items-center" style="">
         <div class="col" style="width: 90%">
+
+        
+
           <q-card class="q-pa-sm" style="text-align: center">
             <q-table
               class="my-sticky-header-table"
@@ -46,21 +50,21 @@
           <q-separator />
 
           <q-card-section>
-            <p>Reason for Denial of Request Update : </p>
-            <q-input v-model="text" filled type="textarea"  dense=""/>
+            <p>Reason for Denial of Request Update :</p>
+            <q-input v-model="text" filled type="textarea" dense="" />
           </q-card-section>
           <q-separator />
 
-        <q-card-actions align="right">
-          <q-btn
-            flat
-            label="Cancel"
-            color="orange"
-            v-close-popup
-            @click="cancel"
-          />
-          <q-btn label="Save" color="green" v-close-popup @click="save" />
-        </q-card-actions>
+          <q-card-actions align="right">
+            <q-btn
+              flat
+              label="Cancel"
+              color="orange"
+              v-close-popup
+              @click="cancel"
+            />
+            <q-btn label="Save" color="green" v-close-popup @click="save" />
+          </q-card-actions>
         </q-card>
       </q-dialog>
     </div>
