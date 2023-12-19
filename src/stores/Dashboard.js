@@ -19,7 +19,7 @@ export const useDashboardStore = defineStore("DashboardStore", {
 
       this.request = res.data.request;
       this.users = Object.values(res.data.users);
-     
+
     },
     async getannouncements() {
       // `http://10.0.1.23:82/HRPORTAL/login.php`

@@ -55,14 +55,6 @@
 
           :rows-per-page-options="[5,10,15,20,100]"
 
-          :loading="loading"
-          row-key="Controlno"
-          virtual-scroll
-          :virtual-scroll-item-size="48"
-          :virtual-scroll-sticky-size-start="48"
-          :pagination="pagination"
-
-          @virtual-scroll="onScroll"
         >
           <template v-slot:body="props">
             <q-tr :props="props" @click="handleRowClick(props.row)">
