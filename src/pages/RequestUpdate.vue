@@ -5,9 +5,6 @@
 
       <div class="column items-center" style="">
         <div class="col" style="width: 90%">
-
-        
-
           <q-card class="q-pa-sm" style="text-align: center">
             <q-table
               class="my-sticky-header-table"
@@ -22,6 +19,9 @@
             >
               <template v-slot:body-cell-actions="{ row }">
                 <div class="actionsbtn q-gutter-lg">
+                  <q-btn flat round color="green" @click="editItem(row)">
+                    View Docu
+                  </q-btn>
                   <q-btn flat round color="green" @click="editItem(row)">
                     Accept
                   </q-btn>
@@ -77,10 +77,31 @@ export default {
       DialogDeny: false,
       columns: [
         {
-          name: "requestname",
+          name: "requestfield",
           align: "left",
-          label: "REQUEST NAME",
-          field: "test",
+          label: "REQUEST FIELD",
+          field: "requestfield",
+          sortable: true,
+        },
+        {
+          name: "datafrom",
+          align: "left",
+          label: "DATA FROM",
+          field: "datafrom",
+          sortable: true,
+        },
+        {
+          name: "datato",
+          align: "left",
+          label: "DATA TO",
+          field: "datato",
+          sortable: true,
+        },
+        {
+          name: "status",
+          align: "left",
+          label: "STATUS",
+          field: "status",
           sortable: true,
         },
         {
@@ -92,7 +113,28 @@ export default {
       ],
       rows: [
         {
-          test: "Test Sample 1",
+          requestfield: "RESIDENTIAL PRVINCE",
+          datafrom: "Davao Del Norte",
+          datato: "Davao Del norte",
+          status: "Status",
+        },
+        {
+          requestfield: "RESIDENTIAL PRVINCE",
+          datafrom: "Davao Del Norte",
+          datato: "Davao Del norte",
+          status: "Status",
+        },
+        {
+          requestfield: "RESIDENTIAL PRVINCE",
+          datafrom: "Davao Del Norte",
+          datato: "Davao Del norte",
+          status: "Status",
+        },
+        {
+          requestfield: "RESIDENTIAL PRVINCE",
+          datafrom: "Davao Del Norte",
+          datato: "Davao Del norte",
+          status: "Status",
         },
       ],
     };
