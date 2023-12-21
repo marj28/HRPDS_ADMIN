@@ -11,10 +11,7 @@ const routes = [
     component: () => import("layouts/MainLayout.vue"),
     children: [
       { path: "", component: () => import("pages/DashboardPage.vue") },
-      {
-        path: "/RequestUpdate",
-        component: () => import("pages/RequestUpdate.vue"),
-      },
+
       {
         path: "/RequestList",
         component: () => import("pages/RequestList.vue"),
@@ -22,6 +19,12 @@ const routes = [
       {
         path: "/Announcement",
         component: () => import("pages/AnnouncementPage.vue"),
+      },
+      {
+        path: "/RequestUpdate/:controlNo",
+        name: "RequestUpdate",
+        component: () => import("pages/RequestUpdate.vue"),
+        props: true, // Adjust the path based on your project structure
       },
     ],
   },

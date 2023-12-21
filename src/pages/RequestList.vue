@@ -95,7 +95,7 @@
 
                     <div class="col-lg-6 col-md-6 col-sm-12">
                       <!--  <q-input filled label="Sex" dense class="q-pa-sm" /> -->
-                      <q-select
+                      <!--   <q-select
                         class="q-pa-sm"
                         label="Sex"
                         transition-show="jump-up"
@@ -104,7 +104,7 @@
                         dense
                         v-model="model"
                         :options="options_sex"
-                      />
+                      /> -->
                     </div>
                   </div>
 
@@ -416,7 +416,7 @@
           :rows="seed"
           :columns="columns"
           :loading="loading"
-          row-key="index"
+          row-key="Controlno"
           virtual-scroll
           :virtual-scroll-item-size="48"
           :virtual-scroll-sticky-size-start="48"
@@ -424,33 +424,23 @@
           :rows-per-page-options="[0]"
           @virtual-scroll="onScroll"
         >
-          <template v-slot:body-cell-actions="{ row }">
-            <div class="actionsbtn">
-              <q-btn
-                icon="edit"
-                flat
-                round
-                color="secondary"
-                @click="editItem(row)"
-              >
-              </q-btn>
-              <q-btn
-                icon="delete"
-                flat
-                round
-                color="deep-orange"
-                @click="deleteItem(row)"
-              >
-              </q-btn>
-              <q-btn
-                icon="security"
-                flat
-                round
-                color="primary"
-                @click="accessItem(row)"
-              >
-              </q-btn>
-            </div>
+          <template v-slot:body="props">
+            <q-tr :props="props" @click="handleRowClick(props.row)">
+              <q-td key="Controlno" :props="props">
+                {{ props.row.Controlno }}
+              </q-td>
+              <q-td key="fullname" :props="props">
+                <!--  <q-badge color="green"> -->
+                {{ props.row.fullname }}
+                <!--   </q-badge> -->
+              </q-td>
+              <q-td key="Designation" :props="props">
+                {{ props.row.Designation }}
+              </q-td>
+              <q-td key="Status" :props="props">
+                {{ props.row.Status }}
+              </q-td>
+            </q-tr>
           </template>
         </q-table>
       </q-card>
@@ -461,6 +451,7 @@
 <script>
 /* import HorizontalBarChart from "../components/HorizontalBarChart.vue"; */
 /* import PieChart from "../components/PieChart.vue"; */
+
 import { defineComponent } from "vue";
 import { ref, computed, nextTick } from "vue";
 export default defineComponent({
@@ -475,14 +466,9 @@ export default defineComponent({
       imageUrl: null,
       dialogpersonal: false,
       filter: "",
-      fixedValue_xray: "X-ray", // Set your fixed value here
-      fixedValue_Sputum: "Sputum", // Set your fixed value here
-      fixedValue_Stool: "Stool", // Set your fixed value here
-      fixedValue_Urine: "Urine", // Set your fixed value here
-      fixedValue_Nationality: "Filipino", // Set your fixed value here
-
+      controlNo: "",
       model: ref(null),
-      options_sex: ["Male", "Female"],
+
       columns: [
         {
           name: "Controlno",
@@ -557,6 +543,13 @@ export default defineComponent({
   created() {},
 
   methods: {
+    handleRowClick(row) {
+      console.log("Clicked row:", row.Controlno);
+      this.$router.push({
+        name: "RequestUpdate",
+        params: { controlNo: row.Controlno },
+      });
+    },
     openFileInput() {
       this.$refs.fileInput.click();
     },

@@ -44,13 +44,13 @@
             <q-item-section> REQUEST UPDATE</q-item-section>
           </q-item>
 
-          <q-item clickable v-ripple exact to="/RequestUpdate">
+          <!--   <q-item clickable v-ripple exact to="/RequestUpdate">
             <q-item-section avatar>
               <q-icon name="border_color" />
             </q-item-section>
 
             <q-item-section> REQUEST UPDATE Sample </q-item-section>
-          </q-item>
+          </q-item> -->
 
           <q-item clickable v-ripple exact to="/Announcement">
             <q-item-section avatar>

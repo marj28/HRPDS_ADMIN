@@ -1,8 +1,23 @@
 <template>
   <div>
     <div>
-      <h5 class="q-ml-lg">REQUEST UPDATE</h5>
+      <div class="row">
+        <div class="col-1">
+          <p>{{ controlNo }}</p>
+          <!--  <h5 class="q-ml-lg">REQUEST UPDATE</h5> -->
+        </div>
+        <div class="col-12 col-sm-6 col-md-3 col-lg-2 q-mt-md">
+          <q-avatar size="80px" class="shadow-10">
+            <q-img :src="imgurl" />
+          </q-avatar>
+        </div>
 
+        <div class="col-2 col-sm-2 col-md-2 col-lg-6 q-mt-md">
+          <p>Full Name: {{ FUllname }}</p>
+          <p class="q-mt-md">Designation:</p>
+          <p class="uppadding">Status:</p>
+        </div>
+      </div>
       <div class="column items-center" style="">
         <div class="col" style="width: 90%">
           <q-card class="q-pa-sm" style="text-align: center">
@@ -75,6 +90,8 @@ export default {
   data() {
     return {
       DialogDeny: false,
+      controlNo: "",
+
       columns: [
         {
           name: "requestfield",
@@ -113,24 +130,57 @@ export default {
       ],
       rows: [
         {
+          /*    Controlno: "019807", */
           requestfield: "RESIDENTIAL PRVINCE",
           datafrom: "Davao Del Norte",
           datato: "Davao Del norte",
           status: "Status",
         },
         {
+          /*  Controlno: "019807", */
           requestfield: "RESIDENTIAL PRVINCE",
           datafrom: "Davao Del Norte",
           datato: "Davao Del norte",
           status: "Status",
         },
         {
+          /*   Controlno: "019807", */
           requestfield: "RESIDENTIAL PRVINCE",
           datafrom: "Davao Del Norte",
           datato: "Davao Del norte",
           status: "Status",
         },
         {
+          /*   Controlno: "019807", */
+          requestfield: "RESIDENTIAL PRVINCE",
+          datafrom: "Davao Del Norte",
+          datato: "Davao Del norte",
+          status: "Status",
+        },
+
+        {
+          /*   Controlno: "0323232", */
+          requestfield: "RESIDENTIAL PRVINCE",
+          datafrom: "Davao Del Norte",
+          datato: "Davao Del norte",
+          status: "Status",
+        },
+        {
+          /*    Controlno: "0323232", */
+          requestfield: "RESIDENTIAL PRVINCE",
+          datafrom: "Davao Del Norte",
+          datato: "Davao Del norte",
+          status: "Status",
+        },
+        {
+          /*   Controlno: "0323232", */
+          requestfield: "RESIDENTIAL PRVINCE",
+          datafrom: "Davao Del Norte",
+          datato: "Davao Del norte",
+          status: "Status",
+        },
+        {
+          /*  Controlno: "0323232", */
           requestfield: "RESIDENTIAL PRVINCE",
           datafrom: "Davao Del Norte",
           datato: "Davao Del norte",
@@ -139,10 +189,25 @@ export default {
       ],
     };
   },
+  mounted() {
+    this.controlNo = this.$route.params.controlNo;
+    /*  this.FUllname = this.$route.params.FUllname; */
+  },
   methods: {
     deleteItem() {
       this.DialogDeny = true;
     },
   },
+
+  // created() {
+  //   // Access the controlNumber from the Vuex store
+  //   this.controlNumber = this.$store.state.controlNumber;
+  // },
 };
 </script>
+
+<style>
+.uppadding {
+  padding-top: -20px;
+}
+</style>
