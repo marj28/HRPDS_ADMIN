@@ -16,7 +16,7 @@
               bordered
               title="Announcement List"
               dense
-              :rows="rows"
+              :rows="announcement"
               :columns="columns"
               row-key="id"
               :rows-per-page-options="[0]"
@@ -119,17 +119,21 @@
 </template>
 
 <script>
+import { useDashboardStore } from 'src/stores/Dashboard';
 export default {
   data() {
     return {
+      id:'',
+      announcementname:'',
       CreationDialog: false,
+      announcement:[],
       imageUrl: null,
       columns: [
         {
           name: "announcementname",
           align: "left",
           label: "ANNOUNCEMENT NAME",
-          field: "test",
+          field: "Announcement",
           sortable: true,
         },
         {
@@ -145,6 +149,13 @@ export default {
         },
       ],
     };
+  },
+  created(){
+    const store=useDashboardStore();
+    store.getannouncements().then(res=>{
+      this.announcement=store.announcements;
+      console.log('announcement=',this.announcement)
+    })
   },
   methods: {
     // deleteItem() {
@@ -163,10 +174,9 @@ export default {
     },
 
     Rowclick() {
-      this.editedItem = {
-        id: null,
-        announcementname: "",
-      };
+
+        this.announcementname= "",
+
       this.CreationDialog = true;
     },
 
@@ -175,12 +185,55 @@ export default {
     },
 
     save() {
-      this.CreationDialog = false;
+      const store=useDashboardStore();
+      if(this.id){
+         const store=useDashboardStore();
+      let data=new FormData;
+      data.append("announcement",this.announcementname);
+      data.append("id",this.id);
+      data.append("type","edit");
+      store.saveannouncements(data).then(res=>{
+        store.getannouncements().then(res=>{
+          this.announcement=store.announcements;
+        })
+      })
+      this.id="";
+      this.announcementname="";
+      }else{
+      if(this.announcementname.trim() !==""){
+        let data=new FormData();
+        data.append("announcement",this.announcementname);
+        data.append("type","save");
+        store.saveannouncements(data).then(res=>{
+          if(res == 0){
+            store.getannouncements().then(res=>{
+              this.announcement=store.announcements
+            })
+          }
+        })
+      }
+    }
+      this.CreationDialog = false
     },
 
     editItem(item) {
-      this.CreationDialog = true;
+      this.announcementname=item.Announcement;
+      this.id=item.ID;
+      this.CreationDialog=true
+
     },
+    deleteItem(item){
+      const store=useDashboardStore();
+      let data=new FormData;
+      data.append("id",item.ID);
+      data.append("type","delete");
+      store.saveannouncements(data).then(res=>{
+        store.getannouncements().then(res=>{
+          this.announcement=store.announcements;
+        })
+      })
+    }
+
   },
 };
 </script>
