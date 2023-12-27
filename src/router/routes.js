@@ -20,6 +20,8 @@ const routes = [
         path: "/Announcement",
         component: () => import("pages/AnnouncementPage.vue"),
       },
+      { path: "/PDS", component: () => import("pages/PDS.vue") },
+
       {
         path: "/RequestUpdate/:controlNo",
         name: "RequestUpdate",
@@ -28,6 +30,7 @@ const routes = [
       },
     ],
   },
+  { path: "/printpds", component: () => import("pages/PrintLayout.vue") },
 
   // Always leave this as last one,
   // but you can also remove it
