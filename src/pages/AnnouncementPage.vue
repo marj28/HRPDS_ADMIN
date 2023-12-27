@@ -49,8 +49,25 @@
               <q-card-section>
                 <div class="text-h6">Announcement Details</div>
 
+                <q-card-section style="height: auto" class="scroll">
+                  <q-form>
+                    <div class="row">
+                      <div class="col-12">
+                        <q-input
+                          type="textarea"
+                          filled
+                          v-model="announcementname"
+                          label="Announcement Name"
+                          dense
+                          class="q-pa-sm"
+                        />
+                      </div>
+                    </div>
+                  </q-form>
+                </q-card-section>
+
                 <div class="row">
-                  <div class="col-12 col-sm-6 col-md-3 col-lg-6">
+                  <div class="col-12 col-sm-6 col-md-3 col-lg-7 q-ml-xl">
                     <div class="q-pa-sm q-ml-xl">
                       <label>
                         <img
@@ -80,22 +97,6 @@
               </q-card-section>
 
               <q-separator />
-
-              <q-card-section style="height: auto" class="scroll">
-                <q-form>
-                  <div class="row">
-                    <div class="col-12">
-                      <q-input
-                        filled
-                        v-model="announcementname"
-                        label="Announcement Name"
-                        dense
-                        class="q-pa-sm"
-                      />
-                    </div>
-                  </div>
-                </q-form>
-              </q-card-section>
 
               <q-separator />
 
