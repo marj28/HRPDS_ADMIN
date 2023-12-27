@@ -7,17 +7,31 @@
         person who has immediate supervision over you in the Office, Bureau or
         Department where you will be apppointed,
         <div class="q-gutter-sm q-mr-md col-md-6 col-xs-12">
-          <label for="sex" class="q-ml-lg">a. within the third degree?</label>
-          <q-radio v-model="personal[0].Q1" val="YES" label="Yes" inline />
-          <q-radio v-model="personal[0].Q1" val="NO" label="No" inline />
+          <div class="row">
+            <div class="col-lg-2 col-md-3">
+              <label for="sex" class="q-ml-md"
+                >a. within the third degree?
+              </label>
+            </div>
+
+            <div class="col-6">
+              <p v-if="personal[0].Q1 == 'NO'">NO</p>
+              <p v-else-if="personal[0].Q1 == 'YES'">YES</p>
+            </div>
+          </div>
+
+          <!--   <q-radio v-model="personal[0].Q1" val="YES" label="Yes" inline />
+          <q-radio v-model="personal[0].Q1" val="NO" label="No" inline /> -->
+
+          <!-- <p v-if="personal[0].Q1 == 'NO'">YES</p> -->
         </div>
         <div class="q-gutter-sm q-mr-md col-md-6 col-xs-12">
           <label for="sex" class="q-ml-lg"
             >b. within the fourth degree (for Local Government Unit - Career
-            Employees)?</label
-          >
-          <q-radio v-model="personal[0].Q11" val="YES" label="Yes" inline />
-          <q-radio v-model="personal[0].Q11" val="NO" label="No" inline />
+            Employees)?
+          </label>
+          <!--  <q-radio v-model="personal[0].Q11" val="YES" label="Yes" inline />
+          <q-radio v-model="personal[0].Q11" val="NO" label="No" inline /> -->
         </div>
         <div class="q-gutter-sm q-mr-md col-md-6 col-xs-12">
           <q-input
@@ -32,10 +46,22 @@
         </div>
       </q-card-section>
       <q-card-section>
-        35. a. Have you ever been found guilty of any administrative offense?
+        <div class="row">
+          <div class="col-lg-4 col-md-6">
+            <p>
+              35. a. Have you ever been found guilty of any administrative
+              offense?
+            </p>
+          </div>
 
-        <q-radio v-model="personal[0].Q4" val="YES" label="Yes" inline />
-        <q-radio v-model="personal[0].Q4" val="NO" label="No" inline />
+          <div class="col-6">
+            <p v-if="personal[0].Q11 == 'NO'">NO</p>
+            <p v-else-if="personal[0].Q11 == 'YES'">YES</p>
+          </div>
+        </div>
+
+        <!--    <q-radio v-model="personal[0].Q4" val="YES" label="Yes" inline />
+        <q-radio v-model="personal[0].Q4" val="NO" label="No" inline /> -->
         <q-input
           v-if="personal[0].Q4 == 'YES'"
           v-model="personal[0].R4"
@@ -47,11 +73,20 @@
         />
 
         <div class="q-gutter-sm q-mr-md col-md-6 col-xs-12">
-          <label for="sex" class="q-ml-lg"
-            >b. Have you been criminally charged before any court?</label
-          >
-          <q-radio v-model="personal[0].Q7" val="YES" label="Yes" inline />
-          <q-radio v-model="personal[0].Q7" val="NO" label="No" inline />
+          <div class="row">
+            <div class="col-lg-4 col-md-6">
+              <label for="sex" class="q-ml-lg"
+                >b. Have you been criminally charged before any court?</label
+              >
+              <div class="col-6">
+                <p v-if="personal[0].Q7 == 'NO'">NO</p>
+                <p v-else-if="personal[0].Q7 == 'YES'">YES</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- <q-radio v-model="personal[0].Q7" val="YES" label="Yes" inline />
+          <q-radio v-model="personal[0].Q7" val="NO" label="No" inline /> -->
           <q-input
             v-if="personal[0].Q7 == 'YES'"
             v-model="personal[0].R7"
@@ -64,11 +99,22 @@
         </div>
       </q-card-section>
       <q-card-section>
-        36. Have you ever been convicted of any crime or violation of any law,
-        decree, ordinance or regulation by any court or tribunal?
+        <div class="row">
+          <div class="col-lg-7 col-md-11">
+            <p>
+              36. Have you ever been convicted of any crime or violation of any
+              law, decree, ordinance or regulation by any court or tribunal?
+            </p>
+          </div>
+          <div class="col-1">
+            <p v-if="personal[0].Q3 == 'NO'">NO</p>
+            <p v-else-if="personal[0].Q3 == 'YES'">YES</p>
+          </div>
+        </div>
+
         <div class="q-gutter-sm q-mr-md col-md-6 col-xs-12">
-          <q-radio v-model="personal[0].Q3" val="YES" label="Yes" inline />
-          <q-radio v-model="personal[0].Q3" val="NO" label="No" inline />
+          <!--   <q-radio v-model="personal[0].Q3" val="YES" label="Yes" inline />
+          <q-radio v-model="personal[0].Q3" val="NO" label="No" inline /> -->
           <q-input
             v-if="personal[0].Q3 == 'YES'"
             v-model="personal[0].R3"
@@ -81,13 +127,23 @@
         </div>
       </q-card-section>
       <q-card-section>
-        37. Have you ever been separated from the service in any of the
-        following modes: resignation, retirement, dropped from the rolls,
-        dismissal, termination, end of term, finished contract or phased out
-        (abolition) in the public or private sector?
+        <div class="row">
+          <div class="col-lg-10 col-md-10">
+            <p>
+              37. Have you ever been separated from the service in any of the
+              following modes: resignation, retirement, dropped from the rolls,
+              dismissal, termination, end of term, finished contract or phased
+              out (abolition) in the public or private sector?
+            </p>
+          </div>
+          <div class="col-3">
+            <p v-if="personal[0].Q11 == 'NO'">NO</p>
+            <p v-else-if="personal[0].Q11 == 'YES'">YES</p>
+          </div>
+        </div>
         <div class="q-gutter-sm q-mr-md col-md-6 col-xs-12">
-          <q-radio v-model="personal[0].Q5" val="YES" label="Yes" inline />
-          <q-radio v-model="personal[0].Q5" val="NO" label="No" inline />
+          <!--   <q-radio v-model="personal[0].Q5" val="YES" label="Yes" inline />
+          <q-radio v-model="personal[0].Q5" val="NO" label="No" inline /> -->
           <q-input
             v-if="personal[0].Q5 == 'YES'"
             v-model="personal[0].R5"
@@ -100,10 +156,20 @@
         </div>
       </q-card-section>
       <q-card-section>
-        38. a. Have you ever been a candidate in a national or local election
-        held within the last year (except Barangay election)?
-        <q-radio v-model="personal[0].Q6" val="YES" label="Yes" inline />
-        <q-radio v-model="personal[0].Q6" val="NO" label="No" inline />
+        <div class="row">
+          <div class="col-lg-7 col-md-10">
+            <p>
+              38. a. Have you ever been a candidate in a national or local
+              election held within the last year (except Barangay election)?
+            </p>
+          </div>
+          <div class="col-2">
+            <p v-if="personal[0].Q6 == 'NO'">NO</p>
+            <p v-else-if="personal[0].Q6 == 'YES'">YES</p>
+          </div>
+        </div>
+        <!--  <q-radio v-model="personal[0].Q6" val="YES" label="Yes" inline />
+        <q-radio v-model="personal[0].Q6" val="NO" label="No" inline /> -->
         <q-input
           v-if="personal[0].Q6 == 'YES'"
           v-model="personal[0].R6"
@@ -114,13 +180,22 @@
           type=""
         />
         <div class="q-gutter-sm q-mr-md col-md-6 col-xs-12">
-          <label for="sex" class="q-ml-lg"
-            >b. Have you resigned from the government service during the three
-            (3)-month period before the last election to promote/actively
-            campaign for a national or local candidate?</label
-          >
-          <q-radio v-model="personal[0].local" val="1" label="Yes" inline />
-          <q-radio v-model="personal[0].local" val="0" label="No" inline />
+          <div class="row">
+            <div class="col-lg-10 col-md-6">
+              <label for="sex" class="q-ml-lg"
+                >b. Have you resigned from the government service during the
+                three (3)-month period before the last election to
+                promote/actively campaign for a national or local
+                candidate?</label
+              >
+            </div>
+            <div class="col-10">
+              <p v-if="personal[0].local == 'NO'">NO</p>
+              <p v-else-if="personal[0].local == 'YES'">YES</p>
+            </div>
+          </div>
+          <!--    <q-radio v-model="personal[0].local" val="1" label="Yes" inline />
+          <q-radio v-model="personal[0].local" val="0" label="No" inline /> -->
           <q-input
             v-if="personal[0].local == '1'"
             v-model="personal[0].localdetails"
@@ -133,11 +208,23 @@
         </div>
       </q-card-section>
       <q-card-section>
-        39. Have you acquired the status of an immigrant or permanent resident
-        of another country?
+        <div class="row">
+          <div class="col-lg-11 col-md-6">
+            <p>
+              39. Have you acquired the status of an immigrant or permanent
+              resident of another country?
+            </p>
+          </div>
+
+          <div class="col-2">
+            <p v-if="personal[0].country == 'NO'">NO</p>
+            <p v-else-if="personal[0].country == 'YES'">YES</p>
+          </div>
+        </div>
+
         <div class="q-gutter-sm q-mr-md col-md-6 col-xs-12">
-          <q-radio v-model="personal[0].country" val="1" label="Yes" inline />
-          <q-radio v-model="personal[0].country" val="0" label="No" inline />
+          <!--  <q-radio v-model="personal[0].country" val="1" label="Yes" inline />
+          <q-radio v-model="personal[0].country" val="0" label="No" inline /> -->
           <q-input
             v-if="personal[0].country == '1'"
             v-model="personal[0].countrydetails"
@@ -154,11 +241,20 @@
         for Disabled Persons (RA 7277); and (c) Solo Parents Welfare Act of 2000
         (RA 8972), please answer the following items:
         <div class="q-gutter-sm q-mr-md col-md-6 col-xs-12">
-          <label for="sex" class="q-ml-lg"
-            >a. Are you a member of any indigenous group?</label
-          >
-          <q-radio v-model="personal[0].IP" val="YES" label="Yes" inline />
-          <q-radio v-model="personal[0].IP" val="NO" label="No" inline />
+          <div class="row">
+            <div class="col-lg-3 col-md-5">
+              <label for="sex" class="q-ml-lg"
+                >a. Are you a member of any indigenous group?</label
+              >
+            </div>
+            <div class="col-3">
+              <p v-if="personal[0].IP == 'NO'">NO</p>
+              <p v-else-if="personal[0].IP == 'YES'">YES</p>
+            </div>
+          </div>
+
+          <!--   <q-radio v-model="personal[0].IP" val="YES" label="Yes" inline />
+          <q-radio v-model="personal[0].IP" val="NO" label="No" inline /> -->
           <q-select
             v-if="personal[0].IP == 'YES'"
             filled
@@ -173,11 +269,19 @@
           />
         </div>
         <div class="q-gutter-sm q-mr-md col-md-6 col-xs-12">
-          <label for="sex" class="q-ml-lg"
-            >b. Are you a person with disability?</label
-          >
-          <q-radio v-model="personal[0].PWD" val="YES" label="Yes" inline />
-          <q-radio v-model="personal[0].PWD" val="NO" label="No" inline />
+          <div class="row">
+            <div class="col-lg-3 col-md-4">
+              <label for="sex" class="q-ml-lg"
+                >b. Are you a person with disability?</label
+              >
+            </div>
+            <div class="col-2">
+              <p v-if="personal[0].PWD == 'NO'">NO</p>
+              <p v-else-if="personal[0].PWD == 'YES'">YES</p>
+            </div>
+          </div>
+          <!--  <q-radio v-model="personal[0].PWD" val="YES" label="Yes" inline />
+          <q-radio v-model="personal[0].PWD" val="NO" label="No" inline /> -->
           <div v-if="personal[0].PWD == 'YES'">
             <label for="Address" class="q-mb-md q-ml-lg q-mt-md"
               >Types of Disabilities:
@@ -220,12 +324,22 @@
           </div>
         </div>
         <div class="q-gutter-sm q-mr-md col-md-6 col-xs-12">
-          <label for="sex" class="q-ml-lg">c. Are you a solo parent?</label>
-          <q-radio v-model="personal[0].SoloP" val="YES" label="Yes" inline />
-          <q-radio v-model="personal[0].SoloP" val="NO" label="No" inline />
+          <div class="row">
+            <div class="col-lg-3 col-md-4">
+              <label for="sex" class="q-ml-lg">c. Are you a solo parent?</label>
+            </div>
+
+            <div class="col-2">
+              <p v-if="personal[0].SoloP == 'NO'">NO</p>
+              <p v-else-if="personal[0].SoloP == 'YES'">YES</p>
+            </div>
+          </div>
+
+          <!--   <q-radio v-model="personal[0].SoloP" val="YES" label="Yes" inline />
+          <q-radio v-model="personal[0].SoloP" val="NO" label="No" inline /> -->
         </div>
         <div class="row justify-center">
-         <!--  <div class="col-md-4 col-xs-6">
+          <!--  <div class="col-md-4 col-xs-6">
             <q-btn
               color="primary"
               @click="Savedata()"
@@ -237,7 +351,7 @@
         <q-card-section style="max-height: 50vh" class="scroll">
           <div class="text-h6">
             REFERENCES
-          <!--   <q-btn label="Add" @click="ReferenceDialog = true"></q-btn> -->
+            <!--   <q-btn label="Add" @click="ReferenceDialog = true"></q-btn> -->
           </div>
         </q-card-section>
         <q-table
@@ -287,7 +401,7 @@
         </div> -->
 
         <div>
-        <!--   <q-btn
+          <!--   <q-btn
             type="button"
             label="Change PDS Picture"
             @click="changepic = true"
@@ -356,7 +470,7 @@
 
         <q-card-actions align="right">
           <q-btn flat label="Cancel" color="primary" v-close-popup size="md" />
-         <!--  <q-btn
+          <!--  <q-btn
             label="Request Update"
             color="secondary"
             size="md"
@@ -525,7 +639,7 @@
               v-close-popup
               size="md"
             />
-           <!--  <q-btn
+            <!--  <q-btn
               label="Request Update"
               color="secondary"
               size="md"
@@ -577,7 +691,7 @@ export default {
       Name: "",
       Address: "",
       ContactNo: "",
-
+      isReadOnly: true,
       personal: [],
       reference: [],
       ReferenceDialog: false,
