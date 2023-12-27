@@ -120,22 +120,53 @@
               label="Cancel"
               color="orange"
               v-close-popup
-              @click="cancel"
+
             />
-            <q-btn label="Save" color="green" v-close-popup @click="save" />
+            <q-btn label="Save" color="green" v-close-popup @click="reject" />
           </q-card-actions>
+        </q-card>
+      </q-dialog>
+
+      <q-dialog v-model="viewdocs" persistent="">
+        <q-card style="width: 35%; height: 40%">
+          <q-card-section>
+            <div class="text-h6">SUPPORTING DOCUMENTS</div>
+          </q-card-section>
+
+          <q-separator />
+
+          <q-card-section>
+            <div v-if="images.length > 0">
+                <q-img v-for="(file, index) in images" :key="index" :src=imagesource(file) alt="Uploaded Image" style="
+                    height: 2in;
+                    max-width: 2in;
+                    border-color: black;
+                    border-radius: 10%;
+                    border-width: 2%;
+                    border-style: solid;
+                  " />
+              </div>
+          </q-card-section>
+          <q-separator />
+
+        <q-card-actions align="right">
+
+          <q-btn label="Close" color="green" v-close-popup  />
+        </q-card-actions>
         </q-card>
       </q-dialog>
     </div>
   </div>
 </template>
 <script>
+import { useDashboardStore } from 'src/stores/Dashboard';
 import { ref } from "vue";
 import PDS from "./PDS.vue";
 export default {
   data() {
     return {
       DialogDeny: false,
+      viewdocs:false,
       controlNo: "",
       tab: ref("List"),
       columns: [
@@ -143,21 +174,21 @@ export default {
           name: "requestfield",
           align: "left",
           label: "REQUEST FIELD",
-          field: "requestfield",
+          field: "label",
           sortable: true,
         },
         {
           name: "datafrom",
           align: "left",
           label: "DATA FROM",
-          field: "datafrom",
+          field: "Dfrom",
           sortable: true,
         },
         {
           name: "datato",
           align: "left",
           label: "DATA TO",
-          field: "datato",
+          field: "Dto",
           sortable: true,
         },
         {
@@ -233,26 +264,102 @@ export default {
           status: "Status",
         },
       ],
+      requests:[],
+      userinfo:[],
+      imgurl:'',
+      images:[],
+        id:'',
+        text:''
     };
   },
   components: {
     PDS,
   },
 
-  mounted() {
-    this.controlNo = this.$route.params.controlNo;
-    /*  this.FUllname = this.$route.params.FUllname; */
-  },
+  // mounted() {
+  //   this.controlNo = this.$route.params.controlNo;
+  //   /*  this.FUllname = this.$route.params.FUllname; */
+  // },
   methods: {
+    imagesource(file){
+      const imgsrc='http://10.0.1.23:82/Pics/' + file.imgname
+      return imgsrc
+    },
+    viewdoc(row){
+      const store=useDashboardStore();
+      let data=new FormData;
+    data.append('ControlNo',this.controlNo);
+    data.append('SessionID',row.sessionID);
+    store.getimg(data).then(res=>{
+      this.images=store.images
+      this.viewdocs=true
+    })
+    },
     deleteItem() {
       this.DialogDeny = true;
     },
+    accept(row){
+      const store=useDashboardStore();
+      let data=new FormData;
+      data.append("column",row.col);
+      data.append("value",row.Dto);
+      data.append("controlno",this.controlNo)
+      data.append("id",row.ID)
+      store.accept(data).then(res=>{
+        let data2=new FormData;
+      data2.append("ControlNo",this.controlNo)
+      store.getsinglerequest(data2).then(res=>{
+        // console.log("result=",res)
+      this.requests=store.userrequest
+      // console.log("userinfo=",this.requests)
+
+    })
+      })
+    },
+    opendialog(row){
+      this.text=""
+      this.id=row.ID
+      this.DialogDeny=true
+    },
+    reject(){
+      const store=useDashboardStore();
+      let data=new FormData;
+
+      data.append("id",this.id)
+      data.append("remarks",this.text)
+      store.reject(data).then(res=>{
+        let data2=new FormData;
+      data2.append("ControlNo",this.controlNo)
+      store.getsinglerequest(data2).then(res=>{
+      this.requests=store.userrequest
+      console.log("userinfo=",this.requests)
+
+    })
+      })
+    }
   },
 
-  // created() {
-  //   // Access the controlNumber from the Vuex store
-  //   this.controlNumber = this.$store.state.controlNumber;
-  // },
+
+  created() {
+    // Access the controlNumber from the Vuex store
+    this.controlNo = this.$route.params.controlNo;
+    const store=useDashboardStore();
+    let data=new FormData;
+    data.append("controlno",this.controlNo)
+    store.getuserinfo(data).then(res=>{
+      this.userinfo=store.userinfo
+      this.imgurl="http://10.0.1.23:82/pics/" + store.img
+    })
+    let data2=new FormData;
+    data2.append("ControlNo",this.controlNo)
+    store.getsinglerequest(data2).then(res=>{
+      this.requests=store.userrequest
+      console.log("userinfo=",this.requests)
+
+    })
+
+
+  },
 };
 </script>
 
