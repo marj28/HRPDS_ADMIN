@@ -48,6 +48,35 @@
             <q-card style="width: 40%; height: auto">
               <q-card-section>
                 <div class="text-h6">Announcement Details</div>
+
+                <div class="row">
+                  <div class="col-12 col-sm-6 col-md-3 col-lg-6">
+                    <div class="q-pa-sm q-ml-xl">
+                      <label>
+                        <img
+                          v-if="imageUrl"
+                          :src="imageUrl"
+                          alt="Selected Image"
+                          style="
+                            cursor: pointer;
+                            max-width: 200%;
+                            max-height: 195px;
+                          "
+                          @click="openFileInput"
+                        />
+                        <div v-else class="placeholder" style="cursor: pointer">
+                          Click to add an image
+                        </div>
+                        <input
+                          ref="fileInput"
+                          type="file"
+                          style="display: none"
+                          @change="handleFileChange"
+                        />
+                      </label>
+                    </div>
+                  </div>
+                </div>
               </q-card-section>
 
               <q-separator />
@@ -78,12 +107,7 @@
                   v-close-popup
                   @click="cancel"
                 />
-                <q-btn
-                  label="Save"
-                  color="green"
-                  v-close-popup
-                  @click="save"
-                />
+                <q-btn label="Save" color="green" v-close-popup @click="save" />
               </q-card-actions>
             </q-card>
           </q-dialog>
@@ -98,6 +122,7 @@ export default {
   data() {
     return {
       CreationDialog: false,
+      imageUrl: null,
       columns: [
         {
           name: "announcementname",
@@ -124,6 +149,18 @@ export default {
     // deleteItem() {
     //   this.DialogDeny = true;
     // },
+    handleFileChange(event) {
+      const file = event.target.files[0];
+      if (file) {
+        // Reset imageUrl before updating with the new image
+        this.imageUrl = null;
+
+        this.imageUrl = URL.createObjectURL(file);
+        this.$emit("image-selected", this.imageUrl);
+        // You can emit this imageUrl to the parent component if needed
+      }
+    },
+
     Rowclick() {
       this.editedItem = {
         id: null,
@@ -133,17 +170,57 @@ export default {
     },
 
     cancel() {
-      this.CreationDialog = false
+      this.CreationDialog = false;
     },
 
     save() {
-      this.CreationDialog = false
+      this.CreationDialog = false;
     },
 
     editItem(item) {
-      this.CreationDialog = true
+      this.CreationDialog = true;
     },
-
   },
 };
 </script>
+<style scoped>
+.placeholder {
+  border: 2px dashed #ccc;
+  padding-top: 80px;
+  text-align: center;
+  color: #777;
+  width: 200px;
+  height: 195px;
+}
+.imunizationbackgroundcolor {
+  background-color: black;
+  color: white;
+}
+.imunizationbackgroundcolor_caption {
+  background-color: #057407;
+  color: white;
+  margin-top: -13%;
+}
+
+.rowup {
+  margin-top: -4%;
+}
+
+.rowup1 {
+  margin-top: -3%;
+}
+.dashboard {
+  padding: 2%;
+  justify-content: space-between;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.my-card {
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+  margin: 1%;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+</style>
