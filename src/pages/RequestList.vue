@@ -55,30 +55,27 @@
 
           :rows-per-page-options="[5,10,15,20,100]"
 
-          :loading="loading"
-          row-key="Controlno"
-          virtual-scroll
-          :virtual-scroll-item-size="48"
-          :virtual-scroll-sticky-size-start="48"
-          :pagination="pagination"
 
-          @virtual-scroll="onScroll"
+          row-key="Controlno"
+
+
+
         >
           <template v-slot:body="props">
             <q-tr :props="props" @click="handleRowClick(props.row)">
               <q-td key="Controlno" :props="props">
-                {{ props.row.Controlno }}
+                {{ props.row.controlno }}
               </q-td>
               <q-td key="fullname" :props="props">
                 <!--  <q-badge color="green"> -->
-                {{ props.row.fullname }}
+                {{ props.row.name1 }}
                 <!--   </q-badge> -->
               </q-td>
               <q-td key="Designation" :props="props">
-                {{ props.row.Designation }}
+                {{ props.row.designation }}
               </q-td>
               <q-td key="Status" :props="props">
-                {{ props.row.Status }}
+                {{ props.row.status }}
               </q-td>
             </q-tr>
           </template>
@@ -115,7 +112,7 @@ export default defineComponent({
           name: "Controlno",
           align: "center",
           label: "Control no",
-          field: row=>row.controlno,
+          field: "controlno",
           sortable: true,
         },
         {
@@ -134,8 +131,9 @@ export default defineComponent({
           label: "Designation",
           field: "designation",
           sortable: true,
+          align: "center"
         },
-        { name: "Status", label: "Status", field: "status", },
+        { name: "Status", label: "Status", field: "status",align:"center" },
       ],
 
 
@@ -148,17 +146,17 @@ export default defineComponent({
   created() {
     const store=useDashboardStore();
 
-//  console.log("imgurl=",store.users);
+ console.log("imgurl=",store.users);
  this.userrequest=store.users
 
   },
 
   methods: {
     handleRowClick(row) {
-      console.log("Clicked row:", row.Controlno);
+      console.log("Clicked row:", row.controlno);
       this.$router.push({
         name: "RequestUpdate",
-        params: { controlNo: row.Controlno },
+        params: { controlNo: row.controlno },
       });
     },
     openFileInput() {
