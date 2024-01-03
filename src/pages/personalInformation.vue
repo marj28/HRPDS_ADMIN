@@ -777,7 +777,7 @@
 
 <script>
 import { ref } from "vue";
-import { useLoginStore } from "src/stores/LoginStore";
+import { useDashboardStore } from "src/stores/Dashboard";
 import philippines from "assets/philippines.json";
 import axios from "axios";
 const stringReligions = [
@@ -967,124 +967,124 @@ export default {
       }
     },
     async Savedata() {
-      let isValid = await this.$refs.personal.validate();
-      this.updatearr = [];
-      if (isValid) {
-        const labelarray = [
-          { name: "Controlno", column: "ControlNo" },
-          { name: "Lastname", column: "Surname" },
-          { name: "Firstname", column: "Firstname" },
-          { name: "Middlename", column: "MIddlename" },
-          { name: "Sex", column: "Sex" },
-          { name: "Civil Status", column: "CivilStatus" },
-          { name: "TIN Number", column: "TINNo" },
-          { name: "GSIS Number", column: "GSISNo" },
-          { name: "PAGIBIG Number", column: "PAGIBIGNo" },
-          { name: "SSS Number", column: "SSSNo" },
-          { name: "PHEALTH Number", column: "PHEALTHNo" },
-          { name: "Citizenship", column: "Citizenship" },
-          { name: "Religion", column: "Religion" },
-          { name: "Residential House", column: "Rhouse" },
-          { name: "Residential Street", column: "Rstreet" },
-          { name: "Residential Subdivision", column: "Rsubdivision" },
-          { name: "Residential Barangay", column: "Rbarangay" },
-          { name: "Residential City", column: "Rcity" },
-          { name: "Residential Province", column: "Rprovince" },
-          { name: "Residential Region", column: "Rregion" },
-          { name: "Residential Zip Code", column: "Rzip" },
-          { name: "Permanent Region", column: "Pregion" },
-          { name: "Permanent House", column: "Phouse" },
-          { name: "Permanent Street", column: "Pstreet" },
-          { name: "Permanent Subdivision", column: "Psubdivision" },
-          { name: "Permanent Barangay", column: "Pbarangay" },
-          { name: "Permanent City", column: "Pcity" },
-          { name: "Permanent Province", column: "Pprovince" },
-          { name: "Permanent Zip Code", column: "Pzip" },
-          { name: "Gender", column: "gender" },
-          { name: "Citizenship Status", column: "citizenshipStatus" },
-          { name: "Height", column: "Heights" },
-          { name: "Weight", column: "Weights" },
-          { name: "Blood Type", column: "BloodType" },
-          { name: "Telephone Number", column: "TelNo" },
-          { name: "Date of Birth", column: "Bday" },
-          { name: "Place of Birth", column: "BirthPlace" },
-          { name: "Email Address", column: "EmailAdd" },
-          { name: "Cellphone Number", column: "CellphoneNo" },
-        ];
+      // let isValid = await this.$refs.personal.validate();
+      // this.updatearr = [];
+      // if (isValid) {
+      //   const labelarray = [
+      //     { name: "Controlno", column: "ControlNo" },
+      //     { name: "Lastname", column: "Surname" },
+      //     { name: "Firstname", column: "Firstname" },
+      //     { name: "Middlename", column: "MIddlename" },
+      //     { name: "Sex", column: "Sex" },
+      //     { name: "Civil Status", column: "CivilStatus" },
+      //     { name: "TIN Number", column: "TINNo" },
+      //     { name: "GSIS Number", column: "GSISNo" },
+      //     { name: "PAGIBIG Number", column: "PAGIBIGNo" },
+      //     { name: "SSS Number", column: "SSSNo" },
+      //     { name: "PHEALTH Number", column: "PHEALTHNo" },
+      //     { name: "Citizenship", column: "Citizenship" },
+      //     { name: "Religion", column: "Religion" },
+      //     { name: "Residential House", column: "Rhouse" },
+      //     { name: "Residential Street", column: "Rstreet" },
+      //     { name: "Residential Subdivision", column: "Rsubdivision" },
+      //     { name: "Residential Barangay", column: "Rbarangay" },
+      //     { name: "Residential City", column: "Rcity" },
+      //     { name: "Residential Province", column: "Rprovince" },
+      //     { name: "Residential Region", column: "Rregion" },
+      //     { name: "Residential Zip Code", column: "Rzip" },
+      //     { name: "Permanent Region", column: "Pregion" },
+      //     { name: "Permanent House", column: "Phouse" },
+      //     { name: "Permanent Street", column: "Pstreet" },
+      //     { name: "Permanent Subdivision", column: "Psubdivision" },
+      //     { name: "Permanent Barangay", column: "Pbarangay" },
+      //     { name: "Permanent City", column: "Pcity" },
+      //     { name: "Permanent Province", column: "Pprovince" },
+      //     { name: "Permanent Zip Code", column: "Pzip" },
+      //     { name: "Gender", column: "gender" },
+      //     { name: "Citizenship Status", column: "citizenshipStatus" },
+      //     { name: "Height", column: "Heights" },
+      //     { name: "Weight", column: "Weights" },
+      //     { name: "Blood Type", column: "BloodType" },
+      //     { name: "Telephone Number", column: "TelNo" },
+      //     { name: "Date of Birth", column: "Bday" },
+      //     { name: "Place of Birth", column: "BirthPlace" },
+      //     { name: "Email Address", column: "EmailAdd" },
+      //     { name: "Cellphone Number", column: "CellphoneNo" },
+      //   ];
 
-        const store = useLoginStore();
+      //   const store = useLoginStore();
 
-        for (let i = 0; i < labelarray.length; i++) {
-          if (
-            this.personal[0][labelarray[i].column] !=
-            store.userinfo[0][labelarray[i].column]
-          ) {
-            //open dialog for image input
-            const labelname = labelarray.find(
-              (item) => item.column == labelarray[i]
-            );
-            // console.log("data[i]",data[i])
-            // console.log("labelnam=",labelname)
-            this.updatearr.push({
-              Controlno: this.personal[0].ControlNo,
-              type: "Edit",
-              label: labelarray[i].name,
-              column: labelarray[i].column,
-              Dfrom: store.userinfo[0][labelarray[i].column],
-              Dto: this.personal[0][labelarray[i].column],
-            });
-          }
-        }
-        if (this.updatearr.length != 0) {
-          axios
-            .post(`http://10.0.1.23:82/HRPORTAL/saveupdate.php`, {
-              data: this.updatearr,
-            })
-            .then((response) => {
-              // console.log("response=", response.data);
-              const returnarr = response.data.return;
+      //   for (let i = 0; i < labelarray.length; i++) {
+      //     if (
+      //       this.personal[0][labelarray[i].column] !=
+      //       store.userinfo[0][labelarray[i].column]
+      //     ) {
+      //       //open dialog for image input
+      //       const labelname = labelarray.find(
+      //         (item) => item.column == labelarray[i]
+      //       );
+      //       // console.log("data[i]",data[i])
+      //       // console.log("labelnam=",labelname)
+      //       this.updatearr.push({
+      //         Controlno: this.personal[0].ControlNo,
+      //         type: "Edit",
+      //         label: labelarray[i].name,
+      //         column: labelarray[i].column,
+      //         Dfrom: store.userinfo[0][labelarray[i].column],
+      //         Dto: this.personal[0][labelarray[i].column],
+      //       });
+      //     }
+      //   }
+      //   if (this.updatearr.length != 0) {
+      //     axios
+      //       .post(`http://10.0.1.23:82/HRPORTAL/saveupdate.php`, {
+      //         data: this.updatearr,
+      //       })
+      //       .then((response) => {
+      //         // console.log("response=", response.data);
+      //         const returnarr = response.data.return;
 
-              // let updatearr2 = [];
-              // for (let i = 0; i < returnarr.length; i++) {
-              //   if (this.updatearr[i].column == returnarr[i].column) {
-              //     this.updatearr2 = this.updatearr.filter(
-              //       (obj) => obj.column !== returnarr[i].column
-              //     );
-              //   }
-              // }
-              // this.updatearr = updatearr2;
+      //         // let updatearr2 = [];
+      //         // for (let i = 0; i < returnarr.length; i++) {
+      //         //   if (this.updatearr[i].column == returnarr[i].column) {
+      //         //     this.updatearr2 = this.updatearr.filter(
+      //         //       (obj) => obj.column !== returnarr[i].column
+      //         //     );
+      //         //   }
+      //         // }
+      //         // this.updatearr = updatearr2;
 
-              this.updatearr = this.updatearr.filter((obj) => {
-                // Assuming column is the property to match
-                return returnarr.every(
-                  (returnObj) => obj.column !== returnObj.column
-                );
-              });
-              // console.log("updatearr=", this.updatearr);
-              // console.log("returnarr=", returnarr);
-              if (this.updatearr.length == 0) {
-                this.alertmessage =
-                  "The updates you requested have already been processed! please check the Updates History for more information about your update requests.";
-                this.alert = true;
-              } else {
-                if (returnarr.length !== 0) {
-                  this.alertmessage =
-                    "Some of the updates you requested have already been processed! please check the Updates History for more information about your update requests.";
-                  this.alert = true;
+      //         this.updatearr = this.updatearr.filter((obj) => {
+      //           // Assuming column is the property to match
+      //           return returnarr.every(
+      //             (returnObj) => obj.column !== returnObj.column
+      //           );
+      //         });
+      //         // console.log("updatearr=", this.updatearr);
+      //         // console.log("returnarr=", returnarr);
+      //         if (this.updatearr.length == 0) {
+      //           this.alertmessage =
+      //             "The updates you requested have already been processed! please check the Updates History for more information about your update requests.";
+      //           this.alert = true;
+      //         } else {
+      //           if (returnarr.length !== 0) {
+      //             this.alertmessage =
+      //               "Some of the updates you requested have already been processed! please check the Updates History for more information about your update requests.";
+      //             this.alert = true;
 
-                  this.sessionID = response.data.sessionID;
-                  // this.dialog = true;
-                } else {
-                  this.sessionID = response.data.sessionID;
-                  this.dialog = true;
-                }
-              }
-            })
-            .catch((error) => {
-              console.log("error=", error);
-            });
-        }
-      } //end of if(validate)
+      //             this.sessionID = response.data.sessionID;
+      //             // this.dialog = true;
+      //           } else {
+      //             this.sessionID = response.data.sessionID;
+      //             this.dialog = true;
+      //           }
+      //         }
+      //       })
+      //       .catch((error) => {
+      //         console.log("error=", error);
+      //       });
+      //   }
+      // } //end of if(validate)
 
       // console.log("changedarr=",this.updatearr)
     },
@@ -1094,29 +1094,29 @@ export default {
       }
     },
     address() {
-      if (this.permanentAddress == "no") {
-        this.personal[0].Pregion = this.personal[0].Rregion;
-        this.personal[0].Pprovince = this.personal[0].Rprovince;
-        this.personal[0].Pcity = this.personal[0].Rcity;
-        this.personal[0].Pbarangay = this.personal[0].Rbarangay;
-        this.personal[0].Psubdivision = this.personal[0].Rsubdivision;
-        this.personal[0].Pstreet = this.personal[0].Rstreet;
-        this.personal[0].Phouse = this.personal[0].Rhouse;
-        this.personal[0].Pzip = this.personal[0].Rzip;
-      } else {
-        this.personal[0].Pregion = "";
-        this.personal[0].Pprovince = "";
-        this.personal[0].Pcity = "";
-        this.personal[0].Pbarangay = "";
-        this.personal[0].Psubdivision = "";
-        this.personal[0].Pstreet = "";
-        this.personal[0].Phouse = "";
-        this.personal[0].Pzip = "";
-      }
+      // if (this.permanentAddress == "no") {
+      //   this.personal[0].Pregion = this.personal[0].Rregion;
+      //   this.personal[0].Pprovince = this.personal[0].Rprovince;
+      //   this.personal[0].Pcity = this.personal[0].Rcity;
+      //   this.personal[0].Pbarangay = this.personal[0].Rbarangay;
+      //   this.personal[0].Psubdivision = this.personal[0].Rsubdivision;
+      //   this.personal[0].Pstreet = this.personal[0].Rstreet;
+      //   this.personal[0].Phouse = this.personal[0].Rhouse;
+      //   this.personal[0].Pzip = this.personal[0].Rzip;
+      // } else {
+      //   this.personal[0].Pregion = "";
+      //   this.personal[0].Pprovince = "";
+      //   this.personal[0].Pcity = "";
+      //   this.personal[0].Pbarangay = "";
+      //   this.personal[0].Psubdivision = "";
+      //   this.personal[0].Pstreet = "";
+      //   this.personal[0].Phouse = "";
+      //   this.personal[0].Pzip = "";
+      // }
     },
   },
   created() {
-    const userstore = useLoginStore();
+    const userstore = useDashboardStore();
     this.personal = userstore.userinfo.map((item) => ({ ...item }));
     if (
       this.personal[0].Surname.includes("JR") ||
@@ -1299,51 +1299,51 @@ export default {
   },
 
   setup() {
-    const religion = ref(stringReligions);
-    const indigenousGroup = ref(stringIndigenous);
-    const store = useLoginStore();
+    // const religion = ref(stringReligions);
+    // const indigenousGroup = ref(stringIndigenous);
+    // const store = useLoginStore();
 
-    return {
-      store,
-      selectedReligion: ref(null),
-      religion,
-      selectedIndigenous: ref(null),
-      indigenousGroup,
+    // return {
+    //   store,
+    //   selectedReligion: ref(null),
+    //   religion,
+    //   selectedIndigenous: ref(null),
+    //   indigenousGroup,
 
-      filterFn(val, update) {
-        if (val === "") {
-          update(() => {
-            religion.value = stringReligions;
+    //   filterFn(val, update) {
+    //     if (val === "") {
+    //       update(() => {
+    //         religion.value = stringReligions;
 
-            // here you have access to "ref" which
-            // is the Vue reference of the QSelect
-          });
-          return;
-        }
+    //         // here you have access to "ref" which
+    //         // is the Vue reference of the QSelect
+    //       });
+    //       return;
+    //     }
 
-        update(() => {
-          const needle = val.toLowerCase();
-          religion.value = stringReligion.filter(
-            (v) => v.toLowerCase().indexOf(needle) > -1
-          );
-        });
-      },
+    //     update(() => {
+    //       const needle = val.toLowerCase();
+    //       religion.value = stringReligion.filter(
+    //         (v) => v.toLowerCase().indexOf(needle) > -1
+    //       );
+    //     });
+    //   },
 
-      filterIndigenous(val, update) {
-        if (val === "") {
-          update(() => {
-            indigenousGroup.value = stringIndigenous;
-          });
-          return;
-        }
-        update(() => {
-          const needle = val.toLowerCase();
-          indigenousGroup.value = stringIndigenous.filter(
-            (v) => v.toLowerCase().indexOf(needle) > -1
-          );
-        });
-      },
-    };
+    //   filterIndigenous(val, update) {
+    //     if (val === "") {
+    //       update(() => {
+    //         indigenousGroup.value = stringIndigenous;
+    //       });
+    //       return;
+    //     }
+    //     update(() => {
+    //       const needle = val.toLowerCase();
+    //       indigenousGroup.value = stringIndigenous.filter(
+    //         (v) => v.toLowerCase().indexOf(needle) > -1
+    //       );
+    //     });
+    //   },
+    // };
   },
 };
 </script>

@@ -425,8 +425,9 @@
 
 <script>
 import { ref } from "vue";
-import { useLoginStore } from "src/stores/LoginStore";
-import { useUserInfoStore } from "src/stores/AdditionalStore";
+// import { useLoginStore } from "src/stores/LoginStore";
+// import { useUserInfoStore } from "src/stores/AdditionalStore";
+import { useDashboardStore } from "src/stores/Dashboard";
 import axios from "axios";
 export default {
   data() {
@@ -532,27 +533,27 @@ export default {
     };
   },
   setup() {
-    const file = ref(null);
-    const fileimage = ref(null);
-    const fileimagesrc = ref("");
-    const handleUpload = () => {
-      if (fileimage.value) {
-        fileimagesrc.value = URL.createObjectURL(fileimage.value);
-      }
-    };
-    const handleUploadBtnClick = () => {
-      file.value.pickFiles();
-    };
-    return {
-      file,
-      handleUploadBtnClick,
-      fileimage,
-      fileimagesrc,
-      handleUpload,
-    };
+    // const file = ref(null);
+    // const fileimage = ref(null);
+    // const fileimagesrc = ref("");
+    // const handleUpload = () => {
+    //   if (fileimage.value) {
+    //     fileimagesrc.value = URL.createObjectURL(fileimage.value);
+    //   }
+    // };
+    // const handleUploadBtnClick = () => {
+    //   file.value.pickFiles();
+    // };
+    // return {
+    //   file,
+    //   handleUploadBtnClick,
+    //   fileimage,
+    //   fileimagesrc,
+    //   handleUpload,
+    // };
   },
   created() {
-    const userstore = useLoginStore();
+    const userstore = useDashboardStore();
     this.user = userstore.userinfo;
     this.personal = userstore.userinfo.map((item) => ({ ...item }));
     if (
@@ -582,195 +583,195 @@ export default {
       this.model = "N/A";
     }
   },
-  methods: {
-    uploadImage() {
-      const formData = new FormData();
-      formData.append("ControlNo", this.personal[0].ControlNo);
-      for (let i = 0; i < this.images.length; i++) {
-        formData.append("files[]", this.images[i]);
-      }
-      formData.append("sessionID", this.sessionID);
+  // methods: {
+  //   uploadImage() {
+  //     const formData = new FormData();
+  //     formData.append("ControlNo", this.personal[0].ControlNo);
+  //     for (let i = 0; i < this.images.length; i++) {
+  //       formData.append("files[]", this.images[i]);
+  //     }
+  //     formData.append("sessionID", this.sessionID);
 
-      const url = `http://10.0.1.23:82/HRPORTAL/uploadpics.php`;
+  //     const url = `http://10.0.1.23:82/HRPORTAL/uploadpics.php`;
 
-      axios
-        .post(url, formData, {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        })
-        .then((response) => {
-          console.log(response.data);
-          this.dialog = false;
-        })
-        .catch((error) => {
-          console.error("Error:", error);
-        });
-    },
-    opendialog() {
-      if (this.updatearr.length !== 0) {
-        this.dialog = true;
-      }
-    },
-    handleupload() {
-      this.imagesurl = [];
+  //     axios
+  //       .post(url, formData, {
+  //         headers: {
+  //           "Content-Type": "multipart/form-data",
+  //         },
+  //       })
+  //       .then((response) => {
+  //         console.log(response.data);
+  //         this.dialog = false;
+  //       })
+  //       .catch((error) => {
+  //         console.error("Error:", error);
+  //       });
+  //   },
+  //   opendialog() {
+  //     if (this.updatearr.length !== 0) {
+  //       this.dialog = true;
+  //     }
+  //   },
+  //   handleupload() {
+  //     this.imagesurl = [];
 
-      for (let i = 0; i < this.images.length; i++) {
-        const dummyimg = URL.createObjectURL(this.images[i]);
-        this.imagesurl.push(dummyimg);
-      }
-    },
-    async Savedata() {
-      // //saving child first
-      // if (this.addchild.length !== 0) {
-      //   const formData = new FormData();
+  //     for (let i = 0; i < this.images.length; i++) {
+  //       const dummyimg = URL.createObjectURL(this.images[i]);
+  //       this.imagesurl.push(dummyimg);
+  //     }
+  //   },
+  //   async Savedata() {
+  //     // //saving child first
+  //     // if (this.addchild.length !== 0) {
+  //     //   const formData = new FormData();
 
-      //   this.addchild.forEach((item, index) => {
-      //     formData.append(`data[${index}][Controlno]`, item.Controlno);
-      //     formData.append(`data[${index}][ChildName]`, item.ChildName);
-      //     formData.append(`data[${index}][BirthDate]`, item.BirthDate);
-      //     formData.append(`data[${index}][type]`, item.type);
-      //     formData.append(`data[${index}][status]`, item.status);
-      //     if (item.Img instanceof File) {
-      //       // It's a File object
-      //       formData.append(`data[${index}][Img]`, item.Img);
-      //     } else {
-      //       // It's not a File object
-      //       console.error("Img is not a File object");
-      //     }
-      //   });
+  //     //   this.addchild.forEach((item, index) => {
+  //     //     formData.append(`data[${index}][Controlno]`, item.Controlno);
+  //     //     formData.append(`data[${index}][ChildName]`, item.ChildName);
+  //     //     formData.append(`data[${index}][BirthDate]`, item.BirthDate);
+  //     //     formData.append(`data[${index}][type]`, item.type);
+  //     //     formData.append(`data[${index}][status]`, item.status);
+  //     //     if (item.Img instanceof File) {
+  //     //       // It's a File object
+  //     //       formData.append(`data[${index}][Img]`, item.Img);
+  //     //     } else {
+  //     //       // It's not a File object
+  //     //       console.error("Img is not a File object");
+  //     //     }
+  //     //   });
 
-      //   axios
-      //     .post(
-      //       "http://10.0.1.23:82/HRPORTAL/saveupdatechild.php",
-      //       formData,
-      //       {
-      //         headers: {
-      //           "Content-Type": "multipart/form-data",
-      //         },
-      //       }
-      //     )
-      //     .then((response) => {
-      //       // handle success
-      //       console.log(response.data);
-      //     })
-      //     .catch((error) => {
-      //       // handle error
-      //       console.error(error);
-      //     });
-      // }
+  //     //   axios
+  //     //     .post(
+  //     //       "http://10.0.1.23:82/HRPORTAL/saveupdatechild.php",
+  //     //       formData,
+  //     //       {
+  //     //         headers: {
+  //     //           "Content-Type": "multipart/form-data",
+  //     //         },
+  //     //       }
+  //     //     )
+  //     //     .then((response) => {
+  //     //       // handle success
+  //     //       console.log(response.data);
+  //     //     })
+  //     //     .catch((error) => {
+  //     //       // handle error
+  //     //       console.error(error);
+  //     //     });
+  //     // }
 
-      const data = [
-        { name: "Spouse Name", column: "SpouseName" },
-        { name: "Spouse Firstname", column: "SpouseFirstname" },
-        { name: "Spouse Middlename", column: "SpouseMiddlename" },
-        { name: "Spouse Occupation", column: "Occupation" },
-        { name: "Spouse Employer", column: "SpouseEmployer" },
-        { name: "Spouse Employer Address", column: "SpouseEmpAddress" },
-        { name: "Spouse Employer Telephone", column: "SpouseEmpTel" },
-        { name: "Father Surname", column: "FatherName" },
-        { name: "Father Firstname", column: "FatherFirstname" },
-        { name: "Father Middlename", column: "FatherMiddlename" },
-        { name: "Mother Surname", column: "MotherName" },
-        { name: "Mother Firstname", column: "MotherFirstname" },
-        { name: "Mother Middlename", column: "MotherMiddlename" },
-      ];
-      const store = useLoginStore();
-      for (let i = 0; i < data.length; i++) {
-        if (
-          this.personal[0][data[i].column] != store.userinfo[0][data[i].column]
-        ) {
-          this.updatearr.push({
-            Controlno: this.personal[0].ControlNo,
-            type: "Edit",
-            label: data[i].name,
-            column: data[i].column,
-            Dfrom: store.userinfo[0][data[i].column],
-            Dto: this.personal[0][data[i].column],
-          });
-        }
-      }
-      if (this.updatearr.length !== 0) {
-        axios
-          .post(`http://10.0.1.23:82/HRPORTAL/saveupdate.php`, {
-            data: this.updatearr,
-          })
-          .then((response) => {
-            const returnarr = response.data.return;
-            this.updatearr = this.updatearr.filter((obj) => {
-              // Assuming column is the property to match
-              return returnarr.every(
-                (returnObj) => obj.column !== returnObj.column
-              );
-            });
-            if (this.updatearr.length == 0) {
-              this.alertmessage =
-                "The updates you requested have already been processed! please check the Updates History for more information about your update requests.";
-              this.alert = true;
-            } else {
-              if (returnarr.length !== 0) {
-                this.alertmessage =
-                  "Some of the updates you requested have already been processed! please check the Updates History for more information about your update requests.";
-                this.alert = true;
+  //     const data = [
+  //       { name: "Spouse Name", column: "SpouseName" },
+  //       { name: "Spouse Firstname", column: "SpouseFirstname" },
+  //       { name: "Spouse Middlename", column: "SpouseMiddlename" },
+  //       { name: "Spouse Occupation", column: "Occupation" },
+  //       { name: "Spouse Employer", column: "SpouseEmployer" },
+  //       { name: "Spouse Employer Address", column: "SpouseEmpAddress" },
+  //       { name: "Spouse Employer Telephone", column: "SpouseEmpTel" },
+  //       { name: "Father Surname", column: "FatherName" },
+  //       { name: "Father Firstname", column: "FatherFirstname" },
+  //       { name: "Father Middlename", column: "FatherMiddlename" },
+  //       { name: "Mother Surname", column: "MotherName" },
+  //       { name: "Mother Firstname", column: "MotherFirstname" },
+  //       { name: "Mother Middlename", column: "MotherMiddlename" },
+  //     ];
+  //     const store = useLoginStore();
+  //     for (let i = 0; i < data.length; i++) {
+  //       if (
+  //         this.personal[0][data[i].column] != store.userinfo[0][data[i].column]
+  //       ) {
+  //         this.updatearr.push({
+  //           Controlno: this.personal[0].ControlNo,
+  //           type: "Edit",
+  //           label: data[i].name,
+  //           column: data[i].column,
+  //           Dfrom: store.userinfo[0][data[i].column],
+  //           Dto: this.personal[0][data[i].column],
+  //         });
+  //       }
+  //     }
+  //     if (this.updatearr.length !== 0) {
+  //       axios
+  //         .post(`http://10.0.1.23:82/HRPORTAL/saveupdate.php`, {
+  //           data: this.updatearr,
+  //         })
+  //         .then((response) => {
+  //           const returnarr = response.data.return;
+  //           this.updatearr = this.updatearr.filter((obj) => {
+  //             // Assuming column is the property to match
+  //             return returnarr.every(
+  //               (returnObj) => obj.column !== returnObj.column
+  //             );
+  //           });
+  //           if (this.updatearr.length == 0) {
+  //             this.alertmessage =
+  //               "The updates you requested have already been processed! please check the Updates History for more information about your update requests.";
+  //             this.alert = true;
+  //           } else {
+  //             if (returnarr.length !== 0) {
+  //               this.alertmessage =
+  //                 "Some of the updates you requested have already been processed! please check the Updates History for more information about your update requests.";
+  //               this.alert = true;
 
-                this.sessionID = response.data.sessionID;
-                // this.dialog = true;
-              } else {
-                this.sessionID = response.data.sessionID;
-                this.dialog = true;
-              }
-            }
-          })
-          .catch((error) => {
-            console.log("error=", error);
-          });
-      }
-    },
-    addchildren() {
-      const store = useUserInfoStore();
-      let Form = new FormData();
+  //               this.sessionID = response.data.sessionID;
+  //               // this.dialog = true;
+  //             } else {
+  //               this.sessionID = response.data.sessionID;
+  //               this.dialog = true;
+  //             }
+  //           }
+  //         })
+  //         .catch((error) => {
+  //           console.log("error=", error);
+  //         });
+  //     }
+  //   },
+  //   addchildren() {
+  //     const store = useUserInfoStore();
+  //     let Form = new FormData();
 
-      Form.append("Controlno", this.personal[0].ControlNo);
-      Form.append("ChildName", this.name);
-      Form.append("BirthDate", this.dateofbirth);
-      Form.append("type", "Add");
-      Form.append("status", "PENDING");
-      Form.append("file", this.fileimage);
-      store.savechildren(Form).then((res) => {
-        console.log("res=", res);
-        if (res == 1) {
-          this.secondDialog = false;
-          this.smalltitle = "Requested!";
-          this.smallmessage = "The request for update has been sent to the HR.";
-          this.small = true;
-          this.personal[0].children.push({
-            ChildName: this.name,
-            BirthDate: this.dateofbirth,
-          });
-        } else if (res == 2) {
-          this.secondDialog = false;
-          this.smalltitle = "Duplicate Entry!";
-          this.smallmessage =
-            "The request for update has already been sent to the HR, Please check the Request history for more information.";
-          this.small = true;
-        } else {
-          this.secondDialog = false;
-          this.smalltitle = "Error!";
-          this.smallmessage = "Please contact the SPM Team on local number 508";
-          this.small = true;
-        }
-      });
+  //     Form.append("Controlno", this.personal[0].ControlNo);
+  //     Form.append("ChildName", this.name);
+  //     Form.append("BirthDate", this.dateofbirth);
+  //     Form.append("type", "Add");
+  //     Form.append("status", "PENDING");
+  //     Form.append("file", this.fileimage);
+  //     store.savechildren(Form).then((res) => {
+  //       console.log("res=", res);
+  //       if (res == 1) {
+  //         this.secondDialog = false;
+  //         this.smalltitle = "Requested!";
+  //         this.smallmessage = "The request for update has been sent to the HR.";
+  //         this.small = true;
+  //         this.personal[0].children.push({
+  //           ChildName: this.name,
+  //           BirthDate: this.dateofbirth,
+  //         });
+  //       } else if (res == 2) {
+  //         this.secondDialog = false;
+  //         this.smalltitle = "Duplicate Entry!";
+  //         this.smallmessage =
+  //           "The request for update has already been sent to the HR, Please check the Request history for more information.";
+  //         this.small = true;
+  //       } else {
+  //         this.secondDialog = false;
+  //         this.smalltitle = "Error!";
+  //         this.smallmessage = "Please contact the SPM Team on local number 508";
+  //         this.small = true;
+  //       }
+  //     });
 
-      this.name = "";
-      this.dateofbirth = "";
-    },
-    addchilddialog() {
-      this.fileimage = null;
-      this.fileimagesrc = null;
-      this.name = "";
-      this.dateofbirth = "";
-      this.secondDialog = true;
-    },
-  },
+  //     this.name = "";
+  //     this.dateofbirth = "";
+  //   },
+  //   addchilddialog() {
+  //     this.fileimage = null;
+  //     this.fileimagesrc = null;
+  //     this.name = "";
+  //     this.dateofbirth = "";
+  //     this.secondDialog = true;
+  //   },
+  // },
 };
 </script>

@@ -54,7 +54,7 @@
                       bordered
                       title="Request for Update List"
                       dense
-                      :rows="rows"
+                      :rows="requests"
                       :columns="columns"
                       row-key="id"
                       :rows-per-page-options="[0]"
