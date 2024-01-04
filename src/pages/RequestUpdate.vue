@@ -12,10 +12,10 @@
           </q-avatar>
         </div>
 
-        <div class="col-2 col-sm-2 col-md-2 col-lg-6 q-mt-md esbugbai">
-          <p>Full Name: {{ FUllname }}</p>
-          <p class="q-mt-md">Designation:</p>
-          <p class="uppadding">Status:</p>
+        <div class="col-2 col-sm-2 col-md-5 col-lg-8 q-mt-md esbugbai">
+          <p>Full Name: {{ userinfo[0].fullname }}</p>
+          <p class="q-mt-md">Designation: {{ userinfo[0].designation }}</p>
+          <p class="uppadding">Status: {{ userinfo[0].status }}</p>
         </div>
       </div>
     </div>
@@ -165,7 +165,7 @@ export default {
       DialogDeny: false,
       viewdocs: false,
       controlNo: "",
-      FUllname:"",
+      FUllname: "",
       tab: ref("List"),
       columns: [
         {
@@ -274,10 +274,10 @@ export default {
     PDS,
   },
 
-  mounted() {
+  /*   mounted() {
     this.controlNo = this.$route.params.controlNo;
     this.FUllname = this.$route.params.FUllname;
-  },
+  }, */
 
   methods: {
     imagesource(file) {
@@ -344,6 +344,7 @@ export default {
     data.append("controlno", this.controlNo);
     store.getuserinfo(data).then((res) => {
       this.userinfo = store.userinfo;
+      console.log(this.userinfo);
       this.imgurl = "http://10.0.1.23:82/pics/" + store.img;
     });
     let data2 = new FormData();
