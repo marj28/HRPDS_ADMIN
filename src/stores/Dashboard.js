@@ -5,6 +5,7 @@ export const useDashboardStore = defineStore("DashboardStore", {
   state: () => ({
     request: [],
     users: [],
+    usereducation: [],
     announcements: [],
     userrequest: [],
     userinfo: [],
@@ -55,6 +56,14 @@ export const useDashboardStore = defineStore("DashboardStore", {
       // this.users=Object.values(res.data.users);
       // console.log("user users=",this.users);
       this.userinfo = res.data.User;
+      this.usereducation = res.data.Education;
+      this.usereligibility = res.data.Eligibility;
+      this.userexperience = res.data.Experience;
+      this.uservoluntary = res.data.Voluntary;
+      this.usertraining = res.data.Training;
+      this.userskills = res.data.Skills;
+      this.userreference = res.data.Reference;
+
       this.img = res.data.img;
     },
     async getsinglerequest(payload) {

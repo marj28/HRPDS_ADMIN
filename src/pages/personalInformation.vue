@@ -1011,9 +1011,7 @@ export default {
       //     { name: "Email Address", column: "EmailAdd" },
       //     { name: "Cellphone Number", column: "CellphoneNo" },
       //   ];
-
       //   const store = useLoginStore();
-
       //   for (let i = 0; i < labelarray.length; i++) {
       //     if (
       //       this.personal[0][labelarray[i].column] !=
@@ -1043,7 +1041,6 @@ export default {
       //       .then((response) => {
       //         // console.log("response=", response.data);
       //         const returnarr = response.data.return;
-
       //         // let updatearr2 = [];
       //         // for (let i = 0; i < returnarr.length; i++) {
       //         //   if (this.updatearr[i].column == returnarr[i].column) {
@@ -1053,7 +1050,6 @@ export default {
       //         //   }
       //         // }
       //         // this.updatearr = updatearr2;
-
       //         this.updatearr = this.updatearr.filter((obj) => {
       //           // Assuming column is the property to match
       //           return returnarr.every(
@@ -1071,7 +1067,6 @@ export default {
       //             this.alertmessage =
       //               "Some of the updates you requested have already been processed! please check the Updates History for more information about your update requests.";
       //             this.alert = true;
-
       //             this.sessionID = response.data.sessionID;
       //             // this.dialog = true;
       //           } else {
@@ -1085,7 +1080,6 @@ export default {
       //       });
       //   }
       // } //end of if(validate)
-
       // console.log("changedarr=",this.updatearr)
     },
     opendialog() {
@@ -1302,25 +1296,21 @@ export default {
     // const religion = ref(stringReligions);
     // const indigenousGroup = ref(stringIndigenous);
     // const store = useLoginStore();
-
     // return {
     //   store,
     //   selectedReligion: ref(null),
     //   religion,
     //   selectedIndigenous: ref(null),
     //   indigenousGroup,
-
     //   filterFn(val, update) {
     //     if (val === "") {
     //       update(() => {
     //         religion.value = stringReligions;
-
     //         // here you have access to "ref" which
     //         // is the Vue reference of the QSelect
     //       });
     //       return;
     //     }
-
     //     update(() => {
     //       const needle = val.toLowerCase();
     //       religion.value = stringReligion.filter(
@@ -1328,7 +1318,6 @@ export default {
     //       );
     //     });
     //   },
-
     //   filterIndigenous(val, update) {
     //     if (val === "") {
     //       update(() => {

@@ -4,7 +4,7 @@
       <q-card-section style="max-height: 50vh" class="scroll">
         <div class="text-h6">
           VOLUNTARY WORK
-         <!--  <q-btn label="Add" @click="secondDialog = true"></q-btn> -->
+          <!--  <q-btn label="Add" @click="secondDialog = true"></q-btn> -->
         </div>
       </q-card-section>
       <q-table
@@ -158,7 +158,7 @@
 
 <script>
 import { ref } from "vue";
-import { useLoginStore } from "../stores/LoginStore";
+import { useDashboardStore } from "../stores/Dashboard";
 
 export default {
   data() {
@@ -221,7 +221,7 @@ export default {
     };
   },
   created() {
-    const userstore = useLoginStore();
+    const userstore = useDashboardStore();
     this.ControlNo = userstore.controlno;
     this.personal = userstore.uservoluntary;
 

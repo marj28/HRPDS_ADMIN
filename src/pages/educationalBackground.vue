@@ -4,7 +4,7 @@
       <q-card-section style="max-height: 50vh" class="scroll">
         <div class="text-h6">
           EDUCATIONAL BACKGROUND
-       <!--    <q-btn label="Add" @click="addnew()"></q-btn> -->
+          <!--    <q-btn label="Add" @click="addnew()"></q-btn> -->
         </div>
       </q-card-section>
       <q-table
@@ -195,7 +195,7 @@
 
 <script>
 import { ref } from "vue";
-import { useLoginStore } from "src/stores/LoginStore";
+import { useDashboardStore } from "src/stores/Dashboard";
 import { useUserInfoStore } from "src/stores/AdditionalStore";
 
 export default {
@@ -302,7 +302,7 @@ export default {
     };
   },
   created() {
-    const userstore = useLoginStore();
+    const userstore = useDashboardStore();
     this.personal = userstore.usereducation;
     for (let i = 0; i < this.personal.length; i++) {
       this.personal[i].From = this.personal[i].DateAttend.slice(0, 4);

@@ -653,7 +653,7 @@
   </div>
 </template>
 <script>
-import { useLoginStore } from "../stores/LoginStore.js";
+import { useDashboardStore } from "../stores/Dashboard";
 import { ref } from "vue";
 import axios from "axios";
 const stringIndigenous = [
@@ -757,7 +757,7 @@ export default {
     };
   },
   created() {
-    const userstore = useLoginStore();
+    const userstore = useDashboardStore();
     this.personal = userstore.userinfo.map((item) => ({ ...item }));
     this.reference = userstore.userreference.map((item) => ({ ...item }));
     if (this.personal[0].Chronic == null) {
@@ -793,7 +793,7 @@ export default {
   },
   setup() {
     const indigenousGroup = ref(stringIndigenous.sort());
-    const store = useLoginStore();
+    const store = useDashboardStore();
     const image = ref(null);
     const imageUrl = ref("");
     const file = ref(null);
@@ -968,7 +968,7 @@ export default {
         { name: "Solo Parent", column: "SoloP" },
       ];
 
-      const store = useLoginStore();
+      const store = useDashboardStore();
 
       for (let i = 0; i < labelarray.length; i++) {
         if (

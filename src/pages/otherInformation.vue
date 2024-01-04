@@ -199,7 +199,7 @@
 
 <script>
 import { ref } from "vue";
-import { useLoginStore } from "../stores/LoginStore";
+import { useDashboardStore } from "../stores/Dashboard";
 
 export default {
   data() {
@@ -259,7 +259,7 @@ export default {
     };
   },
   created() {
-    const userstore = useLoginStore();
+    const userstore = useDashboardStore();
     //dara go
     this.skills = userstore.userskills;
     this.academic = userstore.useracademic;

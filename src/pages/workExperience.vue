@@ -4,7 +4,7 @@
       <q-card-section style="max-height: 50vh" class="scroll">
         <div class="text-h6">
           WORK EXPERIENCE
-         <!--  <q-btn label="Add" @click="secondDialog = true"></q-btn> -->
+          <!--  <q-btn label="Add" @click="secondDialog = true"></q-btn> -->
         </div>
       </q-card-section>
       <q-table
@@ -201,7 +201,7 @@
 
 <script>
 import { ref } from "vue";
-import { useLoginStore } from "../stores/LoginStore";
+import { useDashboardStore } from "../stores/Dashboard";
 import { useUserInfoStore } from "../stores/AdditionalStore";
 export default {
   data() {
@@ -310,7 +310,7 @@ export default {
   },
   created() {
     this.personal = [];
-    const userstore = useLoginStore();
+    const userstore = useDashboardStore();
     // this.personal=userstore.userexperience.map((item)=>({...item}));
     this.personal = userstore.userexperience;
     this.ControlNo = userstore.controlno;
