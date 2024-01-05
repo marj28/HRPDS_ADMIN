@@ -14,6 +14,9 @@ export const useDashboardStore = defineStore("DashboardStore", {
     requestwork_experience: [],
     requestVoluntary_Work: [],
     requestLearning_And_Development: [],
+    requestskills: [],
+    requestNon_Academic: [],
+    request_Organization: [],
 
     userinfo: [],
     img: "",
@@ -91,7 +94,10 @@ export const useDashboardStore = defineStore("DashboardStore", {
       this.requestwork_experience = res.data.WorkExperience;
       this.requestVoluntary_Work = res.data.Voluntary;
       this.requestLearning_And_Development = res.data.Trainings;
-      
+
+      this.requestskills = res.data.Skills;
+      this.requestNon_Academic = res.data.NonAcademic;
+      this.request_Organization = res.data.Organization;
     },
     async getimg(payload) {
       // `http://10.0.1.23:82/HRPORTAL/login.php`

@@ -362,10 +362,31 @@
                           bordered
                           title=""
                           dense
-                          :rows="skills"
+                          :rows="requestSKILL"
                           :columns="columnSkills"
                           row-key="id"
-                        ></q-table>
+                        >
+                          <template v-slot:body-cell-actions="{ row }">
+                            <div class="actionsbtn q-gutter-lg">
+                              <q-btn
+                                flat
+                                round
+                                color="green"
+                                @click="editItem(row)"
+                              >
+                                Accept
+                              </q-btn>
+                              <q-btn
+                                flat
+                                round
+                                color="deep-orange"
+                                @click="deleteItem(row)"
+                              >
+                                DENY
+                              </q-btn>
+                            </div>
+                          </template>
+                        </q-table>
                       </q-card>
                     </div>
                     <div class="col-md-4 col-sm-12 col-xs-12 q-pa-xs">
@@ -383,10 +404,31 @@
                           bordered
                           title=""
                           dense
-                          :rows="academic"
+                          :rows="requestnonacademic"
                           :columns="columnAcademic"
                           row-key="id"
-                        ></q-table>
+                        >
+                          <template v-slot:body-cell-actions="{ row }">
+                            <div class="actionsbtn q-gutter-lg">
+                              <q-btn
+                                flat
+                                round
+                                color="green"
+                                @click="editItem(row)"
+                              >
+                                Accept
+                              </q-btn>
+                              <q-btn
+                                flat
+                                round
+                                color="deep-orange"
+                                @click="deleteItem(row)"
+                              >
+                                DENY
+                              </q-btn>
+                            </div>
+                          </template>
+                        </q-table>
                       </q-card>
                     </div>
                     <div class="col-md-4 col-sm-12 col-xs-12 q-pa-xs">
@@ -404,10 +446,31 @@
                           bordered
                           title=""
                           dense
-                          :rows="organization"
+                          :rows="requestorganization"
                           :columns="columnMembership"
                           row-key="id"
-                        ></q-table>
+                        >
+                          <template v-slot:body-cell-actions="{ row }">
+                            <div class="actionsbtn q-gutter-lg">
+                              <q-btn
+                                flat
+                                round
+                                color="green"
+                                @click="editItem(row)"
+                              >
+                                Accept
+                              </q-btn>
+                              <q-btn
+                                flat
+                                round
+                                color="deep-orange"
+                                @click="deleteItem(row)"
+                              >
+                                DENY
+                              </q-btn>
+                            </div>
+                          </template>
+                        </q-table>
                       </q-card>
                     </div>
                   </div>
@@ -893,11 +956,11 @@ export default {
 
       columnSkills: [
         {
-          name: "Skills",
+          name: "skill",
           required: true,
           label: "Skills and Hobbies",
           align: "left",
-          field: "Skills",
+          field: "skill",
           format: (val) => `${val}`,
           sortable: true,
         },
@@ -1139,6 +1202,15 @@ export default {
 
       this.requestlearningdevelopment = store.requestLearning_And_Development;
       console.log("LEARNING AND DEVELOPMENT", this.requestlearningdevelopment);
+
+      this.requestSKILL = store.requestskills;
+      console.log("SKILL", this.requestSKILL);
+
+      this.requestnonacademic = store.requestNon_Academic;
+      console.log("Non Academid", this.requestnonacademic);
+
+      this.requestorganization = store.request_Organization;
+      console.log("Membership in Association", this.requestorganization);
     });
   },
 };
