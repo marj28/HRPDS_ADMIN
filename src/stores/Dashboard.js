@@ -8,6 +8,13 @@ export const useDashboardStore = defineStore("DashboardStore", {
     usereducation: [],
     announcements: [],
     userrequest: [],
+    requestChild: [],
+    requestEduc_Background: [],
+    requestCivil_service_Eligibility: [],
+    requestwork_experience: [],
+    requestVoluntary_Work: [],
+    requestLearning_And_Development: [],
+
     userinfo: [],
     img: "",
     images: [],
@@ -55,6 +62,7 @@ export const useDashboardStore = defineStore("DashboardStore", {
       // this.request=res.data.request;
       // this.users=Object.values(res.data.users);
       // console.log("user users=",this.users);
+
       this.userinfo = res.data.User;
       this.usereducation = res.data.Education;
       this.usereligibility = res.data.Eligibility;
@@ -77,6 +85,13 @@ export const useDashboardStore = defineStore("DashboardStore", {
       // this.users=Object.values(res.data.users);
       // console.log("user users=",this.users);
       this.userrequest = res.data.request;
+      this.requestChild = res.data.Child;
+      this.requestEduc_Background = res.data.Education;
+      this.requestCivil_service_Eligibility = res.data.Civilservice;
+      this.requestwork_experience = res.data.WorkExperience;
+      this.requestVoluntary_Work = res.data.Voluntary;
+      this.requestLearning_And_Development = res.data.Trainings;
+      
     },
     async getimg(payload) {
       // `http://10.0.1.23:82/HRPORTAL/login.php`

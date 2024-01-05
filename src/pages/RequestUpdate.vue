@@ -13,12 +13,12 @@
         </div>
 
         <div class="col-2 col-sm-2 col-md-5 col-lg-8 q-mt-md esbugbai">
-          <p>Full Name: {{ userinfo[0].fullname }}</p>
-          <p class="q-mt-md">Designation: {{ userinfo[0].designation }}</p>
-          <p class="uppadding">Status: {{ userinfo[0].status }}</p>
+          <p><b>Full Name:</b> {{ userinfo[0].fullname }}</p>
+          <p class="q-mt-md">
+            <b>Designation:</b> {{ userinfo[0].designation }}
+          </p>
+          <p class="uppadding"><b>Status:</b> {{ userinfo[0].status }}</p>
         </div>
-
-        
       </div>
     </div>
     <div class="q-pa-md">
@@ -57,7 +57,7 @@
                       :rows="requests"
                       :columns="columns"
                       row-key="id"
-                      :rows-per-page-options="[0]"
+                      :rows-per-page-options="[5]"
                     >
                       <template v-slot:body-cell-actions="{ row }">
                         <div class="actionsbtn q-gutter-lg">
@@ -89,6 +89,328 @@
                       </template>
                     </q-table>
                   </q-card>
+
+                  <q-card class="q-pa-sm" style="text-align: center">
+                    <q-table
+                      class="my-sticky-header-table"
+                      flat
+                      bordered
+                      title="Request for Adding Children"
+                      dense
+                      :rows="requestChildss"
+                      :columns="columns_child"
+                      row-key="id"
+                      :rows-per-page-options="[5]"
+                    >
+                      <template v-slot:body-cell-actions="{ row }">
+                        <div class="actionsbtn q-gutter-lg">
+                          <q-btn
+                            flat
+                            round
+                            color="green"
+                            @click="editItem(row)"
+                          >
+                            View Docu
+                          </q-btn>
+                          <q-btn
+                            flat
+                            round
+                            color="green"
+                            @click="editItem(row)"
+                          >
+                            Accept
+                          </q-btn>
+                          <q-btn
+                            flat
+                            round
+                            color="deep-orange"
+                            @click="deleteItem(row)"
+                          >
+                            DENY
+                          </q-btn>
+                        </div>
+                      </template>
+                    </q-table>
+                  </q-card>
+
+                  <q-card class="q-pa-sm" style="text-align: center">
+                    <q-table
+                      class="my-sticky-header-table"
+                      flat
+                      bordered
+                      title="REQUEST FOR ADDING EDUCATIONAL BACKGROUND"
+                      dense
+                      :rows="requestEducBackground"
+                      :columns="columns_Educ_Background"
+                      row-key="id"
+                      :rows-per-page-options="[5]"
+                    >
+                      <template v-slot:body-cell-actions="{ row }">
+                        <div class="actionsbtn q-gutter-lg">
+                          <q-btn
+                            flat
+                            round
+                            color="green"
+                            @click="editItem(row)"
+                          >
+                            View Docu
+                          </q-btn>
+                          <q-btn
+                            flat
+                            round
+                            color="green"
+                            @click="editItem(row)"
+                          >
+                            Accept
+                          </q-btn>
+                          <q-btn
+                            flat
+                            round
+                            color="deep-orange"
+                            @click="deleteItem(row)"
+                          >
+                            DENY
+                          </q-btn>
+                        </div>
+                      </template>
+                    </q-table>
+                  </q-card>
+
+                  <q-card class="q-pa-sm" style="text-align: center">
+                    <q-table
+                      class="my-sticky-header-table"
+                      flat
+                      bordered
+                      title="REQUEST FOR CIVIL SERVICE ELIGIBILITY"
+                      dense
+                      :rows="requestCivilserviceEligibility"
+                      :columns="columns_CivilServiceEligibility"
+                      row-key="id"
+                      :rows-per-page-options="[5]"
+                    >
+                      <template v-slot:body-cell-actions="{ row }">
+                        <div class="actionsbtn q-gutter-lg">
+                          <q-btn
+                            flat
+                            round
+                            color="green"
+                            @click="editItem(row)"
+                          >
+                            View Docu
+                          </q-btn>
+                          <q-btn
+                            flat
+                            round
+                            color="green"
+                            @click="editItem(row)"
+                          >
+                            Accept
+                          </q-btn>
+                          <q-btn
+                            flat
+                            round
+                            color="deep-orange"
+                            @click="deleteItem(row)"
+                          >
+                            DENY
+                          </q-btn>
+                        </div>
+                      </template>
+                    </q-table>
+                  </q-card>
+
+                  <q-card class="q-pa-sm" style="text-align: center">
+                    <q-table
+                      class="my-sticky-header-table"
+                      flat
+                      bordered
+                      title="REQUEST FOR WORK EXPERIENCE"
+                      dense
+                      :rows="requestworkexperience"
+                      :columns="columns_WorkExperience"
+                      row-key="id"
+                      :rows-per-page-options="[5]"
+                    >
+                      <template v-slot:body-cell-actions="{ row }">
+                        <div class="actionsbtn q-gutter-lg">
+                          <q-btn
+                            flat
+                            round
+                            color="green"
+                            @click="editItem(row)"
+                          >
+                            View Docu
+                          </q-btn>
+                          <q-btn
+                            flat
+                            round
+                            color="green"
+                            @click="editItem(row)"
+                          >
+                            Accept
+                          </q-btn>
+                          <q-btn
+                            flat
+                            round
+                            color="deep-orange"
+                            @click="deleteItem(row)"
+                          >
+                            DENY
+                          </q-btn>
+                        </div>
+                      </template>
+                    </q-table>
+                  </q-card>
+
+                  <q-card class="q-pa-sm" style="text-align: center">
+                    <q-table
+                      class="my-sticky-header-table"
+                      flat
+                      bordered
+                      title="REQUEST FOR VOLUNTARY WORK"
+                      dense
+                      :rows="requestvoluntarywork"
+                      :columns="columns_VoluntaryWork"
+                      row-key="id"
+                      :rows-per-page-options="[5]"
+                    >
+                      <template v-slot:body-cell-actions="{ row }">
+                        <div class="actionsbtn q-gutter-lg">
+                          <q-btn
+                            flat
+                            round
+                            color="green"
+                            @click="editItem(row)"
+                          >
+                            View Docu
+                          </q-btn>
+                          <q-btn
+                            flat
+                            round
+                            color="green"
+                            @click="editItem(row)"
+                          >
+                            Accept
+                          </q-btn>
+                          <q-btn
+                            flat
+                            round
+                            color="deep-orange"
+                            @click="deleteItem(row)"
+                          >
+                            DENY
+                          </q-btn>
+                        </div>
+                      </template>
+                    </q-table>
+                  </q-card>
+
+                  <q-card class="q-pa-sm" style="text-align: center">
+                    <q-table
+                      class="my-sticky-header-table"
+                      flat
+                      bordered
+                      title="REQUEST FOR LEARNING AND DEVELOPMENT (L&D) INTERVENTIONS"
+                      dense
+                      :rows="requestlearningdevelopment"
+                      :columns="columns_Learnin_AND_Development"
+                      row-key="id"
+                      :rows-per-page-options="[5]"
+                    >
+                      <template v-slot:body-cell-actions="{ row }">
+                        <div class="actionsbtn q-gutter-lg">
+                          <q-btn
+                            flat
+                            round
+                            color="green"
+                            @click="editItem(row)"
+                          >
+                            View Docu
+                          </q-btn>
+                          <q-btn
+                            flat
+                            round
+                            color="green"
+                            @click="editItem(row)"
+                          >
+                            Accept
+                          </q-btn>
+                          <q-btn
+                            flat
+                            round
+                            color="deep-orange"
+                            @click="deleteItem(row)"
+                          >
+                            DENY
+                          </q-btn>
+                        </div>
+                      </template>
+                    </q-table>
+                  </q-card>
+                  <div class="row">
+                    <div class="col-md-4 col-sm-12 col-xs-12 q-pa-xs">
+                      <q-card>
+                        <q-card-section class="scroll">
+                          <div class="text-h6">
+                            SPECIAL SKILLS AND HOBBIES
+                            <!--     <q-btn label="Add" @click="SkillDialog = true"></q-btn> -->
+                          </div>
+                        </q-card-section>
+                        <q-table
+                          class="my-sticky-header-table"
+                          flat
+                          bordered
+                          title=""
+                          dense
+                          :rows="skills"
+                          :columns="columnSkills"
+                          row-key="id"
+                        ></q-table>
+                      </q-card>
+                    </div>
+                    <div class="col-md-4 col-sm-12 col-xs-12 q-pa-xs">
+                      <!-- NON-ACADEMIC DISTINCTIONS / RECOGNITION -->
+                      <q-card>
+                        <q-card-section class="scroll">
+                          <div class="text-h6">
+                            NON-ACADEMIC DISTINCTIONS
+                            <!-- <q-btn label="Add" @click="NonAcademicDialog = true"></q-btn> -->
+                          </div>
+                        </q-card-section>
+                        <q-table
+                          class="my-sticky-header-table"
+                          flat
+                          bordered
+                          title=""
+                          dense
+                          :rows="academic"
+                          :columns="columnAcademic"
+                          row-key="id"
+                        ></q-table>
+                      </q-card>
+                    </div>
+                    <div class="col-md-4 col-sm-12 col-xs-12 q-pa-xs">
+                      <!-- MEMBERSHIP IN ASSOCIATION/ORGANIZATION -->
+                      <q-card>
+                        <q-card-section class="scroll">
+                          <div class="text-h6">
+                            MEMBERSHIP IN ASSOCIATION
+                            <!--  <q-btn label="Add" @click="MembershipDialog = true"></q-btn> -->
+                          </div>
+                        </q-card-section>
+                        <q-table
+                          class="my-sticky-header-table"
+                          flat
+                          bordered
+                          title=""
+                          dense
+                          :rows="organization"
+                          :columns="columnMembership"
+                          row-key="id"
+                        ></q-table>
+                      </q-card>
+                    </div>
+                  </div>
                 </div>
               </div>
             </q-tab-panel>
@@ -205,6 +527,448 @@ export default {
           align: "center",
         },
       ],
+
+      columns_child: [
+        {
+          name: "ChildName",
+          align: "left",
+          label: "CHILD NAME",
+          field: "ChildName",
+          sortable: true,
+        },
+        {
+          name: "BirthDate",
+          align: "left",
+          label: "BRITH DAY",
+          field: "BirthDate",
+          sortable: true,
+        },
+        {
+          name: "status",
+          align: "left",
+          label: "STATUS",
+          field: "status",
+          sortable: true,
+        },
+        {
+          name: "actions",
+          label: "ACTIONS",
+          field: "actions",
+          align: "center",
+        },
+      ],
+
+      columns_Educ_Background: [
+        {
+          name: "Education",
+          align: "left",
+          label: "EDUCATION LEVEL",
+          field: "Education",
+          sortable: true,
+        },
+        {
+          name: "School",
+          align: "left",
+          label: "SCHOOL NAME",
+          field: "School",
+          sortable: true,
+        },
+
+        {
+          name: "Degree",
+          align: "left",
+          label: "BASIC EDUCATION/DEGREE/COURSE",
+          field: "Degree",
+          sortable: true,
+        },
+
+        {
+          name: "From",
+          align: "left",
+          label: "FROM",
+          field: "From",
+          sortable: true,
+        },
+
+        {
+          name: "To",
+          align: "left",
+          label: "TO",
+          field: "To",
+          sortable: true,
+        },
+
+        {
+          name: "Graduated",
+          align: "left",
+          label: "GRADUATED",
+          field: "Graduated",
+          sortable: true,
+        },
+        {
+          name: "status",
+          align: "left",
+          label: "STATUS",
+          field: "status",
+          sortable: true,
+        },
+
+        {
+          name: "remarks",
+          align: "left",
+          label: "REMARKS",
+          field: "remarks",
+          sortable: true,
+        },
+        {
+          name: "actions",
+          label: "ACTIONS",
+          field: "actions",
+          align: "center",
+        },
+      ],
+
+      columns_CivilServiceEligibility: [
+        {
+          name: "CivilServe",
+          align: "left",
+          label: "ELIGIBILITY",
+          field: "CivilServe",
+          sortable: true,
+        },
+        {
+          name: "Rates",
+          align: "left",
+          label: "RATING (IF APPLICABLE)",
+          field: "Rates",
+          sortable: true,
+        },
+
+        {
+          name: "Dates",
+          align: "left",
+          label: "DATE OF EXAMINATION",
+          field: "Dates",
+          sortable: true,
+        },
+
+        {
+          name: "Place",
+          align: "left",
+          label: "PLACE OF EXAMINIATION",
+          field: "Place",
+          sortable: true,
+        },
+
+        {
+          name: "Lnumber",
+          align: "left",
+          label: "LICENSE NUMBER",
+          field: "Lnumber",
+          sortable: true,
+        },
+
+        {
+          name: "Ldate",
+          align: "left",
+          label: "DATE OF VALIDITY",
+          field: "Ldate",
+          sortable: true,
+        },
+        {
+          name: "status",
+          align: "left",
+          label: "STATUS",
+          field: "status",
+          sortable: true,
+        },
+
+        {
+          name: "actions",
+          label: "ACTIONS",
+          field: "actions",
+          align: "center",
+        },
+      ],
+
+      columns_WorkExperience: [
+        {
+          name: "Wfrom",
+          align: "left",
+          label: "FROM",
+          field: "Wfrom",
+          sortable: true,
+        },
+        {
+          name: "Wto",
+          align: "left",
+          label: "TO",
+          field: "Wto",
+          sortable: true,
+        },
+
+        {
+          name: "Wposition",
+          align: "left",
+          label: "POSITION TITTLE",
+          field: "Wposition",
+          sortable: true,
+        },
+
+        {
+          name: "Wcompany",
+          align: "left",
+          label: "DEPARTMENT",
+          field: "Wcompany",
+          sortable: true,
+        },
+
+        {
+          name: "Wsalary",
+          align: "left",
+          label: "MONTHLY SALARY",
+          field: "Wsalary",
+          sortable: true,
+        },
+
+        {
+          name: "Wgrade",
+          align: "left",
+          label: "SALARY GRADE",
+          field: "Wgrade",
+          sortable: true,
+        },
+
+        {
+          name: "wstatus",
+          align: "left",
+          label: "STATUS OF APPOINTMENT",
+          field: "wstatus",
+          sortable: true,
+        },
+
+        {
+          name: "Wgov",
+          align: "left",
+          label: "GOVERNMENT SERVICE",
+          field: "Wgov",
+          sortable: true,
+        },
+
+        {
+          name: "status",
+          align: "left",
+          label: "STATUS",
+          field: "status",
+          sortable: true,
+        },
+
+        {
+          name: "actions",
+          label: "ACTIONS",
+          field: "actions",
+          align: "center",
+        },
+      ],
+
+      columns_VoluntaryWork: [
+        {
+          name: "Orgname",
+          align: "left",
+          label: "NAME & ADDRESS OF ORGANIZATION",
+          field: "Orgname",
+          sortable: true,
+        },
+        {
+          name: "Datefrom",
+          align: "left",
+          label: "FROM",
+          field: "Datefrom",
+          sortable: true,
+        },
+
+        {
+          name: "Dateto",
+          align: "left",
+          label: "TO",
+          field: "Dateto",
+          sortable: true,
+        },
+
+        {
+          name: "Nohours",
+          align: "left",
+          label: "NUMBER OF HOURS",
+          field: "Nohours",
+          sortable: true,
+        },
+
+        {
+          name: "Orgposition",
+          align: "left",
+          label: "POSITION",
+          field: "Orgposition",
+          sortable: true,
+        },
+
+        {
+          name: "status",
+          align: "left",
+          label: "STATUS",
+          field: "status",
+          sortable: true,
+        },
+
+        {
+          name: "actions",
+          label: "ACTIONS",
+          field: "actions",
+          align: "center",
+        },
+      ],
+
+      columns_Learnin_AND_Development: [
+        {
+          name: "Orgname",
+          align: "left",
+          label: "Training",
+          field: "Orgname",
+          sortable: true,
+        },
+        {
+          name: "Datefrom",
+          align: "left",
+          label: "FROM",
+          field: "Datefrom",
+          sortable: true,
+        },
+
+        {
+          name: "Dateto",
+          align: "left",
+          label: "TO",
+          field: "Dateto",
+          sortable: true,
+        },
+
+        {
+          name: "NumHours",
+          align: "left",
+          label: "NUMBER OF HOURS",
+          field: "NumHours",
+          sortable: true,
+        },
+
+        {
+          name: "type",
+          align: "left",
+          label: "TYPE",
+          field: "type",
+          sortable: true,
+        },
+
+        {
+          name: "Conductor",
+          align: "left",
+          label: "CONDUCTED / SPONSORED BY",
+          field: "Conductor",
+          sortable: true,
+        },
+
+        {
+          name: "status",
+          align: "left",
+          label: "STATUS",
+          field: "status",
+          sortable: true,
+        },
+
+        {
+          name: "actions",
+          label: "ACTIONS",
+          field: "actions",
+          align: "center",
+        },
+      ],
+
+      columnSkills: [
+        {
+          name: "Skills",
+          required: true,
+          label: "Skills and Hobbies",
+          align: "left",
+          field: "Skills",
+          format: (val) => `${val}`,
+          sortable: true,
+        },
+        {
+          name: "status",
+          align: "left",
+          label: "STATUS",
+          field: "status",
+          sortable: true,
+        },
+
+        {
+          name: "actions",
+          label: "ACTIONS",
+          field: "actions",
+          align: "center",
+        },
+      ],
+
+      columnAcademic: [
+        {
+          name: "NonAcademic",
+          required: true,
+          label: "Non-Academic Distinction",
+          align: "left",
+          field: "NonAcademic",
+          format: (val) => `${val}`,
+          sortable: true,
+        },
+        {
+          name: "status",
+          align: "left",
+          label: "STATUS",
+          field: "status",
+          sortable: true,
+        },
+
+        {
+          name: "actions",
+          label: "ACTIONS",
+          field: "actions",
+          align: "center",
+        },
+      ],
+
+      columnMembership: [
+        {
+          name: "Organization",
+          required: true,
+          label: "Membership in Organization",
+          align: "left",
+          field: "Organization",
+          format: (val) => `${val}`,
+          sortable: true,
+        },
+        {
+          name: "status",
+          align: "left",
+          label: "STATUS",
+          field: "status",
+          sortable: true,
+        },
+
+        {
+          name: "actions",
+          label: "ACTIONS",
+          field: "actions",
+          align: "center",
+        },
+      ],
+
       rows: [
         {
           /*    Controlno: "019807", */
@@ -346,7 +1110,9 @@ export default {
     data.append("controlno", this.controlNo);
     store.getuserinfo(data).then((res) => {
       this.userinfo = store.userinfo;
+
       console.log(this.userinfo);
+
       this.imgurl = "http://10.0.1.23:82/pics/" + store.img;
     });
     let data2 = new FormData();
@@ -354,6 +1120,25 @@ export default {
     store.getsinglerequest(data2).then((res) => {
       this.requests = store.userrequest;
       console.log("userinfo=", this.requests);
+
+      this.requestChildss = store.requestChild;
+      console.log("CHILD REQUEST", this.requestChildss);
+
+      this.requestEducBackground = store.requestEduc_Background;
+      console.log("EDUCATIONAL BACKGROUND", this.requestEducBackground);
+
+      this.requestCivilserviceEligibility =
+        store.requestCivil_service_Eligibility;
+      console.log("CIVIL SERVICE", this.requestCivilserviceEligibility);
+
+      this.requestworkexperience = store.requestwork_experience;
+      console.log("WORK EXPERIENCE", this.requestworkexperience);
+
+      this.requestvoluntarywork = store.requestVoluntary_Work;
+      console.log("VOLUNTARY WORK", this.requestvoluntarywork);
+
+      this.requestlearningdevelopment = store.requestLearning_And_Development;
+      console.log("LEARNING AND DEVELOPMENT", this.requestlearningdevelopment);
     });
   },
 };
