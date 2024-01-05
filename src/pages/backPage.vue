@@ -74,7 +74,7 @@
 
         <div class="q-gutter-sm q-mr-md col-md-6 col-xs-12">
           <div class="row">
-            <div class="col-lg-4 col-md-6">
+            <div class="col-lg-8 col-md-6">
               <label for="sex" class="q-ml-lg"
                 >b. Have you been criminally charged before any court?</label
               >
@@ -366,7 +366,7 @@
         ></q-table>
       </q-card-section>
       <q-card-section>
-        <label for="ID">Picture</label>
+        <!--  <label for="ID">Picture</label> -->
         <!-- <q-input
           @update:model-value="
             (val) => {
@@ -408,7 +408,7 @@
           ></q-btn> -->
         </div>
         <div>
-          <q-img
+          <!--    <q-img
             :src="imageUrlPDS"
             spinner-color="white"
             style="
@@ -419,7 +419,7 @@
               border-width: 2%;
               border-style: solid;
             "
-          ></q-img>
+          ></q-img> -->
         </div>
       </q-card-section>
     </q-card>

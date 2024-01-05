@@ -17,6 +17,8 @@
           <p class="q-mt-md">Designation: {{ userinfo[0].designation }}</p>
           <p class="uppadding">Status: {{ userinfo[0].status }}</p>
         </div>
+
+        
       </div>
     </div>
     <div class="q-pa-md">
