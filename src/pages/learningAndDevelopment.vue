@@ -259,7 +259,6 @@ export default {
       }
       if (valid) {
         let Form = new FormData();
-
         Form.append("ControlNo", this.ControlNo);
         Form.append("Training", this.Title);
         Form.append("Datefrom", this.InclusiveDateFrom);
@@ -267,7 +266,6 @@ export default {
         Form.append("NumHours", this.NumberofHours);
         Form.append("Type", this.Type);
         Form.append("Conductor", this.Conducted);
-
         Form.append("file", this.fileimage);
         const userstore = useUserInfoStore();
         userstore.saveTraining(Form).then((res) => {

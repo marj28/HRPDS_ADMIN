@@ -1,6 +1,14 @@
 <template>
   <div>
     <div>
+      <div v-if="data.length">
+        <!-- Use v-show to toggle the visibility of q-table based on data availability -->
+        <q-table :rows="data" :columns="columnsss"></q-table>
+
+        <!-- Show a message if there is no data -->
+      </div>
+      <!--  <div v-show="data.length == 0">No data available.</div> -->
+
       <div class="row">
         <div class="col-1">
           <!--   <p>{{ controlNo }}</p> -->
@@ -47,431 +55,451 @@
             <q-tab-panel name="List">
               <div class="column items-center" style="">
                 <div class="col" style="width: 90%">
-                  <q-card class="q-pa-sm" style="text-align: center">
-                    <q-table
-                      class="my-sticky-header-table"
-                      flat
-                      bordered
-                      title="Request for Update List"
-                      dense
-                      :rows="requests"
-                      :columns="columns"
-                      row-key="id"
-                      :rows-per-page-options="[5]"
-                    >
-                      <template v-slot:body-cell-actions="{ row }">
-                        <div class="actionsbtn q-gutter-lg">
-                          <q-btn
-                            flat
-                            round
-                            color="green"
-                            @click="editItem(row)"
-                          >
-                            View Docu
-                          </q-btn>
-                          <q-btn
-                            flat
-                            round
-                            color="green"
-                            @click="editItem(row)"
-                          >
-                            Accept
-                          </q-btn>
-                          <q-btn
-                            flat
-                            round
-                            color="deep-orange"
-                            @click="deleteItem(row)"
-                          >
-                            DENY
-                          </q-btn>
-                        </div>
-                      </template>
-                    </q-table>
-                  </q-card>
+                  <div v-if="requests.length">
+                    <q-card class="q-pa-sm" style="text-align: center">
+                      <q-table
+                        class="my-sticky-header-table"
+                        flat
+                        bordered
+                        title="Request for Update List"
+                        dense
+                        :rows="requests"
+                        :columns="columns"
+                        row-key="id"
+                        :rows-per-page-options="[5]"
+                      >
+                        <template v-slot:body-cell-actions="{ row }">
+                          <div class="actionsbtn q-gutter-lg">
+                            <q-btn
+                              flat
+                              round
+                              color="green"
+                              @click="viewdoc(row)"
+                            >
+                              View Docu
+                            </q-btn>
+                            <q-btn
+                              flat
+                              round
+                              color="green"
+                              @click="accept(row)"
+                            >
+                              Accept
+                            </q-btn>
+                            <q-btn
+                              flat
+                              round
+                              color="deep-orange"
+                              @click="deleteItem(row)"
+                            >
+                              DENY
+                            </q-btn>
+                          </div>
+                        </template>
+                      </q-table>
+                    </q-card>
+                  </div>
 
-                  <q-card class="q-pa-sm" style="text-align: center">
-                    <q-table
-                      class="my-sticky-header-table"
-                      flat
-                      bordered
-                      title="Request for Adding Children"
-                      dense
-                      :rows="requestChildss"
-                      :columns="columns_child"
-                      row-key="id"
-                      :rows-per-page-options="[5]"
-                    >
-                      <template v-slot:body-cell-actions="{ row }">
-                        <div class="actionsbtn q-gutter-lg">
-                          <q-btn
-                            flat
-                            round
-                            color="green"
-                            @click="editItem(row)"
-                          >
-                            View Docu
-                          </q-btn>
-                          <q-btn
-                            flat
-                            round
-                            color="green"
-                            @click="editItem(row)"
-                          >
-                            Accept
-                          </q-btn>
-                          <q-btn
-                            flat
-                            round
-                            color="deep-orange"
-                            @click="deleteItem(row)"
-                          >
-                            DENY
-                          </q-btn>
-                        </div>
-                      </template>
-                    </q-table>
-                  </q-card>
+                  <div v-if="requestChildss.length">
+                    <q-card class="q-pa-sm" style="text-align: center">
+                      <q-table
+                        class="my-sticky-header-table"
+                        flat
+                        bordered
+                        title="Request for Adding Children"
+                        dense
+                        :rows="requestChildss"
+                        :columns="columns_child"
+                        row-key="id"
+                        :rows-per-page-options="[5]"
+                      >
+                        <template v-slot:body-cell-actions="{ row }">
+                          <div class="actionsbtn q-gutter-lg">
+                            <q-btn
+                              flat
+                              round
+                              color="green"
+                              @click="viewdoc(row)"
+                            >
+                              View Docu
+                            </q-btn>
+                            <q-btn
+                              flat
+                              round
+                              color="green"
+                              @click="editItem(row)"
+                            >
+                              Accept
+                            </q-btn>
+                            <q-btn
+                              flat
+                              round
+                              color="deep-orange"
+                              @click="deleteItem(row)"
+                            >
+                              DENY
+                            </q-btn>
+                          </div>
+                        </template>
+                      </q-table>
+                    </q-card>
+                  </div>
 
-                  <q-card class="q-pa-sm" style="text-align: center">
-                    <q-table
-                      class="my-sticky-header-table"
-                      flat
-                      bordered
-                      title="REQUEST FOR ADDING EDUCATIONAL BACKGROUND"
-                      dense
-                      :rows="requestEducBackground"
-                      :columns="columns_Educ_Background"
-                      row-key="id"
-                      :rows-per-page-options="[5]"
-                    >
-                      <template v-slot:body-cell-actions="{ row }">
-                        <div class="actionsbtn q-gutter-lg">
-                          <q-btn
-                            flat
-                            round
-                            color="green"
-                            @click="editItem(row)"
-                          >
-                            View Docu
-                          </q-btn>
-                          <q-btn
-                            flat
-                            round
-                            color="green"
-                            @click="editItem(row)"
-                          >
-                            Accept
-                          </q-btn>
-                          <q-btn
-                            flat
-                            round
-                            color="deep-orange"
-                            @click="deleteItem(row)"
-                          >
-                            DENY
-                          </q-btn>
-                        </div>
-                      </template>
-                    </q-table>
-                  </q-card>
+                  <div v-if="requestEducBackground.length">
+                    <q-card class="q-pa-sm" style="text-align: center">
+                      <q-table
+                        class="my-sticky-header-table"
+                        flat
+                        bordered
+                        title="REQUEST FOR ADDING EDUCATIONAL BACKGROUND"
+                        dense
+                        :rows="requestEducBackground"
+                        :columns="columns_Educ_Background"
+                        row-key="id"
+                        :rows-per-page-options="[5]"
+                      >
+                        <template v-slot:body-cell-actions="{ row }">
+                          <div class="actionsbtn q-gutter-lg">
+                            <q-btn
+                              flat
+                              round
+                              color="green"
+                              @click="editItem(row)"
+                            >
+                              View Docu
+                            </q-btn>
+                            <q-btn
+                              flat
+                              round
+                              color="green"
+                              @click="editItem(row)"
+                            >
+                              Accept
+                            </q-btn>
+                            <q-btn
+                              flat
+                              round
+                              color="deep-orange"
+                              @click="deleteItem(row)"
+                            >
+                              DENY
+                            </q-btn>
+                          </div>
+                        </template>
+                      </q-table>
+                    </q-card>
+                  </div>
+                  <div v-if="requestCivilserviceEligibility.length">
+                    <q-card class="q-pa-sm" style="text-align: center">
+                      <q-table
+                        class="my-sticky-header-table"
+                        flat
+                        bordered
+                        title="REQUEST FOR CIVIL SERVICE ELIGIBILITY"
+                        dense
+                        :rows="requestCivilserviceEligibility"
+                        :columns="columns_CivilServiceEligibility"
+                        row-key="id"
+                        :rows-per-page-options="[5]"
+                      >
+                        <template v-slot:body-cell-actions="{ row }">
+                          <div class="actionsbtn q-gutter-lg">
+                            <q-btn
+                              flat
+                              round
+                              color="green"
+                              @click="editItem(row)"
+                            >
+                              View Docu
+                            </q-btn>
+                            <q-btn
+                              flat
+                              round
+                              color="green"
+                              @click="editItem(row)"
+                            >
+                              Accept
+                            </q-btn>
+                            <q-btn
+                              flat
+                              round
+                              color="deep-orange"
+                              @click="deleteItem(row)"
+                            >
+                              DENY
+                            </q-btn>
+                          </div>
+                        </template>
+                      </q-table>
+                    </q-card>
+                  </div>
 
-                  <q-card class="q-pa-sm" style="text-align: center">
-                    <q-table
-                      class="my-sticky-header-table"
-                      flat
-                      bordered
-                      title="REQUEST FOR CIVIL SERVICE ELIGIBILITY"
-                      dense
-                      :rows="requestCivilserviceEligibility"
-                      :columns="columns_CivilServiceEligibility"
-                      row-key="id"
-                      :rows-per-page-options="[5]"
-                    >
-                      <template v-slot:body-cell-actions="{ row }">
-                        <div class="actionsbtn q-gutter-lg">
-                          <q-btn
-                            flat
-                            round
-                            color="green"
-                            @click="editItem(row)"
-                          >
-                            View Docu
-                          </q-btn>
-                          <q-btn
-                            flat
-                            round
-                            color="green"
-                            @click="editItem(row)"
-                          >
-                            Accept
-                          </q-btn>
-                          <q-btn
-                            flat
-                            round
-                            color="deep-orange"
-                            @click="deleteItem(row)"
-                          >
-                            DENY
-                          </q-btn>
-                        </div>
-                      </template>
-                    </q-table>
-                  </q-card>
+                  <div v-if="requestworkexperience.length">
+                    <q-card class="q-pa-sm" style="text-align: center">
+                      <q-table
+                        class="my-sticky-header-table"
+                        flat
+                        bordered
+                        title="REQUEST FOR WORK EXPERIENCE"
+                        dense
+                        :rows="requestworkexperience"
+                        :columns="columns_WorkExperience"
+                        row-key="id"
+                        :rows-per-page-options="[5]"
+                      >
+                        <template v-slot:body-cell-actions="{ row }">
+                          <div class="actionsbtn q-gutter-lg">
+                            <q-btn
+                              flat
+                              round
+                              color="green"
+                              @click="editItem(row)"
+                            >
+                              View Docu
+                            </q-btn>
+                            <q-btn
+                              flat
+                              round
+                              color="green"
+                              @click="editItem(row)"
+                            >
+                              Accept
+                            </q-btn>
+                            <q-btn
+                              flat
+                              round
+                              color="deep-orange"
+                              @click="deleteItem(row)"
+                            >
+                              DENY
+                            </q-btn>
+                          </div>
+                        </template>
+                      </q-table>
+                    </q-card>
+                  </div>
 
-                  <q-card class="q-pa-sm" style="text-align: center">
-                    <q-table
-                      class="my-sticky-header-table"
-                      flat
-                      bordered
-                      title="REQUEST FOR WORK EXPERIENCE"
-                      dense
-                      :rows="requestworkexperience"
-                      :columns="columns_WorkExperience"
-                      row-key="id"
-                      :rows-per-page-options="[5]"
-                    >
-                      <template v-slot:body-cell-actions="{ row }">
-                        <div class="actionsbtn q-gutter-lg">
-                          <q-btn
-                            flat
-                            round
-                            color="green"
-                            @click="editItem(row)"
-                          >
-                            View Docu
-                          </q-btn>
-                          <q-btn
-                            flat
-                            round
-                            color="green"
-                            @click="editItem(row)"
-                          >
-                            Accept
-                          </q-btn>
-                          <q-btn
-                            flat
-                            round
-                            color="deep-orange"
-                            @click="deleteItem(row)"
-                          >
-                            DENY
-                          </q-btn>
-                        </div>
-                      </template>
-                    </q-table>
-                  </q-card>
+                  <div v-if="requestvoluntarywork.length">
+                    <q-card class="q-pa-sm" style="text-align: center">
+                      <q-table
+                        class="my-sticky-header-table"
+                        flat
+                        bordered
+                        title="REQUEST FOR VOLUNTARY WORK"
+                        dense
+                        :rows="requestvoluntarywork"
+                        :columns="columns_VoluntaryWork"
+                        row-key="id"
+                        :rows-per-page-options="[5]"
+                      >
+                        <template v-slot:body-cell-actions="{ row }">
+                          <div class="actionsbtn q-gutter-lg">
+                            <q-btn
+                              flat
+                              round
+                              color="green"
+                              @click="editItem(row)"
+                            >
+                              View Docu
+                            </q-btn>
+                            <q-btn
+                              flat
+                              round
+                              color="green"
+                              @click="editItem(row)"
+                            >
+                              Accept
+                            </q-btn>
+                            <q-btn
+                              flat
+                              round
+                              color="deep-orange"
+                              @click="deleteItem(row)"
+                            >
+                              DENY
+                            </q-btn>
+                          </div>
+                        </template>
+                      </q-table>
+                    </q-card>
+                  </div>
 
-                  <q-card class="q-pa-sm" style="text-align: center">
-                    <q-table
-                      class="my-sticky-header-table"
-                      flat
-                      bordered
-                      title="REQUEST FOR VOLUNTARY WORK"
-                      dense
-                      :rows="requestvoluntarywork"
-                      :columns="columns_VoluntaryWork"
-                      row-key="id"
-                      :rows-per-page-options="[5]"
-                    >
-                      <template v-slot:body-cell-actions="{ row }">
-                        <div class="actionsbtn q-gutter-lg">
-                          <q-btn
-                            flat
-                            round
-                            color="green"
-                            @click="editItem(row)"
-                          >
-                            View Docu
-                          </q-btn>
-                          <q-btn
-                            flat
-                            round
-                            color="green"
-                            @click="editItem(row)"
-                          >
-                            Accept
-                          </q-btn>
-                          <q-btn
-                            flat
-                            round
-                            color="deep-orange"
-                            @click="deleteItem(row)"
-                          >
-                            DENY
-                          </q-btn>
-                        </div>
-                      </template>
-                    </q-table>
-                  </q-card>
+                  <div v-if="requestlearningdevelopment.length">
+                    <q-card class="q-pa-sm" style="text-align: center">
+                      <q-table
+                        class="my-sticky-header-table"
+                        flat
+                        bordered
+                        title="REQUEST FOR LEARNING AND DEVELOPMENT (L&D) INTERVENTIONS"
+                        dense
+                        :rows="requestlearningdevelopment"
+                        :columns="columns_Learnin_AND_Development"
+                        row-key="id"
+                        :rows-per-page-options="[5]"
+                      >
+                        <template v-slot:body-cell-actions="{ row }">
+                          <div class="actionsbtn q-gutter-lg">
+                            <q-btn
+                              flat
+                              round
+                              color="green"
+                              @click="editItem(row)"
+                            >
+                              View Docu
+                            </q-btn>
+                            <q-btn
+                              flat
+                              round
+                              color="green"
+                              @click="editItem(row)"
+                            >
+                              Accept
+                            </q-btn>
+                            <q-btn
+                              flat
+                              round
+                              color="deep-orange"
+                              @click="deleteItem(row)"
+                            >
+                              DENY
+                            </q-btn>
+                          </div>
+                        </template>
+                      </q-table>
+                    </q-card>
+                  </div>
 
-                  <q-card class="q-pa-sm" style="text-align: center">
-                    <q-table
-                      class="my-sticky-header-table"
-                      flat
-                      bordered
-                      title="REQUEST FOR LEARNING AND DEVELOPMENT (L&D) INTERVENTIONS"
-                      dense
-                      :rows="requestlearningdevelopment"
-                      :columns="columns_Learnin_AND_Development"
-                      row-key="id"
-                      :rows-per-page-options="[5]"
-                    >
-                      <template v-slot:body-cell-actions="{ row }">
-                        <div class="actionsbtn q-gutter-lg">
-                          <q-btn
-                            flat
-                            round
-                            color="green"
-                            @click="editItem(row)"
-                          >
-                            View Docu
-                          </q-btn>
-                          <q-btn
-                            flat
-                            round
-                            color="green"
-                            @click="editItem(row)"
-                          >
-                            Accept
-                          </q-btn>
-                          <q-btn
-                            flat
-                            round
-                            color="deep-orange"
-                            @click="deleteItem(row)"
-                          >
-                            DENY
-                          </q-btn>
-                        </div>
-                      </template>
-                    </q-table>
-                  </q-card>
                   <div class="row">
                     <div class="col-md-4 col-sm-12 col-xs-12 q-pa-xs">
-                      <q-card>
-                        <q-card-section class="scroll">
-                          <div class="text-h6">
-                            SPECIAL SKILLS AND HOBBIES
-                            <!--     <q-btn label="Add" @click="SkillDialog = true"></q-btn> -->
-                          </div>
-                        </q-card-section>
-                        <q-table
-                          class="my-sticky-header-table"
-                          flat
-                          bordered
-                          title=""
-                          dense
-                          :rows="requestSKILL"
-                          :columns="columnSkills"
-                          row-key="id"
-                        >
-                          <template v-slot:body-cell-actions="{ row }">
-                            <div class="actionsbtn q-gutter-lg">
-                              <q-btn
-                                flat
-                                round
-                                color="green"
-                                @click="editItem(row)"
-                              >
-                                Accept
-                              </q-btn>
-                              <q-btn
-                                flat
-                                round
-                                color="deep-orange"
-                                @click="deleteItem(row)"
-                              >
-                                DENY
-                              </q-btn>
+                      <div v-if="requestSKILL.length">
+                        <q-card>
+                          <q-card-section class="scroll">
+                            <div class="text-h6">
+                              SPECIAL SKILLS AND HOBBIES
+                              <!--     <q-btn label="Add" @click="SkillDialog = true"></q-btn> -->
                             </div>
-                          </template>
-                        </q-table>
-                      </q-card>
+                          </q-card-section>
+                          <q-table
+                            class="my-sticky-header-table"
+                            flat
+                            bordered
+                            title=""
+                            dense
+                            :rows="requestSKILL"
+                            :columns="columnSkills"
+                            row-key="id"
+                          >
+                            <template v-slot:body-cell-actions="{ row }">
+                              <div class="actionsbtn q-gutter-lg">
+                                <q-btn
+                                  flat
+                                  round
+                                  color="green"
+                                  @click="editItem(row)"
+                                >
+                                  Accept
+                                </q-btn>
+                                <q-btn
+                                  flat
+                                  round
+                                  color="deep-orange"
+                                  @click="deleteItem(row)"
+                                >
+                                  DENY
+                                </q-btn>
+                              </div>
+                            </template>
+                          </q-table>
+                        </q-card>
+                      </div>
                     </div>
                     <div class="col-md-4 col-sm-12 col-xs-12 q-pa-xs">
                       <!-- NON-ACADEMIC DISTINCTIONS / RECOGNITION -->
-                      <q-card>
-                        <q-card-section class="scroll">
-                          <div class="text-h6">
-                            NON-ACADEMIC DISTINCTIONS
-                            <!-- <q-btn label="Add" @click="NonAcademicDialog = true"></q-btn> -->
-                          </div>
-                        </q-card-section>
-                        <q-table
-                          class="my-sticky-header-table"
-                          flat
-                          bordered
-                          title=""
-                          dense
-                          :rows="requestnonacademic"
-                          :columns="columnAcademic"
-                          row-key="id"
-                        >
-                          <template v-slot:body-cell-actions="{ row }">
-                            <div class="actionsbtn q-gutter-lg">
-                              <q-btn
-                                flat
-                                round
-                                color="green"
-                                @click="editItem(row)"
-                              >
-                                Accept
-                              </q-btn>
-                              <q-btn
-                                flat
-                                round
-                                color="deep-orange"
-                                @click="deleteItem(row)"
-                              >
-                                DENY
-                              </q-btn>
+                      <div v-if="requestnonacademic.length">
+                        <q-card>
+                          <q-card-section class="scroll">
+                            <div class="text-h6">
+                              NON-ACADEMIC DISTINCTIONS
+                              <!-- <q-btn label="Add" @click="NonAcademicDialog = true"></q-btn> -->
                             </div>
-                          </template>
-                        </q-table>
-                      </q-card>
+                          </q-card-section>
+                          <q-table
+                            class="my-sticky-header-table"
+                            flat
+                            bordered
+                            title=""
+                            dense
+                            :rows="requestnonacademic"
+                            :columns="columnAcademic"
+                            row-key="id"
+                          >
+                            <template v-slot:body-cell-actions="{ row }">
+                              <div class="actionsbtn q-gutter-lg">
+                                <q-btn
+                                  flat
+                                  round
+                                  color="green"
+                                  @click="editItem(row)"
+                                >
+                                  Accept
+                                </q-btn>
+                                <q-btn
+                                  flat
+                                  round
+                                  color="deep-orange"
+                                  @click="deleteItem(row)"
+                                >
+                                  DENY
+                                </q-btn>
+                              </div>
+                            </template>
+                          </q-table>
+                        </q-card>
+                      </div>
                     </div>
                     <div class="col-md-4 col-sm-12 col-xs-12 q-pa-xs">
                       <!-- MEMBERSHIP IN ASSOCIATION/ORGANIZATION -->
-                      <q-card>
-                        <q-card-section class="scroll">
-                          <div class="text-h6">
-                            MEMBERSHIP IN ASSOCIATION
-                            <!--  <q-btn label="Add" @click="MembershipDialog = true"></q-btn> -->
-                          </div>
-                        </q-card-section>
-                        <q-table
-                          class="my-sticky-header-table"
-                          flat
-                          bordered
-                          title=""
-                          dense
-                          :rows="requestorganization"
-                          :columns="columnMembership"
-                          row-key="id"
-                        >
-                          <template v-slot:body-cell-actions="{ row }">
-                            <div class="actionsbtn q-gutter-lg">
-                              <q-btn
-                                flat
-                                round
-                                color="green"
-                                @click="editItem(row)"
-                              >
-                                Accept
-                              </q-btn>
-                              <q-btn
-                                flat
-                                round
-                                color="deep-orange"
-                                @click="deleteItem(row)"
-                              >
-                                DENY
-                              </q-btn>
+                      <div v-if="requestorganization.length">
+                        <q-card>
+                          <q-card-section class="scroll">
+                            <div class="text-h6">
+                              MEMBERSHIP IN ASSOCIATION
+                              <!--  <q-btn label="Add" @click="MembershipDialog = true"></q-btn> -->
                             </div>
-                          </template>
-                        </q-table>
-                      </q-card>
+                          </q-card-section>
+                          <q-table
+                            class="my-sticky-header-table"
+                            flat
+                            bordered
+                            title=""
+                            dense
+                            :rows="requestorganization"
+                            :columns="columnMembership"
+                            row-key="id"
+                          >
+                            <template v-slot:body-cell-actions="{ row }">
+                              <div class="actionsbtn q-gutter-lg">
+                                <q-btn
+                                  flat
+                                  round
+                                  color="green"
+                                  @click="editItem(row)"
+                                >
+                                  Accept
+                                </q-btn>
+                                <q-btn
+                                  flat
+                                  round
+                                  color="deep-orange"
+                                  @click="deleteItem(row)"
+                                >
+                                  DENY
+                                </q-btn>
+                              </div>
+                            </template>
+                          </q-table>
+                        </q-card>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -591,6 +619,30 @@ export default {
         },
       ],
 
+      data: [
+        /* { name: "sdsd", age: "sd" },
+        { name: "sd", age: "sd" }, */
+        // Add more data as needed
+      ],
+      columnsss: [
+        // Define your table columns
+        {
+          name: "name",
+          label: "Name",
+          align: "left",
+          field: "name",
+          sortable: true,
+        },
+        {
+          name: "age",
+          label: "Age",
+          align: "center",
+          field: "age",
+          sortable: true,
+        },
+        // Add more columns as needed
+      ],
+
       columns_child: [
         {
           name: "ChildName",
@@ -699,13 +751,13 @@ export default {
           field: "CivilServe",
           sortable: true,
         },
-        {
+        /*    {
           name: "Rates",
           align: "left",
           label: "RATING (IF APPLICABLE)",
           field: "Rates",
           sortable: true,
-        },
+        }, */
 
         {
           name: "Dates",

@@ -94,7 +94,6 @@ export const useDashboardStore = defineStore("DashboardStore", {
       this.requestwork_experience = res.data.WorkExperience;
       this.requestVoluntary_Work = res.data.Voluntary;
       this.requestLearning_And_Development = res.data.Trainings;
-
       this.requestskills = res.data.Skills;
       this.requestNon_Academic = res.data.NonAcademic;
       this.request_Organization = res.data.Organization;
