@@ -79,6 +79,10 @@
                               View Docu
                             </q-btn>
                             <q-btn
+                              v-if="
+                                row.status !== 'ACCEPTED' &&
+                                row.status !== 'REJECTED'
+                              "
                               flat
                               round
                               color="green"
@@ -87,6 +91,10 @@
                               Accept
                             </q-btn>
                             <q-btn
+                              v-if="
+                                row.status !== 'ACCEPTED' &&
+                                row.status !== 'REJECTED'
+                              "
                               flat
                               round
                               color="deep-orange"
@@ -124,6 +132,10 @@
                               View Docu
                             </q-btn>
                             <q-btn
+                              v-if="
+                                row.status !== 'ACCEPTED' &&
+                                row.status !== 'REJECTED'
+                              "
                               flat
                               round
                               color="green"
@@ -132,6 +144,10 @@
                               Accept
                             </q-btn>
                             <q-btn
+                              v-if="
+                                row.status !== 'ACCEPTED' &&
+                                row.status !== 'REJECTED'
+                              "
                               flat
                               round
                               color="deep-orange"
@@ -169,6 +185,10 @@
                               View Docu
                             </q-btn>
                             <q-btn
+                              v-if="
+                                row.status !== 'ACCEPTED' &&
+                                row.status !== 'REJECTED'
+                              "
                               flat
                               round
                               color="green"
@@ -177,6 +197,10 @@
                               Accept
                             </q-btn>
                             <q-btn
+                              v-if="
+                                row.status !== 'ACCEPTED' &&
+                                row.status !== 'REJECTED'
+                              "
                               flat
                               round
                               color="deep-orange"
@@ -213,6 +237,10 @@
                               View Docu
                             </q-btn>
                             <q-btn
+                              v-if="
+                                row.status !== 'ACCEPTED' &&
+                                row.status !== 'REJECTED'
+                              "
                               flat
                               round
                               color="green"
@@ -221,6 +249,10 @@
                               Accept
                             </q-btn>
                             <q-btn
+                              v-if="
+                                row.status !== 'ACCEPTED' &&
+                                row.status !== 'REJECTED'
+                              "
                               flat
                               round
                               color="deep-orange"
@@ -258,6 +290,10 @@
                               View Docu
                             </q-btn>
                             <q-btn
+                              v-if="
+                                row.status !== 'ACCEPTED' &&
+                                row.status !== 'REJECTED'
+                              "
                               flat
                               round
                               color="green"
@@ -266,6 +302,10 @@
                               Accept
                             </q-btn>
                             <q-btn
+                              v-if="
+                                row.status !== 'ACCEPTED' &&
+                                row.status !== 'REJECTED'
+                              "
                               flat
                               round
                               color="deep-orange"
@@ -303,6 +343,10 @@
                               View Docu
                             </q-btn>
                             <q-btn
+                              v-if="
+                                row.status !== 'ACCEPTED' &&
+                                row.status !== 'REJECTED'
+                              "
                               flat
                               round
                               color="green"
@@ -311,6 +355,10 @@
                               Accept
                             </q-btn>
                             <q-btn
+                              v-if="
+                                row.status !== 'ACCEPTED' &&
+                                row.status !== 'REJECTED'
+                              "
                               flat
                               round
                               color="deep-orange"
@@ -348,6 +396,10 @@
                               View Docu
                             </q-btn>
                             <q-btn
+                              v-if="
+                                row.status !== 'ACCEPTED' &&
+                                row.status !== 'REJECTED'
+                              "
                               flat
                               round
                               color="green"
@@ -356,6 +408,10 @@
                               Accept
                             </q-btn>
                             <q-btn
+                              v-if="
+                                row.status !== 'ACCEPTED' &&
+                                row.status !== 'REJECTED'
+                              "
                               flat
                               round
                               color="deep-orange"
@@ -392,6 +448,10 @@
                             <template v-slot:body-cell-actions="{ row }">
                               <div class="actionsbtn q-gutter-lg">
                                 <q-btn
+                                  v-if="
+                                    row.status !== 'ACCEPTED' &&
+                                    row.status !== 'REJECTED'
+                                  "
                                   flat
                                   round
                                   color="green"
@@ -400,6 +460,10 @@
                                   Accept
                                 </q-btn>
                                 <q-btn
+                                  v-if="
+                                    row.status !== 'ACCEPTED' &&
+                                    row.status !== 'REJECTED'
+                                  "
                                   flat
                                   round
                                   color="deep-orange"
@@ -436,6 +500,10 @@
                             <template v-slot:body-cell-actions="{ row }">
                               <div class="actionsbtn q-gutter-lg">
                                 <q-btn
+                                  v-if="
+                                    row.status !== 'ACCEPTED' &&
+                                    row.status !== 'REJECTED'
+                                  "
                                   flat
                                   round
                                   color="green"
@@ -444,6 +512,10 @@
                                   Accept
                                 </q-btn>
                                 <q-btn
+                                  v-if="
+                                    row.status !== 'ACCEPTED' &&
+                                    row.status !== 'REJECTED'
+                                  "
                                   flat
                                   round
                                   color="deep-orange"
@@ -480,6 +552,10 @@
                             <template v-slot:body-cell-actions="{ row }">
                               <div class="actionsbtn q-gutter-lg">
                                 <q-btn
+                                  v-if="
+                                    row.status !== 'ACCEPTED' &&
+                                    row.status !== 'REJECTED'
+                                  "
                                   flat
                                   round
                                   color="green"
@@ -488,6 +564,10 @@
                                   Accept
                                 </q-btn>
                                 <q-btn
+                                  v-if="
+                                    row.status !== 'ACCEPTED' &&
+                                    row.status !== 'REJECTED'
+                                  "
                                   flat
                                   round
                                   color="deep-orange"
@@ -1175,7 +1255,9 @@ export default {
         this.viewdocs = true;
       });
     },
-    deleteItem() {
+    deleteItem(row) {
+      console.log("ROW", row);
+      this.id = row.ID;
       this.DialogDeny = true;
     },
     accept(row) {
@@ -1201,6 +1283,7 @@ export default {
       this.DialogDeny = true;
     },
     reject() {
+      console.log("ID", this.id);
       const store = useDashboardStore();
       let data = new FormData();
 

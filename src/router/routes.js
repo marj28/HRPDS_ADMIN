@@ -6,6 +6,7 @@ const routes = [
     //   { path: '', component: () => import('pages/IndexPage.vue') }
     // ]
   },
+
   {
     path: "/Dashboard",
     component: () => import("layouts/MainLayout.vue"),
@@ -27,6 +28,14 @@ const routes = [
         name: "RequestUpdate",
         component: () => import("pages/RequestUpdate.vue"),
         props: true, // Adjust the path based on your project structure
+      },
+      {
+        path: "/SampleCodes",
+        name: "SampleCodes",
+        component: () => import("pages/SampleCodes.vue"),
+        // children: [
+        //   { path: '', component: () => import('pages/IndexPage.vue') }
+        // ]
       },
     ],
   },

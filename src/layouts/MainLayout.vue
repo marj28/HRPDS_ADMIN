@@ -44,7 +44,7 @@
             <q-item-section> REQUEST UPDATE</q-item-section>
           </q-item>
 
-         <!--  <q-item clickable v-ripple exact to="/PDS">
+          <!--  <q-item clickable v-ripple exact to="/PDS">
             <q-item-section avatar>
               <q-icon name="border_color" />
             </q-item-section>
@@ -59,6 +59,14 @@
 
             <q-item-section> ANNOUNCEMENT </q-item-section>
           </q-item>
+
+          <!--  <q-item clickable v-ripple exact to="/SampleCodes">
+            <q-item-section avatar>
+              <q-icon name="campaign" />
+            </q-item-section>
+
+            <q-item-section> SAMPLE </q-item-section>
+          </q-item> -->
         </q-list>
       </q-scroll-area>
 
