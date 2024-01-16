@@ -58,7 +58,7 @@
         <!-- LEARNING AND DEVELOPMENT (L&D) INTERVENTIONS/TRAINING PROGRAMS ATTENDED -->
         <LearningAndDevelopment />
         <br />
-       <!--  OTHER INFORMATION -->
+        <!--  OTHER INFORMATION -->
         <OtherInformation />
       </q-step>
 

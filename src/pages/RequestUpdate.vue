@@ -139,7 +139,7 @@
                               flat
                               round
                               color="green"
-                              @click="editItem(row)"
+                              @click="accept_child(row)"
                             >
                               Accept
                             </q-btn>
@@ -192,7 +192,7 @@
                               flat
                               round
                               color="green"
-                              @click="editItem(row)"
+                              @click="accept_Educational_Background(row)"
                             >
                               Accept
                             </q-btn>
@@ -244,7 +244,7 @@
                               flat
                               round
                               color="green"
-                              @click="editItem(row)"
+                              @click="accept_CivilService_Eligibility(row)"
                             >
                               Accept
                             </q-btn>
@@ -297,7 +297,7 @@
                               flat
                               round
                               color="green"
-                              @click="editItem(row)"
+                              @click="accept_WorkExperience(row)"
                             >
                               Accept
                             </q-btn>
@@ -350,7 +350,7 @@
                               flat
                               round
                               color="green"
-                              @click="editItem(row)"
+                              @click="accept_Voluntary_Work(row)"
                             >
                               Accept
                             </q-btn>
@@ -403,7 +403,7 @@
                               flat
                               round
                               color="green"
-                              @click="editItem(row)"
+                              @click="accept_Learning_And_Development(row)"
                             >
                               Accept
                             </q-btn>
@@ -455,7 +455,7 @@
                                   flat
                                   round
                                   color="green"
-                                  @click="editItem(row)"
+                                  @click="accept_SKills(row)"
                                 >
                                   Accept
                                 </q-btn>
@@ -507,7 +507,7 @@
                                   flat
                                   round
                                   color="green"
-                                  @click="editItem(row)"
+                                  @click="accept_NonAcademic(row)"
                                 >
                                   Accept
                                 </q-btn>
@@ -559,7 +559,7 @@
                                   flat
                                   round
                                   color="green"
-                                  @click="editItem(row)"
+                                  @click="accept_Organizaition(row)"
                                 >
                                   Accept
                                 </q-btn>
@@ -809,13 +809,6 @@ export default {
         },
 
         {
-          name: "remarks",
-          align: "left",
-          label: "REMARKS",
-          field: "remarks",
-          sortable: true,
-        },
-        {
           name: "actions",
           label: "ACTIONS",
           field: "actions",
@@ -1024,10 +1017,10 @@ export default {
 
       columns_Learnin_AND_Development: [
         {
-          name: "Orgname",
+          name: "Training",
           align: "left",
           label: "Training",
-          field: "Orgname",
+          field: "Training",
           sortable: true,
         },
         {
@@ -1252,20 +1245,237 @@ export default {
       data.append("SessionID", row.sessionID);
       store.getimg(data).then((res) => {
         this.images = store.images;
+        console.log(this.images);
         this.viewdocs = true;
       });
     },
+    viewdoc_child(row) {
+      // const store = useDashboardStore();
+      // let data = new FormData();
+      // data.append("ControlNo", this.controlNo);
+      // data.append("SessionID", row.sessionID);
+      // store.getimg(data).then((res) => {
+      this.images = row.img;
+      this.viewdocs = true;
+      // });
+    },
+
     deleteItem(row) {
       console.log("ROW", row);
       this.id = row.ID;
       this.DialogDeny = true;
     },
+
+    accept_child(row) {
+      const store = useDashboardStore();
+      let data = new FormData();
+      data.append("ChildName", row.ChildName);
+      data.append("BirthDate", row.BirthDate);
+      data.append("controlno", this.controlNo);
+      data.append("tablename", "tblPDSUpdatesChild");
+      data.append("type", "add");
+      data.append("id", row.ID);
+      store.accept(data).then((res) => {
+        let data2 = new FormData();
+        data2.append("ControlNo", this.controlNo);
+        store.getsinglerequest(data2).then((res) => {
+          // console.log("result=",res)
+          this.requests = store.userrequest;
+          // console.log("userinfo=",this.requests)
+        });
+      });
+    },
+
+    accept_Educational_Background(row) {
+      const store = useDashboardStore();
+      let data = new FormData();
+      data.append("Education", row.Education);
+      data.append("School", row.School);
+      data.append("Degree", row.Degree);
+      data.append("From", row.From);
+      data.append("To", row.To);
+      data.append("Graduated", row.Graduated);
+      data.append("codes", row.codes);
+      data.append("controlno", this.controlNo);
+      data.append("tablename", "tblPDSUpdatesEducation");
+      data.append("type", "add");
+      data.append("id", row.ID);
+      store.accept(data).then((res) => {
+        let data2 = new FormData();
+        data2.append("ControlNo", this.controlNo);
+        store.getsinglerequest(data2).then((res) => {
+          // console.log("result=",res)
+          this.requests = store.userrequest;
+          // console.log("userinfo=",this.requests)
+        });
+      });
+    },
+
+    accept_CivilService_Eligibility(row) {
+      const store = useDashboardStore();
+      let data = new FormData();
+      data.append("CivilServe", row.CivilServe);
+      data.append("Dates", row.Dates);
+      data.append("Place", row.Place);
+      data.append("Lnumber", row.Lnumber);
+      data.append("Ldate", row.Ldate);
+
+      data.append("controlno", this.controlNo);
+      data.append("tablename", "tblPDSUpdatesCivilService");
+      data.append("type", "add");
+      data.append("id", row.ID);
+      store.accept(data).then((res) => {
+        let data2 = new FormData();
+        data2.append("ControlNo", this.controlNo);
+        store.getsinglerequest(data2).then((res) => {
+          // console.log("result=",res)
+          this.requests = store.userrequest;
+          // console.log("userinfo=",this.requests)
+        });
+      });
+    },
+
+    accept_WorkExperience(row) {
+      const store = useDashboardStore();
+      let data = new FormData();
+      data.append("Wfrom", row.Wfrom);
+      data.append("Wto", row.Wto);
+      data.append("Wposition", row.Wposition);
+      data.append("Wcompany", row.Wcompany);
+      data.append("Wsalary", row.Wsalary);
+      data.append("Wgrade", row.Wgrade);
+      data.append("wstatus", row.wstatus);
+      data.append("Wgov", row.Wgov);
+
+      data.append("controlno", this.controlNo);
+      data.append("tablename", "tblPDSUpdatesWorkExperience");
+      data.append("type", "add");
+      data.append("id", row.ID);
+      store.accept(data).then((res) => {
+        let data2 = new FormData();
+        data2.append("ControlNo", this.controlNo);
+        store.getsinglerequest(data2).then((res) => {
+          // console.log("result=",res)
+          this.requests = store.userrequest;
+          // console.log("userinfo=",this.requests)
+        });
+      });
+    },
+
+    accept_Voluntary_Work(row) {
+      const store = useDashboardStore();
+      let data = new FormData();
+      data.append("Orgname", row.Orgname);
+      data.append("Datefrom", row.Datefrom);
+      data.append("Dateto", row.Dateto);
+      data.append("Nohours", row.Nohours);
+      data.append("Orgposition", row.Orgposition);
+      data.append("controlno", this.controlNo);
+      data.append("tablename", "tblPDSUpdatesVoluntary");
+      data.append("type", "add");
+      data.append("id", row.ID);
+      store.accept(data).then((res) => {
+        let data2 = new FormData();
+        data2.append("ControlNo", this.controlNo);
+        store.getsinglerequest(data2).then((res) => {
+          // console.log("result=",res)
+          this.requests = store.userrequest;
+          // console.log("userinfo=",this.requests)
+        });
+      });
+    },
+
+    accept_Learning_And_Development(row) {
+      const store = useDashboardStore();
+      let data = new FormData();
+      data.append("Training", row.Training);
+      data.append("Datefrom", row.Datefrom);
+      data.append("Dateto", row.Dateto);
+      data.append("NumHours", row.NumHours);
+      data.append("type", row.type);
+      data.append("Conductor", row.Conductor);
+      data.append("controlno", this.controlNo);
+      data.append("tablename", "tblPDSUpdatesTrainings");
+      data.append("type", "add");
+      data.append("id", row.ID);
+      store.accept(data).then((res) => {
+        let data2 = new FormData();
+        data2.append("ControlNo", this.controlNo);
+        store.getsinglerequest(data2).then((res) => {
+          // console.log("result=",res)
+          this.requests = store.userrequest;
+          // console.log("userinfo=",this.requests)
+        });
+      });
+    },
+
+    accept_SKills(row) {
+      const store = useDashboardStore();
+      let data = new FormData();
+      data.append("skill", row.skill);
+
+      data.append("controlno", this.controlNo);
+      data.append("tablename", "tblPDSUpdatesSkills");
+      data.append("type", "add");
+      data.append("id", row.ID);
+      store.accept(data).then((res) => {
+        let data2 = new FormData();
+        data2.append("ControlNo", this.controlNo);
+        store.getsinglerequest(data2).then((res) => {
+          // console.log("result=",res)
+          this.requests = store.userrequest;
+          // console.log("userinfo=",this.requests)
+        });
+      });
+    },
+
+    accept_NonAcademic(row) {
+      const store = useDashboardStore();
+      let data = new FormData();
+      data.append("NonAcademic", row.NonAcademic);
+
+      data.append("controlno", this.controlNo);
+      data.append("tablename", "tblPDSUpdatesNonAcademic");
+      data.append("type", "add");
+      data.append("id", row.ID);
+      store.accept(data).then((res) => {
+        let data2 = new FormData();
+        data2.append("ControlNo", this.controlNo);
+        store.getsinglerequest(data2).then((res) => {
+          // console.log("result=",res)
+          this.requests = store.userrequest;
+          // console.log("userinfo=",this.requests)
+        });
+      });
+    },
+
+    accept_Organizaition(row) {
+      const store = useDashboardStore();
+      let data = new FormData();
+      data.append("Organization", row.Organization);
+
+      data.append("controlno", this.controlNo);
+      data.append("tablename", "tblPDSUpdatesOrganization");
+      data.append("type", "add");
+      data.append("id", row.ID);
+      store.accept(data).then((res) => {
+        let data2 = new FormData();
+        data2.append("ControlNo", this.controlNo);
+        store.getsinglerequest(data2).then((res) => {
+          // console.log("result=",res)
+          this.requests = store.userrequest;
+          // console.log("userinfo=",this.requests)
+        });
+      });
+    },
+
     accept(row) {
       const store = useDashboardStore();
       let data = new FormData();
       data.append("column", row.col);
       data.append("value", row.Dto);
       data.append("controlno", this.controlNo);
+      data.append("type", "edit");
       data.append("id", row.ID);
       store.accept(data).then((res) => {
         let data2 = new FormData();
@@ -1289,6 +1499,7 @@ export default {
 
       data.append("id", this.id);
       data.append("remarks", this.text);
+      data.append("tablename", "tblPDSUpdates");
       store.reject(data).then((res) => {
         let data2 = new FormData();
         data2.append("ControlNo", this.controlNo);

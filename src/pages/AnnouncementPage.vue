@@ -67,33 +67,35 @@
                 </q-card-section>
 
                 <div class="row">
-                  <div class="col-12 col-sm-6 col-md-3 col-lg-7 q-ml-xl">
-                    <div class="q-pa-sm q-ml-xl">
-                      <label>
-                        <img
-                          v-if="imageUrl"
-                          :src="imageUrl"
-                          alt="Selected Image"
-                          style="
-                            cursor: pointer;
-                            max-width: 200%;
-                            max-height: 195px;
-                          "
-                          @click="openFileInput"
-                        />
-                        <div v-else class="placeholder" style="cursor: pointer">
-                          Click to add an image
-                        </div>
-                        <input
-                          ref="fileInput"
-                          type="file"
-                          style="display: none"
-                          @change="handleFileChange"
-                        />
-                      </label>
+                  <div class="col">
+                    <q-file
+
+
+                      style="display: none"
+                      v-model="fileimage"
+                      @update:model-value="handleUpload"
+                      accept=".jpg, image/*"
+                      ref="file"
+                    ></q-file>
+                    <div class="column items-center">
+                      <q-btn
+                        type="button"
+                        label="Upload Supporting Document"
+                        @click="handleUploadBtnClick"
+                      ></q-btn>
                     </div>
                   </div>
                 </div>
+                <div class="q-pt-sm">
+                  <q-img
+
+                    :src="fileimagesrc"
+                    spinner-color="white"
+                  ></q-img>
+                </div>
+
+
+              
               </q-card-section>
 
               <q-separator />
@@ -119,14 +121,16 @@
 </template>
 
 <script>
-import { useDashboardStore } from 'src/stores/Dashboard';
+import { useDashboardStore } from "src/stores/Dashboard";
+import {ref} from 'vue'
 export default {
   data() {
     return {
-      id:'',
-      announcementname:'',
+      id: "",
+      announcementname: "",
       CreationDialog: false,
-      announcement:[],
+      announcement: [],
+
       imageUrl: null,
       columns: [
         {
@@ -150,12 +154,37 @@ export default {
       ],
     };
   },
-  created(){
-    const store=useDashboardStore();
-    store.getannouncements().then(res=>{
-      this.announcement=store.announcements;
-      console.log('announcement=',this.announcement)
-    })
+
+  setup() {
+
+    const file = ref(null);
+    const fileimage = ref(null);
+    const fileimagesrc = ref("");
+    const handleUpload = () => {
+      if (fileimage.value) {
+        fileimagesrc.value = URL.createObjectURL(fileimage.value);
+      }
+    };
+    const handleUploadBtnClick = () => {
+      file.value.pickFiles();
+    };
+
+    return {
+      file,
+      fileimage,
+      fileimagesrc,
+      handleUpload,
+      handleUploadBtnClick,
+
+    };
+  },
+
+  created() {
+    const store = useDashboardStore();
+    store.getannouncements().then((res) => {
+      this.announcement = store.announcements;
+      console.log("announcement=", this.announcement);
+    });
   },
   methods: {
     // deleteItem() {
@@ -174,10 +203,7 @@ export default {
     },
 
     Rowclick() {
-
-        this.announcementname= "",
-
-      this.CreationDialog = true;
+      (this.announcementname = ""), (this.CreationDialog = true);
     },
 
     cancel() {
@@ -185,55 +211,54 @@ export default {
     },
 
     save() {
-      const store=useDashboardStore();
-      if(this.id){
-         const store=useDashboardStore();
-      let data=new FormData;
-      data.append("announcement",this.announcementname);
-      data.append("id",this.id);
-      data.append("type","edit");
-      store.saveannouncements(data).then(res=>{
-        store.getannouncements().then(res=>{
-          this.announcement=store.announcements;
-        })
-      })
-      this.id="";
-      this.announcementname="";
-      }else{
-      if(this.announcementname.trim() !==""){
-        let data=new FormData();
-        data.append("announcement",this.announcementname);
-        data.append("type","save");
-        store.saveannouncements(data).then(res=>{
-          if(res == 0){
-            store.getannouncements().then(res=>{
-              this.announcement=store.announcements
-            })
-          }
-        })
+      const store = useDashboardStore();
+      if (this.id) {
+        const store = useDashboardStore();
+        let data = new FormData();
+        data.append("announcement", this.announcementname);
+        data.append("id", this.id);
+        data.append("type", "edit");
+        store.saveannouncements(data).then((res) => {
+          store.getannouncements().then((res) => {
+            this.announcement = store.announcements;
+          });
+        });
+        this.id = "";
+        this.announcementname = "";
+      } else {
+        if (this.announcementname.trim() !== "") {
+          let data = new FormData();
+          data.append("announcement", this.announcementname);
+          data.append("file", this.fileimage);
+          data.append("type", "save");
+          store.saveannouncements(data).then((res) => {
+            if (res == 0) {
+              store.getannouncements().then((res) => {
+                this.announcement = store.announcements;
+              });
+            }
+          });
+        }
       }
-    }
-      this.CreationDialog = false
+      this.CreationDialog = false;
     },
 
     editItem(item) {
-      this.announcementname=item.Announcement;
-      this.id=item.ID;
-      this.CreationDialog=true
-
+      this.announcementname = item.Announcement;
+      this.id = item.ID;
+      this.CreationDialog = true;
     },
-    deleteItem(item){
-      const store=useDashboardStore();
-      let data=new FormData;
-      data.append("id",item.ID);
-      data.append("type","delete");
-      store.saveannouncements(data).then(res=>{
-        store.getannouncements().then(res=>{
-          this.announcement=store.announcements;
-        })
-      })
-    }
-
+    deleteItem(item) {
+      const store = useDashboardStore();
+      let data = new FormData();
+      data.append("id", item.ID);
+      data.append("type", "delete");
+      store.saveannouncements(data).then((res) => {
+        store.getannouncements().then((res) => {
+          this.announcement = store.announcements;
+        });
+      });
+    },
   },
 };
 </script>

@@ -44,10 +44,12 @@ export const useDashboardStore = defineStore("DashboardStore", {
     },
     async saveannouncements(payload) {
       // `http://10.0.1.23:82/HRPORTAL/login.php`
+
       let res = await axios.post(
         `http://10.0.1.23:82/HRPORTAL/saveannouncement.php`,
         payload
       );
+      console.log("Res Data", res.data);
       if (res.data == "duplicate") {
         return 1;
       } else {
