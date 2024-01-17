@@ -8,21 +8,17 @@
         :done="activeStep > 1"
       >
         <!-- Step 1 content with 5 q-inputs -->
-        <!-- <div class="q-pa-md">
-          <q-input
-            @input="handleInputChange('step1', 'input1')"
-            v-model="step1Input1"
-            label="Input 1"
-          ></q-input>
+        <div class="q-pa-md">
+          <q-input v-model="step1Input1" label="Input 1"></q-input>
           <q-input v-model="step1Input2" label="Input 2"></q-input>
           <q-input v-model="step1Input3" label="Input 3"></q-input>
           <q-input v-model="step1Input4" label="Input 4"></q-input>
           <q-input v-model="step1Input5" label="Input 5"></q-input>
-        </div> -->
-        <StepInputs
-          :sampleData="sampleData"
+        </div>
+        <!--    <StepInputs
+          :sampleData="Object"
           :handleInputChange="handleInputChange"
-        />
+        /> -->
         <!-- Step 1 navigation buttons -->
         <div class="q-mt-md q-flex justify-between">
           <q-btn @click="goToPreviousStep" :disable="activeStep === 0"
@@ -84,7 +80,7 @@
 
 <script>
 import { ref } from "vue";
-import StepInputs from "./StepInputs .vue";
+/* import StepInputs from "./StepInputs .vue"; */
 
 export default {
   data() {
@@ -114,33 +110,13 @@ export default {
       step3Input5: "",
 
       sampleData: {
-        step1: {
-          input1: "Sample Data 1",
-          input2: "Sample Data 2",
-          input3: "Sample Data 3",
-          input4: "Sample Data 4",
-          input5: "Sample Data 5",
-        },
-        step2: {
-          input1: "Sample Data A",
-          input2: "Sample Data B",
-          input3: "Sample Data C",
-          input4: "Sample Data D",
-          input5: "Sample Data E",
-        },
-        step3: {
-          input1: "Sample Data X",
-          input2: "Sample Data Y",
-          input3: "Sample Data Z",
-          input4: "Sample Data W",
-          input5: "Sample Data V",
-        },
+        step1: {},
       },
     };
   },
 
   components: {
-    StepInputs,
+    /*  StepInputs, */
   },
 
   watch: {
@@ -159,6 +135,7 @@ export default {
     step1Input5(newValue) {
       this.checkChanges("step1");
     },
+
     // Repeat similar watch handlers for Step 2 and Step 3 inputs
   },
   methods: {
