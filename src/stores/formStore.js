@@ -1,12 +1,12 @@
-// store/form.js
-import { defineStore } from "pinia";
-import axios from "axios";
+// store.js
+import { createPinia } from "pinia";
 
-export const useFormStore = defineStore({
-  id: "form",
+const pinia = createPinia();
 
+export const useMyStore = pinia.createStore({
   state: () => ({
     activeStep: 1,
+    stepperColor: "primary",
 
     // Step 1 inputs
     step1Input1: "",
@@ -35,14 +35,7 @@ export const useFormStore = defineStore({
   }),
 
   actions: {
-    updateInput(payload) {
-      const { step, input, value } = payload;
-      this[`${step}${input}`] = value;
-    },
-
-    checkChanges(payload) {
-      const { step } = payload;
-
+    checkChanges(step) {
       // Check if any input in the current step has been edited
       const isEdited =
         this[`${step}Input1`] !== this.sampleData[step].input1 ||
@@ -51,33 +44,28 @@ export const useFormStore = defineStore({
         this[`${step}Input4`] !== this.sampleData[step].input4 ||
         this[`${step}Input5`] !== this.sampleData[step].input5;
 
-      // You might want to commit the result to state if needed
-      // this.setEditedStatus({ step, isEdited });
-
-      return isEdited;
+      this[`${step}Edited`] = isEdited;
     },
 
-    canProceedToNextStep(payload) {
-      const { step } = payload;
-
+    canProceedToNextStep(step) {
       // Check if any input in the current step has been edited
-      return !this.checkChanges({ step });
+      return !this[`${step}Edited`];
     },
 
-    goToNextStep(payload) {
-      const { step } = payload;
-
+    goToNextStep(step) {
       // Prompt user if trying to leave a step with edited inputs
       if (
-        this.canProceedToNextStep({ step }) ||
+        this.canProceedToNextStep(step) ||
         confirm("You have unsaved changes. Are you sure you want to leave?")
       ) {
-        this.incrementActiveStep();
+        this.activeStep += 1;
       }
     },
 
     goToPreviousStep() {
-      this.decrementActiveStep();
+      this.activeStep -= 1;
     },
   },
 });
+
+export { pinia };

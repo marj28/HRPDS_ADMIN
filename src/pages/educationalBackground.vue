@@ -303,10 +303,12 @@ export default {
   },
   created() {
     const userstore = useDashboardStore();
+
     this.personal = userstore.usereducation;
+
     for (let i = 0; i < this.personal.length; i++) {
       this.personal[i].From = this.personal[i].DateAttend.slice(0, 4);
-      this.personal[i].To = this.personal[i].DateAttend.slice(6);
+      this.personal[i].To = this.personal[i].DateAttend.slice(5, 10);
       if (this.personal[i].Graduated == "YES") {
         this.personal[i].yeargraduated = this.personal[i].To;
         this.personal[i].NumUnits = "";

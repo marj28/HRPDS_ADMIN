@@ -1291,12 +1291,19 @@ export default {
       let data = new FormData();
       data.append("Education", row.Education);
       data.append("School", row.School);
-      data.append("Degree", row.Degree);
-      data.append("From", row.From);
-      data.append("To", row.To);
-      data.append("Graduated", row.Graduated);
       data.append("codes", row.codes);
-      data.append("controlno", this.controlNo);
+      data.append("Degree", row.Degree);
+      data.append("numunits", row.Numunits);
+      data.append("Yearlevel", row.Yearlevel);
+      data.append("DateAttend", row.DateAttend);
+      data.append("Honors", row.Honors);
+      data.append("Graduated", row.Graduated);
+      data.append("orderscount", row.orderscount);
+
+      /* data.append("From", row.From);
+      data.append("To", row.To); */
+
+      data.append("controlno", this.controlno);
       data.append("tablename", "tblPDSUpdatesEducation");
       data.append("type", "add");
       data.append("id", row.ID);
@@ -1314,13 +1321,15 @@ export default {
     accept_CivilService_Eligibility(row) {
       const store = useDashboardStore();
       let data = new FormData();
+      data.append("Codes", row.Codes);
       data.append("CivilServe", row.CivilServe);
       data.append("Dates", row.Dates);
+      data.append("Rates", row.Rates);
       data.append("Place", row.Place);
       data.append("Lnumber", row.Lnumber);
-      data.append("Ldate", row.Ldate);
+      data.append("LDate", row.LDate);
 
-      data.append("controlno", this.controlNo);
+      data.append("controlno", this.controlno);
       data.append("tablename", "tblPDSUpdatesCivilService");
       data.append("type", "add");
       data.append("id", row.ID);
@@ -1338,16 +1347,15 @@ export default {
     accept_WorkExperience(row) {
       const store = useDashboardStore();
       let data = new FormData();
-      data.append("Wfrom", row.Wfrom);
-      data.append("Wto", row.Wto);
-      data.append("Wposition", row.Wposition);
-      data.append("Wcompany", row.Wcompany);
-      data.append("Wsalary", row.Wsalary);
-      data.append("Wgrade", row.Wgrade);
-      data.append("wstatus", row.wstatus);
-      data.append("Wgov", row.Wgov);
-
-      data.append("controlno", this.controlNo);
+      data.append("WFrom", row.WFrom);
+      data.append("WTo", row.WTo);
+      data.append("WPosition", row.WPosition);
+      data.append("WCompany", row.WCompany);
+      data.append("WSalary", row.WSalary);
+      data.append("WGrade", row.WGrade);
+      data.append("Status", row.Status);
+      data.append("WGov", row.WGov);
+      data.append("controlno", this.controlno);
       data.append("tablename", "tblPDSUpdatesWorkExperience");
       data.append("type", "add");
       data.append("id", row.ID);
@@ -1362,6 +1370,7 @@ export default {
       });
     },
 
+    /*  Kanii suuddddddd */
     accept_Voluntary_Work(row) {
       const store = useDashboardStore();
       let data = new FormData();

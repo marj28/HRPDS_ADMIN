@@ -138,6 +138,7 @@ export default {
 
     // Repeat similar watch handlers for Step 2 and Step 3 inputs
   },
+
   methods: {
     checkChanges(step) {
       // Check if any input in the current step has been edited
