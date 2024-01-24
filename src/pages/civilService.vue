@@ -308,7 +308,6 @@ export default {
     };
   },
 
-  
   methods: {
     async saveservice() {
       const valid = await this.$refs.service.validate();
@@ -320,13 +319,15 @@ export default {
       }
       if (valid) {
         let Form = new FormData();
+        Form.append("id", this.id);
         Form.append("Codes", this.name.codes);
         Form.append("ControlNo", this.Controlno);
         Form.append("CivilServe", this.name.Descriptions);
         Form.append("Dates", this.dateofexamination);
         Form.append("Rates", this.rating);
         Form.append("Place", this.PlaceofExamination);
-        Form.append("Lnumber", this.LicenseNumber);
+        Form.append("LNumber", this.LicenseNumber);
+        Form.append("tablename", "tblPDSUpdatesCivilService");
         Form.append("Ldate", this.dateofvalidity);
         Form.append("file", this.fileimage);
         const store = useUserInfoStore();

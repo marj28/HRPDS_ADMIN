@@ -127,7 +127,7 @@
                               flat
                               round
                               color="green"
-                              @click="viewdoc(row)"
+                              @click="viewdoc_ADD(row)"
                             >
                               View Docu
                             </q-btn>
@@ -151,7 +151,7 @@
                               flat
                               round
                               color="deep-orange"
-                              @click="deleteItem(row)"
+                              @click="deleteItem_Child(row)"
                             >
                               DENY
                             </q-btn>
@@ -180,7 +180,7 @@
                               flat
                               round
                               color="green"
-                              @click="editItem(row)"
+                              @click="viewdoc_ADD(row)"
                             >
                               View Docu
                             </q-btn>
@@ -204,7 +204,7 @@
                               flat
                               round
                               color="deep-orange"
-                              @click="deleteItem(row)"
+                              @click="deleteItem_Educational_Background(row)"
                             >
                               DENY
                             </q-btn>
@@ -232,7 +232,7 @@
                               flat
                               round
                               color="green"
-                              @click="editItem(row)"
+                              @click="viewdoc_ADD(row)"
                             >
                               View Docu
                             </q-btn>
@@ -256,7 +256,7 @@
                               flat
                               round
                               color="deep-orange"
-                              @click="deleteItem(row)"
+                              @click="deleteItem_Civil_Service(row)"
                             >
                               DENY
                             </q-btn>
@@ -285,7 +285,7 @@
                               flat
                               round
                               color="green"
-                              @click="editItem(row)"
+                              @click="viewdoc_ADD(row)"
                             >
                               View Docu
                             </q-btn>
@@ -309,7 +309,7 @@
                               flat
                               round
                               color="deep-orange"
-                              @click="deleteItem(row)"
+                              @click="deleteItem_WorkExperience(row)"
                             >
                               DENY
                             </q-btn>
@@ -338,7 +338,7 @@
                               flat
                               round
                               color="green"
-                              @click="editItem(row)"
+                              @click="viewdoc_ADD(row)"
                             >
                               View Docu
                             </q-btn>
@@ -391,7 +391,7 @@
                               flat
                               round
                               color="green"
-                              @click="editItem(row)"
+                              @click="viewdoc_ADD(row)"
                             >
                               View Docu
                             </q-btn>
@@ -415,7 +415,7 @@
                               flat
                               round
                               color="deep-orange"
-                              @click="deleteItem(row)"
+                              @click="deleteItem_Learning_Development(row)"
                             >
                               DENY
                             </q-btn>
@@ -467,7 +467,7 @@
                                   flat
                                   round
                                   color="deep-orange"
-                                  @click="deleteItem(row)"
+                                  @click="deleteItem_Skills(row)"
                                 >
                                   DENY
                                 </q-btn>
@@ -519,7 +519,7 @@
                                   flat
                                   round
                                   color="deep-orange"
-                                  @click="deleteItem(row)"
+                                  @click="deleteItem_Non_Academic(row)"
                                 >
                                   DENY
                                 </q-btn>
@@ -571,7 +571,7 @@
                                   flat
                                   round
                                   color="deep-orange"
-                                  @click="deleteItem(row)"
+                                  @click="deleteItem_MembershipAssociation(row)"
                                 >
                                   DENY
                                 </q-btn>
@@ -593,6 +593,214 @@
     </div>
 
     <div>
+      <q-dialog v-model="DialogDeny_MemberAssociation" persistent="">
+        <q-card style="width: 35%; height: 40%">
+          <q-card-section>
+            <div class="text-h6">REQUEST UPDATE DENIED</div>
+          </q-card-section>
+
+          <q-separator />
+
+          <q-card-section>
+            <p>Reason for Denial of Request Update :</p>
+            <q-input v-model="text" filled type="textarea" dense="" />
+          </q-card-section>
+          <q-separator />
+
+          <q-card-actions align="right">
+            <q-btn flat label="Cancel" color="orange" v-close-popup />
+            <q-btn
+              label="Save"
+              color="green"
+              v-close-popup
+              @click="reject_Membership_Association()"
+            />
+          </q-card-actions>
+        </q-card>
+      </q-dialog>
+
+      <q-dialog v-model="DialogDeny_NonAcademnic" persistent="">
+        <q-card style="width: 35%; height: 40%">
+          <q-card-section>
+            <div class="text-h6">REQUEST UPDATE DENIED</div>
+          </q-card-section>
+
+          <q-separator />
+
+          <q-card-section>
+            <p>Reason for Denial of Request Update :</p>
+            <q-input v-model="text" filled type="textarea" dense="" />
+          </q-card-section>
+          <q-separator />
+
+          <q-card-actions align="right">
+            <q-btn flat label="Cancel" color="orange" v-close-popup />
+            <q-btn
+              label="Save"
+              color="green"
+              v-close-popup
+              @click="reject_Non_Academic()"
+            />
+          </q-card-actions>
+        </q-card>
+      </q-dialog>
+
+      <q-dialog v-model="DialogDeny_Skills" persistent="">
+        <q-card style="width: 35%; height: 40%">
+          <q-card-section>
+            <div class="text-h6">REQUEST UPDATE DENIED</div>
+          </q-card-section>
+
+          <q-separator />
+
+          <q-card-section>
+            <p>Reason for Denial of Request Update :</p>
+            <q-input v-model="text" filled type="textarea" dense="" />
+          </q-card-section>
+          <q-separator />
+
+          <q-card-actions align="right">
+            <q-btn flat label="Cancel" color="orange" v-close-popup />
+            <q-btn
+              label="Save"
+              color="green"
+              v-close-popup
+              @click="reject_Skils()"
+            />
+          </q-card-actions>
+        </q-card>
+      </q-dialog>
+
+      <q-dialog v-model="DialogDeny_Learning_Development" persistent="">
+        <q-card style="width: 35%; height: 40%">
+          <q-card-section>
+            <div class="text-h6">REQUEST UPDATE DENIED</div>
+          </q-card-section>
+
+          <q-separator />
+
+          <q-card-section>
+            <p>Reason for Denial of Request Update :</p>
+            <q-input v-model="text" filled type="textarea" dense="" />
+          </q-card-section>
+          <q-separator />
+
+          <q-card-actions align="right">
+            <q-btn flat label="Cancel" color="orange" v-close-popup />
+            <q-btn
+              label="Save"
+              color="green"
+              v-close-popup
+              @click="reject_Learning_Development()"
+            />
+          </q-card-actions>
+        </q-card>
+      </q-dialog>
+
+      <q-dialog v-model="DialogDeny_Work_Experience" persistent="">
+        <q-card style="width: 35%; height: 40%">
+          <q-card-section>
+            <div class="text-h6">REQUEST UPDATE DENIED</div>
+          </q-card-section>
+
+          <q-separator />
+
+          <q-card-section>
+            <p>Reason for Denial of Request Update :</p>
+            <q-input v-model="text" filled type="textarea" dense="" />
+          </q-card-section>
+          <q-separator />
+
+          <q-card-actions align="right">
+            <q-btn flat label="Cancel" color="orange" v-close-popup />
+            <q-btn
+              label="Save"
+              color="green"
+              v-close-popup
+              @click="reject_WorkExperience()"
+            />
+          </q-card-actions>
+        </q-card>
+      </q-dialog>
+
+      <q-dialog v-model="DialogDeny_Civil_Service" persistent="">
+        <q-card style="width: 35%; height: 40%">
+          <q-card-section>
+            <div class="text-h6">REQUEST UPDATE DENIED</div>
+          </q-card-section>
+
+          <q-separator />
+
+          <q-card-section>
+            <p>Reason for Denial of Request Update :</p>
+            <q-input v-model="text" filled type="textarea" dense="" />
+          </q-card-section>
+          <q-separator />
+
+          <q-card-actions align="right">
+            <q-btn flat label="Cancel" color="orange" v-close-popup />
+            <q-btn
+              label="Save"
+              color="green"
+              v-close-popup
+              @click="reject_CivilService()"
+            />
+          </q-card-actions>
+        </q-card>
+      </q-dialog>
+
+      <q-dialog v-model="DialogDeny_EducationalBack_Ground" persistent="">
+        <q-card style="width: 35%; height: 40%">
+          <q-card-section>
+            <div class="text-h6">REQUEST UPDATE DENIED</div>
+          </q-card-section>
+
+          <q-separator />
+
+          <q-card-section>
+            <p>Reason for Denial of Request Update :</p>
+            <q-input v-model="text" filled type="textarea" dense="" />
+          </q-card-section>
+          <q-separator />
+
+          <q-card-actions align="right">
+            <q-btn flat label="Cancel" color="orange" v-close-popup />
+            <q-btn
+              label="Save"
+              color="green"
+              v-close-popup
+              @click="reject_EducationalBackground()"
+            />
+          </q-card-actions>
+        </q-card>
+      </q-dialog>
+
+      <q-dialog v-model="DialogDeny_Child" persistent="">
+        <q-card style="width: 35%; height: 40%">
+          <q-card-section>
+            <div class="text-h6">REQUEST UPDATE DENIED</div>
+          </q-card-section>
+
+          <q-separator />
+
+          <q-card-section>
+            <p>Reason for Denial of Request Update :</p>
+            <q-input v-model="text" filled type="textarea" dense="" />
+          </q-card-section>
+          <q-separator />
+
+          <q-card-actions align="right">
+            <q-btn flat label="Cancel" color="orange" v-close-popup />
+            <q-btn
+              label="Save"
+              color="green"
+              v-close-popup
+              @click="reject_Child()"
+            />
+          </q-card-actions>
+        </q-card>
+      </q-dialog>
+
       <q-dialog v-model="DialogDeny" persistent="">
         <q-card style="width: 35%; height: 40%">
           <q-card-section>
@@ -647,6 +855,39 @@
           </q-card-actions>
         </q-card>
       </q-dialog>
+
+      <q-dialog v-model="viewdocs_add" persistent="">
+        <q-card style="width: 35%; height: 40%">
+          <q-card-section>
+            <div class="text-h6">SUPPORTING DOCUMENTS</div>
+          </q-card-section>
+
+          <q-separator />
+
+          <q-card-section>
+            <div>
+              <q-img
+                :src="images"
+                alt="Uploaded Image"
+                style="
+                  height: 2in;
+                  max-width: 2in;
+                  border-color: black;
+                  border-radius: 10%;
+                  border-width: 2%;
+                  border-style: solid;
+                "
+              />
+            </div>
+          </q-card-section>
+
+          <q-separator />
+
+          <q-card-actions align="right">
+            <q-btn label="Close" color="green" v-close-popup />
+          </q-card-actions>
+        </q-card>
+      </q-dialog>
     </div>
   </div>
 </template>
@@ -657,7 +898,17 @@ import PDS from "./PDS.vue";
 export default {
   data() {
     return {
+      viewdocs_add: false,
+      DialogDeny_MemberAssociation: false,
+      DialogDeny_NonAcademnic: false,
+      DialogDeny_Learning_Development: false,
+      DialogDeny_Skills: false,
+      DialogDeny_Work_Experience: false,
+      DialogDeny_EducationalBack_Ground: false,
       DialogDeny: false,
+      DialogDeny_Child: false,
+      DialogDeny_Civil_Service: false,
+
       viewdocs: false,
       controlNo: "",
       FUllname: "",
@@ -1249,14 +1500,25 @@ export default {
         this.viewdocs = true;
       });
     },
-    viewdoc_child(row) {
+    viewdoc_ADD(row) {
       // const store = useDashboardStore();
       // let data = new FormData();
       // data.append("ControlNo", this.controlNo);
       // data.append("SessionID", row.sessionID);
       // store.getimg(data).then((res) => {
-      this.images = row.img;
-      this.viewdocs = true;
+      this.images = "http://10.0.1.23:82/Pics/" + row.img;
+      this.viewdocs_add = true;
+      // });
+    },
+
+    viewdoc_VOLUNTARY_WORk(row) {
+      // const store = useDashboardStore();
+      // let data = new FormData();
+      // data.append("ControlNo", this.controlNo);
+      // data.append("SessionID", row.sessionID);
+      // store.getimg(data).then((res) => {
+      this.images = "http://10.0.1.23:82/Pics/" + row.Img;
+      this.viewdocs_add = true;
       // });
     },
 
@@ -1266,21 +1528,70 @@ export default {
       this.DialogDeny = true;
     },
 
+    deleteItem_Child(row) {
+      console.log("ROW", row);
+      this.id = row.ID;
+      this.DialogDeny_Child = true;
+    },
+
+    deleteItem_Educational_Background(row) {
+      console.log("ROW", row);
+      this.id = row.ID;
+      this.DialogDeny_EducationalBack_Ground = true;
+    },
+
+    deleteItem_Civil_Service(row) {
+      console.log("ROW", row);
+      this.id = row.ID;
+      this.DialogDeny_Civil_Service = true;
+    },
+
+    deleteItem_WorkExperience(row) {
+      console.log("ROW", row);
+      this.id = row.ID;
+      this.DialogDeny_Work_Experience = true;
+    },
+
+    deleteItem_Learning_Development(row) {
+      console.log("ROW", row);
+      this.id = row.ID;
+      this.DialogDeny_Learning_Development = true;
+    },
+
+    deleteItem_Skills(row) {
+      console.log("ROW", row);
+      this.id = row.ID;
+      this.DialogDeny_Skills = true;
+    },
+
+    deleteItem_Non_Academic(row) {
+      console.log("ROW", row);
+      this.id = row.ID;
+      this.DialogDeny_NonAcademnic = true;
+    },
+
+    deleteItem_MembershipAssociation(row) {
+      console.log("ROW", row);
+      this.id = row.ID;
+      this.DialogDeny_MemberAssociation = true;
+    },
+
     accept_child(row) {
       const store = useDashboardStore();
       let data = new FormData();
       data.append("ChildName", row.ChildName);
       data.append("BirthDate", row.BirthDate);
-      data.append("controlno", this.controlNo);
+      data.append("controlno", row.Controlno);
       data.append("tablename", "tblPDSUpdatesChild");
       data.append("type", "add");
       data.append("id", row.ID);
       store.accept(data).then((res) => {
         let data2 = new FormData();
-        data2.append("ControlNo", this.controlNo);
+        data2.append("ControlNo", row.Controlno);
         store.getsinglerequest(data2).then((res) => {
           // console.log("result=",res)
           this.requests = store.userrequest;
+          this.requestChildss = store.requestChild;
           // console.log("userinfo=",this.requests)
         });
       });
@@ -1289,6 +1600,11 @@ export default {
     accept_Educational_Background(row) {
       const store = useDashboardStore();
       let data = new FormData();
+
+      data.append("orders", row.Orders);
+      data.append("Codes", row.codes);
+      data.append("Numunits", row.Numunits);
+
       data.append("Education", row.Education);
       data.append("School", row.School);
       data.append("codes", row.codes);
@@ -1303,16 +1619,17 @@ export default {
       /* data.append("From", row.From);
       data.append("To", row.To); */
 
-      data.append("controlno", this.controlno);
+      data.append("controlno", row.ControlNo);
       data.append("tablename", "tblPDSUpdatesEducation");
       data.append("type", "add");
       data.append("id", row.ID);
       store.accept(data).then((res) => {
         let data2 = new FormData();
-        data2.append("ControlNo", this.controlNo);
+        data2.append("ControlNo", row.ControlNo);
         store.getsinglerequest(data2).then((res) => {
           // console.log("result=",res)
           this.requests = store.userrequest;
+          this.requestEducBackground = store.requestEduc_Background;
           // console.log("userinfo=",this.requests)
         });
       });
@@ -1326,20 +1643,22 @@ export default {
       data.append("Dates", row.Dates);
       data.append("Rates", row.Rates);
       data.append("Place", row.Place);
-      data.append("Lnumber", row.Lnumber);
-      data.append("LDate", row.LDate);
+      data.append("LNumber", row.Lnumber);
+      data.append("LDate", row.Ldate);
 
-      data.append("controlno", this.controlno);
+      data.append("controlno", row.ControlNo);
       data.append("tablename", "tblPDSUpdatesCivilService");
       data.append("type", "add");
       data.append("id", row.ID);
       store.accept(data).then((res) => {
         let data2 = new FormData();
-        data2.append("ControlNo", this.controlNo);
+        data2.append("ControlNo", row.ControlNo);
         store.getsinglerequest(data2).then((res) => {
           // console.log("result=",res)
           this.requests = store.userrequest;
           // console.log("userinfo=",this.requests)
+          this.requestCivilserviceEligibility =
+            store.requestCivil_service_Eligibility;
         });
       });
     },
@@ -1347,24 +1666,25 @@ export default {
     accept_WorkExperience(row) {
       const store = useDashboardStore();
       let data = new FormData();
-      data.append("WFrom", row.WFrom);
-      data.append("WTo", row.WTo);
-      data.append("WPosition", row.WPosition);
-      data.append("WCompany", row.WCompany);
-      data.append("WSalary", row.WSalary);
-      data.append("WGrade", row.WGrade);
-      data.append("Status", row.Status);
-      data.append("WGov", row.WGov);
-      data.append("controlno", this.controlno);
+      data.append("WFrom", row.Wfrom);
+      data.append("WTo", row.Wto);
+      data.append("WPosition", row.Wposition);
+      data.append("WCompany", row.Wcompany);
+      data.append("WSalary", row.Wsalary);
+      data.append("WGrade", row.Wgrade);
+      data.append("WStatus", row.wstatus);
+      data.append("WGov", row.Wgov);
+      data.append("controlno", row.controlno);
       data.append("tablename", "tblPDSUpdatesWorkExperience");
       data.append("type", "add");
       data.append("id", row.ID);
       store.accept(data).then((res) => {
         let data2 = new FormData();
-        data2.append("ControlNo", this.controlNo);
+        data2.append("ControlNo", row.controlno);
         store.getsinglerequest(data2).then((res) => {
           // console.log("result=",res)
           this.requests = store.userrequest;
+          this.requestworkexperience = store.requestwork_experience;
           // console.log("userinfo=",this.requests)
         });
       });
@@ -1374,21 +1694,22 @@ export default {
     accept_Voluntary_Work(row) {
       const store = useDashboardStore();
       let data = new FormData();
-      data.append("Orgname", row.Orgname);
-      data.append("Datefrom", row.Datefrom);
-      data.append("Dateto", row.Dateto);
-      data.append("Nohours", row.Nohours);
-      data.append("Orgposition", row.Orgposition);
-      data.append("controlno", this.controlNo);
+      data.append("OrgName", row.Orgname);
+      data.append("NoHours", row.Nohours);
+      data.append("OrgPosition", row.Orgposition);
+      data.append("DateFrom", row.Datefrom);
+      data.append("DateTo", row.Dateto);
+      data.append("controlno", row.controlno);
       data.append("tablename", "tblPDSUpdatesVoluntary");
       data.append("type", "add");
       data.append("id", row.ID);
       store.accept(data).then((res) => {
         let data2 = new FormData();
-        data2.append("ControlNo", this.controlNo);
+        data2.append("ControlNo", row.controlno);
         store.getsinglerequest(data2).then((res) => {
           // console.log("result=",res)
           this.requests = store.userrequest;
+          this.requestvoluntarywork = store.requestVoluntary_Work;
           // console.log("userinfo=",this.requests)
         });
       });
@@ -1398,21 +1719,24 @@ export default {
       const store = useDashboardStore();
       let data = new FormData();
       data.append("Training", row.Training);
-      data.append("Datefrom", row.Datefrom);
-      data.append("Dateto", row.Dateto);
+      data.append("Dates", row.Dates);
       data.append("NumHours", row.NumHours);
-      data.append("type", row.type);
       data.append("Conductor", row.Conductor);
-      data.append("controlno", this.controlNo);
+      data.append("DateFrom", row.Datefrom);
+      data.append("DateTo", row.Dateto);
+      data.append("type", row.type);
+      data.append("controlno", row.Controlno);
       data.append("tablename", "tblPDSUpdatesTrainings");
       data.append("type", "add");
       data.append("id", row.ID);
       store.accept(data).then((res) => {
         let data2 = new FormData();
-        data2.append("ControlNo", this.controlNo);
+        data2.append("ControlNo", row.Controlno);
         store.getsinglerequest(data2).then((res) => {
           // console.log("result=",res)
           this.requests = store.userrequest;
+          this.requestlearningdevelopment =
+            store.requestLearning_And_Development;
           // console.log("userinfo=",this.requests)
         });
       });
@@ -1421,18 +1745,19 @@ export default {
     accept_SKills(row) {
       const store = useDashboardStore();
       let data = new FormData();
-      data.append("skill", row.skill);
-
-      data.append("controlno", this.controlNo);
+      data.append("Skills", row.skill);
+      data.append("controlno", row.Controlno);
       data.append("tablename", "tblPDSUpdatesSkills");
       data.append("type", "add");
       data.append("id", row.ID);
       store.accept(data).then((res) => {
         let data2 = new FormData();
-        data2.append("ControlNo", this.controlNo);
+        data2.append("ControlNo", row.Controlno);
         store.getsinglerequest(data2).then((res) => {
           // console.log("result=",res)
           this.requests = store.userrequest;
+          this.requestSKILL = store.requestskills;
+
           // console.log("userinfo=",this.requests)
         });
       });
@@ -1443,16 +1768,17 @@ export default {
       let data = new FormData();
       data.append("NonAcademic", row.NonAcademic);
 
-      data.append("controlno", this.controlNo);
+      data.append("controlno", row.Controlno);
       data.append("tablename", "tblPDSUpdatesNonAcademic");
       data.append("type", "add");
       data.append("id", row.ID);
       store.accept(data).then((res) => {
         let data2 = new FormData();
-        data2.append("ControlNo", this.controlNo);
+        data2.append("ControlNo", row.Controlno);
         store.getsinglerequest(data2).then((res) => {
           // console.log("result=",res)
           this.requests = store.userrequest;
+          this.requestnonacademic = store.requestNon_Academic;
           // console.log("userinfo=",this.requests)
         });
       });
@@ -1463,16 +1789,17 @@ export default {
       let data = new FormData();
       data.append("Organization", row.Organization);
 
-      data.append("controlno", this.controlNo);
+      data.append("controlno", row.Controlno);
       data.append("tablename", "tblPDSUpdatesOrganization");
       data.append("type", "add");
       data.append("id", row.ID);
       store.accept(data).then((res) => {
         let data2 = new FormData();
-        data2.append("ControlNo", this.controlNo);
+        data2.append("ControlNo", row.Controlno);
         store.getsinglerequest(data2).then((res) => {
           // console.log("result=",res)
           this.requests = store.userrequest;
+          this.requestorganization = store.request_Organization;
           // console.log("userinfo=",this.requests)
         });
       });
@@ -1485,6 +1812,7 @@ export default {
       data.append("value", row.Dto);
       data.append("controlno", this.controlNo);
       data.append("type", "edit");
+      data.append("tablename", "tblPDSUpdates");
       data.append("id", row.ID);
       store.accept(data).then((res) => {
         let data2 = new FormData();
@@ -1518,6 +1846,160 @@ export default {
         });
       });
     },
+
+    reject_Child() {
+      console.log("ID", this.id);
+      const store = useDashboardStore();
+      let data = new FormData();
+
+      data.append("id", this.id);
+      data.append("remarks", this.text);
+      data.append("tablename", "tblPDSUpdatesChild");
+      store.reject(data).then((res) => {
+        let data2 = new FormData();
+        data2.append("ControlNo", this.controlNo);
+        store.getsinglerequest(data2).then((res) => {
+          this.requests = store.userrequest;
+          this.requestChildss = store.requestChild;
+          console.log("userinfo=", this.requests);
+        });
+      });
+    },
+
+    reject_EducationalBackground() {
+      console.log("ID", this.id);
+      const store = useDashboardStore();
+      let data = new FormData();
+
+      data.append("id", this.id);
+      data.append("remarks", this.text);
+      data.append("tablename", "tblPDSUpdatesEducation");
+      store.reject(data).then((res) => {
+        let data2 = new FormData();
+        data2.append("ControlNo", this.controlNo);
+        store.getsinglerequest(data2).then((res) => {
+          this.requests = store.userrequest;
+          this.requestEducBackground = store.requestEduc_Background;
+          console.log("userinfo=", this.requests);
+        });
+      });
+    },
+
+    reject_CivilService() {
+      console.log("ID", this.id);
+      const store = useDashboardStore();
+      let data = new FormData();
+
+      data.append("id", this.id);
+      data.append("remarks", this.text);
+      data.append("tablename", "tblPDSUpdatesCivilService");
+      store.reject(data).then((res) => {
+        let data2 = new FormData();
+        data2.append("ControlNo", this.controlNo);
+        store.getsinglerequest(data2).then((res) => {
+          this.requests = store.userrequest;
+          this.requestCivilserviceEligibility =
+            store.requestCivil_service_Eligibility;
+          console.log("userinfo=", this.requests);
+        });
+      });
+    },
+
+    reject_WorkExperience() {
+      console.log("ID", this.id);
+      const store = useDashboardStore();
+      let data = new FormData();
+
+      data.append("id", this.id);
+      data.append("remarks", this.text);
+      data.append("tablename", "tblPDSUpdatesWorkExperience");
+      store.reject(data).then((res) => {
+        let data2 = new FormData();
+        data2.append("ControlNo", this.controlNo);
+        store.getsinglerequest(data2).then((res) => {
+          this.requests = store.userrequest;
+          this.requestworkexperience = store.requestwork_experience;
+          console.log("userinfo=", this.requests);
+        });
+      });
+    },
+
+    reject_Learning_Development() {
+      console.log("ID", this.id);
+      const store = useDashboardStore();
+      let data = new FormData();
+
+      data.append("id", this.id);
+      data.append("remarks", this.text);
+      data.append("tablename", "tblPDSUpdatesTrainings");
+      store.reject(data).then((res) => {
+        let data2 = new FormData();
+        data2.append("ControlNo", this.controlNo);
+        store.getsinglerequest(data2).then((res) => {
+          this.requests = store.userrequest;
+          this.requestlearningdevelopment =
+            store.requestLearning_And_Development;
+          console.log("userinfo=", this.requests);
+        });
+      });
+    },
+
+    reject_Skils() {
+      console.log("ID", this.id);
+      const store = useDashboardStore();
+      let data = new FormData();
+
+      data.append("id", this.id);
+      data.append("remarks", this.text);
+      data.append("tablename", "tblPDSUpdatesSkills");
+      store.reject(data).then((res) => {
+        let data2 = new FormData();
+        data2.append("ControlNo", this.controlNo);
+        store.getsinglerequest(data2).then((res) => {
+          this.requests = store.userrequest;
+          this.requestSKILL = store.requestskills;
+          console.log("userinfo=", this.requests);
+        });
+      });
+    },
+
+    reject_Non_Academic() {
+      console.log("ID", this.id);
+      const store = useDashboardStore();
+      let data = new FormData();
+
+      data.append("id", this.id);
+      data.append("remarks", this.text);
+      data.append("tablename", "tblPDSUpdatesNonAcademic");
+      store.reject(data).then((res) => {
+        let data2 = new FormData();
+        data2.append("ControlNo", this.controlNo);
+        store.getsinglerequest(data2).then((res) => {
+          this.requests = store.userrequest;
+          this.requestnonacademic = store.requestNon_Academic;
+          console.log("userinfo=", this.requests);
+        });
+      });
+    },
+
+    reject_Membership_Association() {
+      console.log("ID", this.id);
+      const store = useDashboardStore();
+      let data = new FormData();
+
+      data.append("id", this.id);
+      data.append("remarks", this.text);
+      data.append("tablename", "tblPDSUpdatesOrganization");
+      store.reject(data).then((res) => {
+        let data2 = new FormData();
+        data2.append("ControlNo", this.controlNo);
+        store.getsinglerequest(data2).then((res) => {
+          this.requests = store.userrequest;
+          this.requestorganization = store.request_Organization;
+          console.log("userinfo=", this.requests);
+        });
+      });
+    },
   },
 
   created() {
@@ -1538,6 +2020,12 @@ export default {
     store.getsinglerequest(data2).then((res) => {
       this.requests = store.userrequest;
       console.log("userinfo=", this.requests);
+
+      this.request_reference = store.requestReference;
+      console.log("Reference123", this.request_reference);
+
+      this.request_pic = store.requestPic;
+      console.log("PIC", this.request_pic);
 
       this.requestChildss = store.requestChild;
       console.log("CHILD REQUEST", this.requestChildss);

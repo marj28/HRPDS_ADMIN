@@ -340,7 +340,6 @@ export default {
       if (valid) {
         let Form = new FormData();
 
-        Form.append("Codes", this.degree.codes);
         Form.append("ControlNo", this.ControlNo);
         Form.append(
           "DateAttend",
@@ -350,9 +349,10 @@ export default {
         Form.append("Education", this.level);
         Form.append("From", this.PeriodofAttendanceFrom);
         Form.append("Graduated", this.Graduated);
+        Form.append("Codes", this.degree.codes);
         Form.append("Honors", this.Scholarship);
         Form.append("NumUnits", isNaN(this.Unit) ? this.Unit : "");
-        Form.append("Orders", this.personal[0].length + 1);
+        Form.append("orders", this.personal[0].length + 1);
         Form.append("School", this.name);
         Form.append("To", this.PeriodofAttendanceTo);
         Form.append("YearLevel", isNaN(this.Unit) ? "" : this.Unit);

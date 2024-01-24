@@ -14,6 +14,8 @@ export const useRequestStore = defineStore("Request", {
     requestOrganization: [],
     requestVoluntary: [],
     images: [],
+    requestReference: [],
+    requestPic: [],
   }),
   getters: {
     // doubleCount: (state) => state.counter * 2,
@@ -25,7 +27,7 @@ export const useRequestStore = defineStore("Request", {
         `http://10.0.1.23:82/HRPORTAL/requests.php`,
         payload
       );
-      // console.log("data=",res.data);\
+      console.log("data=", res.data);
 
       this.request = res.data.request;
       this.requestChild = res.data.Child;
@@ -37,6 +39,8 @@ export const useRequestStore = defineStore("Request", {
       this.requestSkills = res.data.Skills;
       this.requestOrganization = res.data.Organization;
       this.requestVoluntary = res.data.Voluntary;
+      this.requestReference = res.data.Reference;
+      this.requestPic = res.data.Pic;
       //   console.log("userinfo=",this.degree);
     },
 
