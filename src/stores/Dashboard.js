@@ -17,7 +17,8 @@ export const useDashboardStore = defineStore("DashboardStore", {
     requestskills: [],
     requestNon_Academic: [],
     request_Organization: [],
-
+    requestReference: [],
+    requestPic: [],
     userinfo: [],
     img: "",
     images: [],
@@ -99,6 +100,8 @@ export const useDashboardStore = defineStore("DashboardStore", {
       this.requestskills = res.data.Skills;
       this.requestNon_Academic = res.data.NonAcademic;
       this.request_Organization = res.data.Organization;
+      this.requestReference = res.data.Reference;
+      this.requestPic = res.data.Pic;
     },
     async getimg(payload) {
       // `http://10.0.1.23:82/HRPORTAL/login.php`

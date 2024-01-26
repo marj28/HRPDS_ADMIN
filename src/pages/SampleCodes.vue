@@ -1,171 +1,70 @@
 <template>
-  <div class="q-pa-md">
-    <q-stepper v-model="activeStep">
-      <q-step
-        :name="1"
-        title="Personal Information"
-        icon="settings"
-        :done="activeStep > 1"
-      >
-        <!-- Step 1 content with 5 q-inputs -->
-        <div class="q-pa-md">
-          <q-input v-model="step1Input1" label="Input 1"></q-input>
-          <q-input v-model="step1Input2" label="Input 2"></q-input>
-          <q-input v-model="step1Input3" label="Input 3"></q-input>
-          <q-input v-model="step1Input4" label="Input 4"></q-input>
-          <q-input v-model="step1Input5" label="Input 5"></q-input>
-        </div>
-        <!--    <StepInputs
-          :sampleData="Object"
-          :handleInputChange="handleInputChange"
-        /> -->
-        <!-- Step 1 navigation buttons -->
-        <div class="q-mt-md q-flex justify-between">
-          <q-btn @click="goToPreviousStep" :disable="activeStep === 0"
-            >Back</q-btn
-          >
-          <q-btn @click="goToNextStep('step1')">Next</q-btn>
-        </div>
-      </q-step>
-
-      <q-step
-        :name="2"
-        title="Family Background"
-        icon="create_new_folder"
-        :done="activeStep > 2"
-      >
-        <!-- Step 2 content with 5 q-inputs -->
-        <div class="q-pa-md">
-          <q-input v-model="step2Input1" label="Input 1"></q-input>
-          <q-input v-model="step2Input2" label="Input 2"></q-input>
-          <q-input v-model="step2Input3" label="Input 3"></q-input>
-          <q-input v-model="step2Input4" label="Input 4"></q-input>
-          <q-input v-model="step2Input5" label="Input 5"></q-input>
-        </div>
-
-        <!-- Step 2 navigation buttons -->
-        <div class="q-mt-md q-flex justify-between">
-          <q-btn @click="goToPreviousStep">Back</q-btn>
-          <q-btn @click="goToNextStep">Next</q-btn>
-        </div>
-      </q-step>
-
-      <q-step
-        :name="3"
-        title="Educational Background"
-        icon="add_comment"
-        :done="activeStep > 3"
-      >
-        <!-- Step 3 content with 5 q-inputs -->
-
-        <q-input v-model="step3Input1" label="Input 1"></q-input>
-        <q-input v-model="step3Input2" label="Input 2"></q-input>
-        <q-input v-model="step3Input3" label="Input 3"></q-input>
-        <q-input v-model="step3Input4" label="Input 4"></q-input>
-        <q-input v-model="step3Input5" label="Input 5"></q-input>
-
-        <!-- Step 3 navigation buttons -->
-        <div class="q-mt-md q-flex justify-between">
-          <q-btn @click="goToPreviousStep" :disable="activeStep === 0"
-            >Back</q-btn
-          >
-          <q-btn @click="submitForm" :disable="!canProceedToNextStep"
-            >Submit</q-btn
-          >
-        </div>
-      </q-step>
-    </q-stepper>
-  </div>
+  <q-page>
+    <q-table
+      :rows="sortedTableData"
+      :columns="columns"
+      row-key="id"
+      :rows-per-page-options="[50, 10, 20, 50]"
+    >
+      <!--   <template v-slot:body-cell-status="props">
+        <q-td :props="props">
+          <q-badge
+            :color="getStatusColor(props.row.status)"
+            :label="props.row.status"
+          ></q-badge>
+        </q-td>
+      </template> -->
+    </q-table>
+  </q-page>
 </template>
 
 <script>
-import { ref } from "vue";
-/* import StepInputs from "./StepInputs .vue"; */
-
 export default {
   data() {
     return {
-      activeStep: ref(1),
-      stepperColor: "primary",
-
-      // Step 1 inputs
-      step1Input1: "",
-      step1Input2: "",
-      step1Input3: "",
-      step1Input4: "",
-      step1Input5: "",
-
-      // Step 2 inputs
-      step2Input1: "",
-      step2Input2: "",
-      step2Input3: "",
-      step2Input4: "",
-      step2Input5: "",
-
-      // Step 3 inputs
-      step3Input1: "",
-      step3Input2: "",
-      step3Input3: "",
-      step3Input4: "",
-      step3Input5: "",
-
-      sampleData: {
-        step1: {},
-      },
+      columns: [
+        {
+          name: "fullname",
+          label: "Full Name",
+          align: "left",
+          field: "fullname",
+        },
+        {
+          name: "status",
+          label: "Status",
+          align: "left",
+          field: "status",
+          sortable: true,
+        },
+      ],
+      tableData: [
+        { id: 1, fullname: "John Doe", status: "ACCEPT" },
+        { id: 2, fullname: "Roderick", status: "ACCEPT" },
+        { id: 3, fullname: "Alice Johnson", status: "DENY" },
+        { id: 7, fullname: "Bob Smith", status: "PENDING" },
+        { id: 8, fullname: "Jogz", status: "PENDING" },
+        { id: 9, fullname: "Kimmy", status: "ACCEPT" },
+        { id: 9, fullname: "Joemarie", status: "DENY" },
+        // Add more data as needed
+        // ...
+      ],
     };
   },
-
-  components: {
-    /*  StepInputs, */
+  computed: {
+    sortedTableData() {
+      return [...this.tableData].sort(
+        (a, b) => this.statusOrder[a.status] - this.statusOrder[b.status]
+      );
+    },
   },
 
-  watch: {
-    step1Input1(newValue) {
-      this.checkChanges("step1");
-    },
-    step1Input2(newValue) {
-      this.checkChanges("step1");
-    },
-    step1Input3(newValue) {
-      this.checkChanges("step1");
-    },
-    step1Input4(newValue) {
-      this.checkChanges("step1");
-    },
-    step1Input5(newValue) {
-      this.checkChanges("step1");
-    },
-
-    // Repeat similar watch handlers for Step 2 and Step 3 inputs
+  created() {
+    this.sortStatusOrder();
   },
-
   methods: {
-    checkChanges(step) {
-      // Check if any input in the current step has been edited
-      const isEdited =
-        this[`${step}Input1`] !== this.sampleData[step].input1 ||
-        this[`${step}Input2`] !== this.sampleData[step].input2 ||
-        this[`${step}Input3`] !== this.sampleData[step].input3 ||
-        this[`${step}Input4`] !== this.sampleData[step].input4 ||
-        this[`${step}Input5`] !== this.sampleData[step].input5;
-
-      this[`${step}Edited`] = isEdited;
-    },
-    canProceedToNextStep(step) {
-      // Check if any input in the current step has been edited
-      return !this[`${step}Edited`];
-    },
-    goToNextStep(step) {
-      // Prompt user if trying to leave a step with edited inputs
-      if (
-        this.canProceedToNextStep(step) ||
-        confirm("You have unsaved changes. Are you sure you want to leave?")
-      ) {
-        this.activeStep += 1;
-      }
-    },
-    goToPreviousStep() {
-      this.activeStep -= 1;
+    sortStatusOrder() {
+      // Define a custom sorting order based on the order 'PENDING', 'ACCEPT', 'DENY'
+      this.statusOrder = { PENDING: 1, ACCEPT: 2, DENY: 3 };
     },
   },
 };

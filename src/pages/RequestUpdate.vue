@@ -68,6 +68,17 @@
                         row-key="id"
                         :rows-per-page-options="[5]"
                       >
+                        <template v-slot:body-cell-status="props">
+                          <q-td
+                            :props="props"
+                            :class="{
+                              'text-positive': props.row.status === 'ACCEPTED',
+                              'text-negative': props.row.status === 'REJECTED',
+                            }"
+                          >
+                            {{ props.row.status }}
+                          </q-td>
+                        </template>
                         <template v-slot:body-cell-actions="{ row }">
                           <div class="actionsbtn q-gutter-lg">
                             <q-btn
@@ -121,7 +132,28 @@
                         row-key="id"
                         :rows-per-page-options="[5]"
                       >
+                        <template v-slot:body-cell-status="props">
+                          <q-td
+                            :props="props"
+                            :class="{
+                              'text-positive': props.row.status === 'ACCEPTED',
+                              'text-negative': props.row.status === 'REJECTED',
+                            }"
+                          >
+                            {{ props.row.status }}
+                          </q-td>
+                        </template>
+
                         <template v-slot:body-cell-actions="{ row }">
+                          <!-- <q-td
+                            :props="row"
+                            :class="{
+                              'text-positive': props.row.status === 'ACCEPTED',
+                              'text-negative': props.row.status === 'REJECTED',
+                            }"
+                          >
+                            {{ props.row.status }}
+                          </q-td> -->
                           <div class="actionsbtn q-gutter-lg">
                             <q-btn
                               flat
@@ -174,6 +206,17 @@
                         row-key="id"
                         :rows-per-page-options="[5]"
                       >
+                        <template v-slot:body-cell-status="props">
+                          <q-td
+                            :props="props"
+                            :class="{
+                              'text-positive': props.row.status === 'ACCEPTED',
+                              'text-negative': props.row.status === 'REJECTED',
+                            }"
+                          >
+                            {{ props.row.status }}
+                          </q-td>
+                        </template>
                         <template v-slot:body-cell-actions="{ row }">
                           <div class="actionsbtn q-gutter-lg">
                             <q-btn
@@ -226,6 +269,17 @@
                         row-key="id"
                         :rows-per-page-options="[5]"
                       >
+                        <template v-slot:body-cell-status="props">
+                          <q-td
+                            :props="props"
+                            :class="{
+                              'text-positive': props.row.status === 'ACCEPTED',
+                              'text-negative': props.row.status === 'REJECTED',
+                            }"
+                          >
+                            {{ props.row.status }}
+                          </q-td>
+                        </template>
                         <template v-slot:body-cell-actions="{ row }">
                           <div class="actionsbtn q-gutter-lg">
                             <q-btn
@@ -279,6 +333,17 @@
                         row-key="id"
                         :rows-per-page-options="[5]"
                       >
+                        <template v-slot:body-cell-status="props">
+                          <q-td
+                            :props="props"
+                            :class="{
+                              'text-positive': props.row.status === 'ACCEPTED',
+                              'text-negative': props.row.status === 'REJECTED',
+                            }"
+                          >
+                            {{ props.row.status }}
+                          </q-td>
+                        </template>
                         <template v-slot:body-cell-actions="{ row }">
                           <div class="actionsbtn q-gutter-lg">
                             <q-btn
@@ -332,6 +397,17 @@
                         row-key="id"
                         :rows-per-page-options="[5]"
                       >
+                        <template v-slot:body-cell-status="props">
+                          <q-td
+                            :props="props"
+                            :class="{
+                              'text-positive': props.row.status === 'ACCEPTED',
+                              'text-negative': props.row.status === 'REJECTED',
+                            }"
+                          >
+                            {{ props.row.status }}
+                          </q-td>
+                        </template>
                         <template v-slot:body-cell-actions="{ row }">
                           <div class="actionsbtn q-gutter-lg">
                             <q-btn
@@ -385,6 +461,17 @@
                         row-key="id"
                         :rows-per-page-options="[5]"
                       >
+                        <template v-slot:body-cell-status="props">
+                          <q-td
+                            :props="props"
+                            :class="{
+                              'text-positive': props.row.status === 'ACCEPTED',
+                              'text-negative': props.row.status === 'REJECTED',
+                            }"
+                          >
+                            {{ props.row.status }}
+                          </q-td>
+                        </template>
                         <template v-slot:body-cell-actions="{ row }">
                           <div class="actionsbtn q-gutter-lg">
                             <q-btn
@@ -445,6 +532,19 @@
                             :columns="columnSkills"
                             row-key="id"
                           >
+                            <template v-slot:body-cell-status="props">
+                              <q-td
+                                :props="props"
+                                :class="{
+                                  'text-positive':
+                                    props.row.status === 'ACCEPTED',
+                                  'text-negative':
+                                    props.row.status === 'REJECTED',
+                                }"
+                              >
+                                {{ props.row.status }}
+                              </q-td>
+                            </template>
                             <template v-slot:body-cell-actions="{ row }">
                               <div class="actionsbtn q-gutter-lg">
                                 <q-btn
@@ -497,6 +597,19 @@
                             :columns="columnAcademic"
                             row-key="id"
                           >
+                            <template v-slot:body-cell-status="props">
+                              <q-td
+                                :props="props"
+                                :class="{
+                                  'text-positive':
+                                    props.row.status === 'ACCEPTED',
+                                  'text-negative':
+                                    props.row.status === 'REJECTED',
+                                }"
+                              >
+                                {{ props.row.status }}
+                              </q-td>
+                            </template>
                             <template v-slot:body-cell-actions="{ row }">
                               <div class="actionsbtn q-gutter-lg">
                                 <q-btn
@@ -549,6 +662,19 @@
                             :columns="columnMembership"
                             row-key="id"
                           >
+                            <template v-slot:body-cell-status="props">
+                              <q-td
+                                :props="props"
+                                :class="{
+                                  'text-positive':
+                                    props.row.status === 'ACCEPTED',
+                                  'text-negative':
+                                    props.row.status === 'REJECTED',
+                                }"
+                              >
+                                {{ props.row.status }}
+                              </q-td>
+                            </template>
                             <template v-slot:body-cell-actions="{ row }">
                               <div class="actionsbtn q-gutter-lg">
                                 <q-btn
@@ -582,6 +708,143 @@
                       </div>
                     </div>
                   </div>
+
+                  <div v-if="request_reference.length">
+                    <q-card class="q-pa-sm" style="text-align: center">
+                      <q-table
+                        class="my-sticky-header-table"
+                        flat
+                        bordered
+                        title="REQUEST FOR REFERENCE"
+                        dense
+                        :rows="request_reference"
+                        :columns="columns_Reference"
+                        row-key="id"
+                        :rows-per-page-options="[5]"
+                      >
+                        <template v-slot:body-cell-status="props">
+                          <q-td
+                            :props="props"
+                            :class="{
+                              'text-positive': props.row.status === 'ACCEPTED',
+                              'text-negative': props.row.status === 'REJECTED',
+                            }"
+                          >
+                            {{ props.row.status }}
+                          </q-td>
+                        </template>
+                        <template v-slot:body-cell-actions="{ row }">
+                          <div class="actionsbtn q-gutter-lg">
+                            <q-btn
+                              flat
+                              round
+                              color="green"
+                              @click="viewdoc_ADD(row)"
+                            >
+                              View Docu
+                            </q-btn>
+                            <q-btn
+                              v-if="
+                                row.status !== 'ACCEPTED' &&
+                                row.status !== 'REJECTED'
+                              "
+                              flat
+                              round
+                              color="green"
+                              @click="accept_Reference(row)"
+                            >
+                              Accept
+                            </q-btn>
+                            <q-btn
+                              v-if="
+                                row.status !== 'ACCEPTED' &&
+                                row.status !== 'REJECTED'
+                              "
+                              flat
+                              round
+                              color="deep-orange"
+                              @click="deleteItem_Reference(row)"
+                            >
+                              DENY
+                            </q-btn>
+                          </div>
+                        </template>
+                      </q-table>
+                    </q-card>
+                  </div>
+
+                  <q-card>
+                    <q-card-section class="scroll">
+                      <div class="text-h6">
+                        REQUEST FOR CHANGE PHOTO
+                        <!--     <q-btn label="Add" @click="SkillDialog = true"></q-btn> -->
+                      </div>
+                    </q-card-section>
+                    <div class="row">
+                      <div class="col-md-2 col-sm-12 col-xs-12 q-pa-xs">
+                        <div v-if="requestSKILL.length">
+                          <q-card-section class="scroll">
+                            <div class="text-h6">
+                              FROM
+                              <!--     <q-btn label="Add" @click="SkillDialog = true"></q-btn> -->
+                            </div>
+                          </q-card-section>
+
+                          <q-card-section>
+                            <div>
+                              <q-img
+                                :src="images"
+                                alt="Uploaded Image"
+                                style="
+                                  height: 2in;
+                                  max-width: 2in;
+                                  border-color: black;
+                                  border-radius: 10%;
+                                  border-width: 2%;
+                                  border-style: solid;
+                                "
+                              />
+                            </div>
+                          </q-card-section>
+                        </div>
+                      </div>
+                      <div class="col-md-4 col-sm-12 col-xs-12 q-pa-xs">
+                        <!-- NON-ACADEMIC DISTINCTIONS / RECOGNITION -->
+                        <div v-if="requestnonacademic.length">
+                          <q-card-section class="scroll">
+                            <div class="text-h6">
+                              TO
+                              <!-- <q-btn label="Add" @click="NonAcademicDialog = true"></q-btn> -->
+                            </div>
+                          </q-card-section>
+                          <q-card-section>
+                            <div class="row">
+                              <div class="col-md-6">
+                                <q-img
+                                  :src="images"
+                                  alt="Uploaded Image"
+                                  style="
+                                    height: 2in;
+                                    max-width: 2in;
+                                    border-color: black;
+                                    border-radius: 10%;
+                                    border-width: 2%;
+                                    border-style: solid;
+                                  "
+                                />
+                              </div>
+                              <div class="col-md-3">
+                                <q-btn flat color="green">Accept</q-btn>
+                              </div>
+                              <div class="col-md-3">
+                                <q-btn flat color="deep-orange">Deny</q-btn>
+                              </div>
+                            </div>
+                          </q-card-section>
+                        </div>
+                      </div>
+                    </div>
+                  </q-card>
                 </div>
               </div>
             </q-tab-panel>
@@ -593,6 +856,32 @@
     </div>
 
     <div>
+      <q-dialog v-model="DialogDeny_Reference" persistent="">
+        <q-card style="width: 35%; height: 40%">
+          <q-card-section>
+            <div class="text-h6">REQUEST UPDATE DENIED</div>
+          </q-card-section>
+
+          <q-separator />
+
+          <q-card-section>
+            <p>Reason for Denial of Request Update :</p>
+            <q-input v-model="text" filled type="textarea" dense="" />
+          </q-card-section>
+          <q-separator />
+
+          <q-card-actions align="right">
+            <q-btn flat label="Cancel" color="orange" v-close-popup />
+            <q-btn
+              label="Save"
+              color="green"
+              v-close-popup
+              @click="reject_Membership_Reference()"
+            />
+          </q-card-actions>
+        </q-card>
+      </q-dialog>
+
       <q-dialog v-model="DialogDeny_MemberAssociation" persistent="">
         <q-card style="width: 35%; height: 40%">
           <q-card-section>
@@ -908,6 +1197,7 @@ export default {
       DialogDeny: false,
       DialogDeny_Child: false,
       DialogDeny_Civil_Service: false,
+      DialogDeny_Reference: false,
 
       viewdocs: false,
       controlNo: "",
@@ -976,6 +1266,19 @@ export default {
 
       columns_child: [
         {
+          name: "RequestDate",
+          align: "left",
+          label: "Aging",
+          field: "RequestDate",
+          sortable: true,
+          /*  format: (val) => this.calculateDaysFromToday(val), */
+          format: (val, row) =>
+            row.status === "ACCEPTED" || row.status === "REJECTED"
+              ? ""
+              : this.calculateDaysFromToday(val),
+        },
+
+        {
           name: "ChildName",
           align: "left",
           label: "CHILD NAME",
@@ -1005,6 +1308,19 @@ export default {
       ],
 
       columns_Educ_Background: [
+        {
+          name: "RequestDate",
+          align: "left",
+          label: "Aging",
+          field: "RequestDate",
+          sortable: true,
+          /*  format: (val) => this.calculateDaysFromToday(val), */
+          format: (val, row) =>
+            row.status === "ACCEPTED" || row.status === "REJECTED"
+              ? ""
+              : this.calculateDaysFromToday_EducationalBackground(val),
+        },
+
         {
           name: "Education",
           align: "left",
@@ -1069,6 +1385,19 @@ export default {
 
       columns_CivilServiceEligibility: [
         {
+          name: "RequestDate",
+          align: "left",
+          label: "Aging",
+          field: "RequestDate",
+          sortable: true,
+          /*  format: (val) => this.calculateDaysFromToday(val), */
+          format: (val, row) =>
+            row.status === "ACCEPTED" || row.status === "REJECTED"
+              ? ""
+              : this.calculateDaysFromToday_CivilService(val),
+        },
+
+        {
           name: "CivilServe",
           align: "left",
           label: "ELIGIBILITY",
@@ -1131,6 +1460,19 @@ export default {
       ],
 
       columns_WorkExperience: [
+        {
+          name: "RequestDate",
+          align: "left",
+          label: "Aging",
+          field: "RequestDate",
+          sortable: true,
+          /*  format: (val) => this.calculateDaysFromToday(val), */
+          format: (val, row) =>
+            row.status === "ACCEPTED" || row.status === "REJECTED"
+              ? ""
+              : this.calculateDaysFromToday_WorkExperience(val),
+        },
+
         {
           name: "Wfrom",
           align: "left",
@@ -1212,6 +1554,19 @@ export default {
 
       columns_VoluntaryWork: [
         {
+          name: "RequestDate",
+          align: "left",
+          label: "Aging",
+          field: "RequestDate",
+          sortable: true,
+          /*  format: (val) => this.calculateDaysFromToday(val), */
+          format: (val, row) =>
+            row.status === "ACCEPTED" || row.status === "REJECTED"
+              ? ""
+              : this.calculateDaysFromToday_VoluntaryWork(val),
+        },
+
+        {
           name: "Orgname",
           align: "left",
           label: "NAME & ADDRESS OF ORGANIZATION",
@@ -1267,6 +1622,19 @@ export default {
       ],
 
       columns_Learnin_AND_Development: [
+        {
+          name: "RequestDate",
+          align: "left",
+          label: "Aging",
+          field: "RequestDate",
+          sortable: true,
+          /*  format: (val) => this.calculateDaysFromToday(val), */
+          format: (val, row) =>
+            row.status === "ACCEPTED" || row.status === "REJECTED"
+              ? ""
+              : this.calculateDaysFromToday_LearningAndDevelopmenent(val),
+        },
+
         {
           name: "Training",
           align: "left",
@@ -1332,6 +1700,19 @@ export default {
 
       columnSkills: [
         {
+          name: "RequestDate",
+          align: "left",
+          label: "Aging",
+          field: "RequestDate",
+          sortable: true,
+          /*  format: (val) => this.calculateDaysFromToday(val), */
+          format: (val, row) =>
+            row.status === "ACCEPTED" || row.status === "REJECTED"
+              ? ""
+              : this.calculateDaysFromToday_Skills(val),
+        },
+
+        {
           name: "skill",
           required: true,
           label: "Skills and Hobbies",
@@ -1357,6 +1738,19 @@ export default {
       ],
 
       columnAcademic: [
+        {
+          name: "RequestDate",
+          align: "left",
+          label: "Aging",
+          field: "RequestDate",
+          sortable: true,
+          /*  format: (val) => this.calculateDaysFromToday(val), */
+          format: (val, row) =>
+            row.status === "ACCEPTED" || row.status === "REJECTED"
+              ? ""
+              : this.calculateDaysFromToday_NonAcademic(val),
+        },
+
         {
           name: "NonAcademic",
           required: true,
@@ -1384,6 +1778,19 @@ export default {
 
       columnMembership: [
         {
+          name: "RequestDate",
+          align: "left",
+          label: "Aging",
+          field: "RequestDate",
+          sortable: true,
+          /*  format: (val) => this.calculateDaysFromToday(val), */
+          format: (val, row) =>
+            row.status === "ACCEPTED" || row.status === "REJECTED"
+              ? ""
+              : this.calculateDaysFromToday_Membership(val),
+        },
+
+        {
           name: "Organization",
           required: true,
           label: "Membership in Organization",
@@ -1392,6 +1799,59 @@ export default {
           format: (val) => `${val}`,
           sortable: true,
         },
+        {
+          name: "status",
+          align: "left",
+          label: "STATUS",
+          field: "status",
+          sortable: true,
+        },
+
+        {
+          name: "actions",
+          label: "ACTIONS",
+          field: "actions",
+          align: "center",
+        },
+      ],
+
+      columns_Reference: [
+        {
+          name: "RequestDate",
+          align: "left",
+          label: "Aging",
+          field: "RequestDate",
+          sortable: true,
+          /*  format: (val) => this.calculateDaysFromToday(val), */
+          format: (val, row) =>
+            row.status === "ACCEPTED" || row.status === "REJECTED"
+              ? ""
+              : this.calculateDaysFromToday_Reference(val),
+        },
+
+        {
+          name: "Name",
+          align: "left",
+          label: "Name",
+          field: "Name",
+          sortable: true,
+        },
+        {
+          name: "Address",
+          align: "left",
+          label: "Address",
+          field: "Address",
+          sortable: true,
+        },
+
+        {
+          name: "Telno",
+          align: "left",
+          label: "Tel Number",
+          field: "Telno",
+          sortable: true,
+        },
+
         {
           name: "status",
           align: "left",
@@ -1479,12 +1939,221 @@ export default {
     PDS,
   },
 
+  computed: {
+    sortedTableData_CHILD_Pending_Accept_Deny() {
+      return [...this.requestChildss].sort(
+        (a, b) => this.statusOrder[a.status] - this.statusOrder[b.status]
+      );
+    },
+
+    tableDataWithDays() {
+      // Add a new property 'daysFromToday' to each row in tableData
+      return this.requestChildss.map((row) => ({
+        ...row,
+        daysFromToday: this.calculateDaysFromToday(row.RequestDate),
+      }));
+    },
+
+    tableDataWithDays_Educational_Background() {
+      // Add a new property 'daysFromToday' to each row in tableData
+      return this.requestEducBackground.map((row) => ({
+        ...row,
+        daysFromToday: this.calculateDaysFromToday_EducationalBackground(
+          row.RequestDate
+        ),
+      }));
+    },
+
+    tableDataWithDays_CivilService() {
+      // Add a new property 'daysFromToday' to each row in tableData
+      return this.requestCivilserviceEligibility.map((row) => ({
+        ...row,
+        daysFromToday: this.calculateDaysFromToday_CivilService(
+          row.RequestDate
+        ),
+      }));
+    },
+
+    tableDataWithDays_WorkExperience() {
+      // Add a new property 'daysFromToday' to each row in tableData
+      return this.requestworkexperience.map((row) => ({
+        ...row,
+        daysFromToday: this.calculateDaysFromToday_WorkExperience(
+          row.RequestDate
+        ),
+      }));
+    },
+
+    tableDataWithDays_VoluntaryWork() {
+      // Add a new property 'daysFromToday' to each row in tableData
+      return this.requestvoluntarywork.map((row) => ({
+        ...row,
+        daysFromToday: this.calculateDaysFromToday_VoluntaryWork(
+          row.RequestDate
+        ),
+      }));
+    },
+
+    tableDataWithDays_LearningANdDevelopment() {
+      // Add a new property 'daysFromToday' to each row in tableData
+      return this.requestlearningdevelopment.map((row) => ({
+        ...row,
+        daysFromToday: this.calculateDaysFromToday_LearningAndDevelopmenent(
+          row.RequestDate
+        ),
+      }));
+    },
+
+    tableDataWithDays_Skills() {
+      // Add a new property 'daysFromToday' to each row in tableData
+      return this.requestSKILL.map((row) => ({
+        ...row,
+        daysFromToday: this.calculateDaysFromToday_Skills(row.RequestDate),
+      }));
+    },
+
+    tableDataWithDays_NonAcademic() {
+      // Add a new property 'daysFromToday' to each row in tableData
+      return this.requestnonacademic.map((row) => ({
+        ...row,
+        daysFromToday: this.calculateDaysFromToday_NonAcademic(row.RequestDate),
+      }));
+    },
+
+    tableDataWithDays_Membership() {
+      // Add a new property 'daysFromToday' to each row in tableData
+      return this.requestorganization.map((row) => ({
+        ...row,
+        daysFromToday: this.calculateDaysFromToday_Membership(row.RequestDate),
+      }));
+    },
+
+    tableDataWithDays_Reference() {
+      // Add a new property 'daysFromToday' to each row in tableData
+      return this.request_reference.map((row) => ({
+        ...row,
+        daysFromToday: this.calculateDaysFromToday_Reference(row.RequestDate),
+      }));
+    },
+  },
+
   /*   mounted() {
     this.controlNo = this.$route.params.controlNo;
     this.FUllname = this.$route.params.FUllname;
   }, */
 
   methods: {
+    sortStatusOrder_CHILD_Pending_Accept_Deny() {
+      // Define a custom sorting order based on the order 'PENDING', 'ACCEPT', 'DENY'
+      this.statusOrder = { PENDING: 1, ACCEPTED: 2, REJECTED: 3 };
+    },
+
+    formatDate(date) {
+      // Custom function to format the date as 'YYYY-MM-DD'
+      const formattedDate = new Date(date).toISOString().split("T")[0];
+      return formattedDate;
+    },
+
+    calculateDaysFromToday_Reference(date) {
+      // Custom function to calculate the number of days from today
+      const today = new Date();
+      const startDate = new Date(date);
+      const timeDifference = today.getTime() - startDate.getTime();
+      const daysDifference =
+        Math.ceil(timeDifference / (1000 * 3600 * 24)) + " Days";
+      return daysDifference;
+    },
+
+    calculateDaysFromToday_Membership(date) {
+      // Custom function to calculate the number of days from today
+      const today = new Date();
+      const startDate = new Date(date);
+      const timeDifference = today.getTime() - startDate.getTime();
+      const daysDifference =
+        Math.ceil(timeDifference / (1000 * 3600 * 24)) + " Days";
+      return daysDifference;
+    },
+
+    calculateDaysFromToday_NonAcademic(date) {
+      // Custom function to calculate the number of days from today
+      const today = new Date();
+      const startDate = new Date(date);
+      const timeDifference = today.getTime() - startDate.getTime();
+      const daysDifference =
+        Math.ceil(timeDifference / (1000 * 3600 * 24)) + " Days";
+      return daysDifference;
+    },
+
+    calculateDaysFromToday_Skills(date) {
+      // Custom function to calculate the number of days from today
+      const today = new Date();
+      const startDate = new Date(date);
+      const timeDifference = today.getTime() - startDate.getTime();
+      const daysDifference =
+        Math.ceil(timeDifference / (1000 * 3600 * 24)) + " Days";
+      return daysDifference;
+    },
+
+    calculateDaysFromToday_LearningAndDevelopmenent(date) {
+      // Custom function to calculate the number of days from today
+      const today = new Date();
+      const startDate = new Date(date);
+      const timeDifference = today.getTime() - startDate.getTime();
+      const daysDifference =
+        Math.ceil(timeDifference / (1000 * 3600 * 24)) + " Days";
+      return daysDifference;
+    },
+
+    calculateDaysFromToday_VoluntaryWork(date) {
+      // Custom function to calculate the number of days from today
+      const today = new Date();
+      const startDate = new Date(date);
+      const timeDifference = today.getTime() - startDate.getTime();
+      const daysDifference =
+        Math.ceil(timeDifference / (1000 * 3600 * 24)) + " Days";
+      return daysDifference;
+    },
+
+    calculateDaysFromToday_WorkExperience(date) {
+      // Custom function to calculate the number of days from today
+      const today = new Date();
+      const startDate = new Date(date);
+      const timeDifference = today.getTime() - startDate.getTime();
+      const daysDifference =
+        Math.ceil(timeDifference / (1000 * 3600 * 24)) + " Days";
+      return daysDifference;
+    },
+
+    calculateDaysFromToday_CivilService(date) {
+      // Custom function to calculate the number of days from today
+      const today = new Date();
+      const startDate = new Date(date);
+      const timeDifference = today.getTime() - startDate.getTime();
+      const daysDifference =
+        Math.ceil(timeDifference / (1000 * 3600 * 24)) + " Days";
+      return daysDifference;
+    },
+
+    calculateDaysFromToday_EducationalBackground(date) {
+      // Custom function to calculate the number of days from today
+      const today = new Date();
+      const startDate = new Date(date);
+      const timeDifference = today.getTime() - startDate.getTime();
+      const daysDifference =
+        Math.ceil(timeDifference / (1000 * 3600 * 24)) + " Days";
+      return daysDifference;
+    },
+
+    calculateDaysFromToday(date) {
+      // Custom function to calculate the number of days from today
+      const today = new Date();
+      const startDate = new Date(date);
+      const timeDifference = today.getTime() - startDate.getTime();
+      const daysDifference =
+        Math.ceil(timeDifference / (1000 * 3600 * 24)) + " Days";
+      return daysDifference;
+    },
+
     imagesource(file) {
       const imgsrc = "http://10.0.1.23:82/Pics/" + file.imgname;
       return imgsrc;
@@ -1558,6 +2227,12 @@ export default {
       this.DialogDeny_Learning_Development = true;
     },
 
+    deleteItem_Reference(row) {
+      console.log("ROW", row);
+      this.id = row.ID;
+      this.DialogDeny_Reference = true;
+    },
+
     deleteItem_Skills(row) {
       console.log("ROW", row);
       this.id = row.ID;
@@ -1592,6 +2267,13 @@ export default {
           // console.log("result=",res)
           this.requests = store.userrequest;
           this.requestChildss = store.requestChild;
+          this.requestChildss.sort(
+            (a, b) => this.statusOrder[a.status] - this.statusOrder[b.status]
+          );
+          /*   this.sortedTableData_CHILD_Pending_Accept_Deny(); */
+          /* this.sortStatusOrder_CHILD_Pending_Accept_Deny(); */
+
+          /*  this.sortStatusOrder(); */
           // console.log("userinfo=",this.requests)
         });
       });
@@ -1742,6 +2424,30 @@ export default {
       });
     },
 
+    accept_Reference(row) {
+      const store = useDashboardStore();
+      let data = new FormData();
+      data.append("Address", row.Address);
+      data.append("Names", row.Name);
+      data.append("Telno", row.Telno);
+      data.append("id", row.ID);
+
+      data.append("controlno", row.Controlno);
+      data.append("tablename", "tblPDSUpdatesReference");
+      data.append("type", "add");
+      data.append("id", row.ID);
+      store.accept(data).then((res) => {
+        let data2 = new FormData();
+        data2.append("ControlNo", row.Controlno);
+        store.getsinglerequest(data2).then((res) => {
+          // console.log("result=",res)
+          this.requests = store.userrequest;
+          this.request_reference = store.requestReference;
+          // console.log("userinfo=",this.requests)
+        });
+      });
+    },
+
     accept_SKills(row) {
       const store = useDashboardStore();
       let data = new FormData();
@@ -1861,6 +2567,8 @@ export default {
         store.getsinglerequest(data2).then((res) => {
           this.requests = store.userrequest;
           this.requestChildss = store.requestChild;
+          this.requestChildss.sort((a, b) => this.statusOrder[a.status] - this.statusOrder[b.status]
+          );
           console.log("userinfo=", this.requests);
         });
       });
@@ -2000,9 +2708,29 @@ export default {
         });
       });
     },
+
+    reject_Membership_Reference() {
+      console.log("ID", this.id);
+      const store = useDashboardStore();
+      let data = new FormData();
+
+      data.append("id", this.id);
+      data.append("remarks", this.text);
+      data.append("tablename", "tblPDSUpdatesReference");
+      store.reject(data).then((res) => {
+        let data2 = new FormData();
+        data2.append("ControlNo", this.controlNo);
+        store.getsinglerequest(data2).then((res) => {
+          this.requests = store.userrequest;
+          this.request_reference = store.requestReference;
+          console.log("userinfo=", this.requests);
+        });
+      });
+    },
   },
 
   created() {
+    this.sortStatusOrder_CHILD_Pending_Accept_Deny();
     // Access the controlNumber from the Vuex store
     this.controlNo = this.$route.params.controlNo;
     const store = useDashboardStore();
@@ -2028,6 +2756,9 @@ export default {
       console.log("PIC", this.request_pic);
 
       this.requestChildss = store.requestChild;
+      this.requestChildss.sort(
+        (a, b) => this.statusOrder[a.status] - this.statusOrder[b.status]
+      );
       console.log("CHILD REQUEST", this.requestChildss);
 
       this.requestEducBackground = store.requestEduc_Background;
@@ -2065,5 +2796,12 @@ export default {
 }
 .esbugbai {
   margin-left: -60px;
+}
+.text-positive {
+  color: green;
+}
+
+.text-negative {
+  color: red;
 }
 </style>
