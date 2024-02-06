@@ -773,27 +773,93 @@
                     </q-card>
                   </div>
 
-                  <q-card>
+                  <div v-if="request_pic == 'ACCEPTED'">
+                    <q-card class="q-pa-sm" style="text-align: center">
+                      <q-table
+                        class="my-sticky-header-table"
+                        flat
+                        bordered
+                        title="REQUEST FOR CHANGE PHOTO"
+                        dense
+                        :rows="request_pic"
+                        :columns="columns_Picture"
+                        row-key="id"
+                        :rows-per-page-options="[5]"
+                      >
+                        <template v-slot:body-cell-imgfrom="{}">
+                          <q-td>
+                            <q-avatar size="80px" class="shadow-24">
+                              <q-img :src="this.imgurl" />
+                            </q-avatar>
+                          </q-td>
+                        </template>
+
+                        <template v-slot:body-cell-img="{ row }">
+                          <q-td>
+                            <q-avatar size="80px" class="shadow-24">
+                              <q-img :src="imageSrcss + row.img" />
+                            </q-avatar>
+                          </q-td>
+                        </template>
+
+                        <template v-slot:body-cell-status="props">
+                          <q-td
+                            :props="props"
+                            :class="{
+                              'text-positive': props.row.status === 'ACCEPTED',
+                              'text-negative': props.row.status === 'REJECTED',
+                            }"
+                          >
+                            {{ props.row.status }}
+                          </q-td>
+                        </template>
+                        <template v-slot:body-cell-actions="{ row }">
+                          <div class="actionsbtn q-gutter-lg">
+                            <q-btn
+                              v-if="
+                                row.status !== 'ACCEPTED' &&
+                                row.status !== 'REJECTED'
+                              "
+                              flat
+                              round
+                              color="green"
+                              @click="accept_ChangePhoto(row)"
+                            >
+                              Accept
+                            </q-btn>
+                            <q-btn
+                              v-if="
+                                row.status !== 'ACCEPTED' &&
+                                row.status !== 'REJECTED'
+                              "
+                              flat
+                              round
+                              color="deep-orange"
+                              @click="deleteItem_ChangePhoto(row)"
+                            >
+                              DENY
+                            </q-btn>
+                          </div>
+                        </template>
+                      </q-table>
+                    </q-card>
+                  </div>
+
+                  <!--    <q-card>
                     <q-card-section class="scroll">
-                      <div class="text-h6">
-                        REQUEST FOR CHANGE PHOTO
-                        <!--     <q-btn label="Add" @click="SkillDialog = true"></q-btn> -->
-                      </div>
+                      <div class="text-h6">REQUEST FOR CHANGE PHOTO</div>
                     </q-card-section>
                     <div class="row">
                       <div class="col-md-2 col-sm-12 col-xs-12 q-pa-xs">
                         <div v-if="requestSKILL.length">
                           <q-card-section class="scroll">
-                            <div class="text-h6">
-                              FROM
-                              <!--     <q-btn label="Add" @click="SkillDialog = true"></q-btn> -->
-                            </div>
+                            <div class="text-h6">FROM</div>
                           </q-card-section>
 
                           <q-card-section>
                             <div>
                               <q-img
-                                :src="images"
+                                :src="imgurl"
                                 alt="Uploaded Image"
                                 style="
                                   height: 2in;
@@ -809,13 +875,9 @@
                         </div>
                       </div>
                       <div class="col-md-4 col-sm-12 col-xs-12 q-pa-xs">
-                        <!-- NON-ACADEMIC DISTINCTIONS / RECOGNITION -->
                         <div v-if="requestnonacademic.length">
                           <q-card-section class="scroll">
-                            <div class="text-h6">
-                              TO
-                              <!-- <q-btn label="Add" @click="NonAcademicDialog = true"></q-btn> -->
-                            </div>
+                            <div class="text-h6">TO</div>
                           </q-card-section>
                           <q-card-section>
                             <div class="row">
@@ -844,7 +906,7 @@
                         </div>
                       </div>
                     </div>
-                  </q-card>
+                  </q-card> -->
                 </div>
               </div>
             </q-tab-panel>
@@ -1090,6 +1152,32 @@
         </q-card>
       </q-dialog>
 
+      <q-dialog v-model="DialogDeny_ChangePhoto" persistent="">
+        <q-card style="width: 35%; height: 40%">
+          <q-card-section>
+            <div class="text-h6">REQUEST UPDATE DENIED</div>
+          </q-card-section>
+
+          <q-separator />
+
+          <q-card-section>
+            <p>Reason for Denial of Request Update :</p>
+            <q-input v-model="text" filled type="textarea" dense="" />
+          </q-card-section>
+          <q-separator />
+
+          <q-card-actions align="right">
+            <q-btn flat label="Cancel" color="orange" v-close-popup />
+            <q-btn
+              label="Save"
+              color="green"
+              v-close-popup
+              @click="reject_ChangePhoto"
+            />
+          </q-card-actions>
+        </q-card>
+      </q-dialog>
+
       <q-dialog v-model="DialogDeny" persistent="">
         <q-card style="width: 35%; height: 40%">
           <q-card-section>
@@ -1187,6 +1275,8 @@ import PDS from "./PDS.vue";
 export default {
   data() {
     return {
+      imageSrcss: "http://10.0.1.23:82/pics/",
+      /*    imgurl: "http://10.0.1.23:82/pics/", */
       viewdocs_add: false,
       DialogDeny_MemberAssociation: false,
       DialogDeny_NonAcademnic: false,
@@ -1198,12 +1288,26 @@ export default {
       DialogDeny_Child: false,
       DialogDeny_Civil_Service: false,
       DialogDeny_Reference: false,
+      DialogDeny_ChangePhoto: false,
 
       viewdocs: false,
       controlNo: "",
       FUllname: "",
       tab: ref("List"),
       columns: [
+        {
+          name: "RequestDate",
+          align: "left",
+          label: "Aging",
+          field: "RequestDate",
+          sortable: true,
+          /*  format: (val) => this.calculateDaysFromToday(val), */
+          format: (val, row) =>
+            row.status === "ACCEPTED" || row.status === "REJECTED"
+              ? ""
+              : this.calculateDaysFromToday_Request(val),
+        },
+
         {
           name: "requestfield",
           align: "left",
@@ -1868,6 +1972,52 @@ export default {
         },
       ],
 
+      columns_Picture: [
+        {
+          name: "RequestDate",
+          align: "left",
+          label: "Aging",
+          field: "RequestDate",
+          sortable: true,
+          /*  format: (val) => this.calculateDaysFromToday(val), */
+          format: (val, row) =>
+            row.status === "ACCEPTED" || row.status === "REJECTED"
+              ? ""
+              : this.calculateDaysFromToday_Reference(val),
+        },
+
+        {
+          name: "imgfrom",
+          align: "center",
+          label: "From",
+
+          sortable: true,
+        },
+
+        {
+          name: "img",
+          align: "center",
+          label: "TO",
+          field: "img",
+          sortable: true,
+        },
+
+        {
+          name: "status",
+          align: "left",
+          label: "STATUS",
+          field: "status",
+          sortable: true,
+        },
+
+        {
+          name: "actions",
+          label: "ACTIONS",
+          field: "actions",
+          align: "center",
+        },
+      ],
+
       rows: [
         {
           /*    Controlno: "019807", */
@@ -1961,6 +2111,14 @@ export default {
         daysFromToday: this.calculateDaysFromToday_EducationalBackground(
           row.RequestDate
         ),
+      }));
+    },
+
+    tableDataWithDays_Request() {
+      // Add a new property 'daysFromToday' to each row in tableData
+      return this.requestEducBackground.map((row) => ({
+        ...row,
+        daysFromToday: this.calculateDaysFromToday_Request(row.RequestDate),
       }));
     },
 
@@ -2144,6 +2302,16 @@ export default {
       return daysDifference;
     },
 
+    calculateDaysFromToday_Request(date) {
+      // Custom function to calculate the number of days from today
+      const today = new Date();
+      const startDate = new Date(date);
+      const timeDifference = today.getTime() - startDate.getTime();
+      const daysDifference =
+        Math.ceil(timeDifference / (1000 * 3600 * 24)) + " Days";
+      return daysDifference;
+    },
+
     calculateDaysFromToday(date) {
       // Custom function to calculate the number of days from today
       const today = new Date();
@@ -2152,6 +2320,11 @@ export default {
       const daysDifference =
         Math.ceil(timeDifference / (1000 * 3600 * 24)) + " Days";
       return daysDifference;
+    },
+
+    imagesource_viewChangePhoto(row) {
+      const imgsrc_changephoto = "http://10.0.1.23:82/Pics/" + row.img;
+      return imgsrc_changephoto;
     },
 
     imagesource(file) {
@@ -2195,6 +2368,12 @@ export default {
       console.log("ROW", row);
       this.id = row.ID;
       this.DialogDeny = true;
+    },
+
+    deleteItem_ChangePhoto(row) {
+      console.log("ROW", row);
+      this.id = row.ID;
+      this.DialogDeny_ChangePhoto = true;
     },
 
     deleteItem_Child(row) {
@@ -2312,6 +2491,9 @@ export default {
           // console.log("result=",res)
           this.requests = store.userrequest;
           this.requestEducBackground = store.requestEduc_Background;
+          this.requestEducBackground.sort(
+            (a, b) => this.statusOrder[a.status] - this.statusOrder[b.status]
+          );
           // console.log("userinfo=",this.requests)
         });
       });
@@ -2341,6 +2523,9 @@ export default {
           // console.log("userinfo=",this.requests)
           this.requestCivilserviceEligibility =
             store.requestCivil_service_Eligibility;
+          this.requestCivilserviceEligibility.sort(
+            (a, b) => this.statusOrder[a.status] - this.statusOrder[b.status]
+          );
         });
       });
     },
@@ -2367,6 +2552,9 @@ export default {
           // console.log("result=",res)
           this.requests = store.userrequest;
           this.requestworkexperience = store.requestwork_experience;
+          this.requestworkexperience.sort(
+            (a, b) => this.statusOrder[a.status] - this.statusOrder[b.status]
+          );
           // console.log("userinfo=",this.requests)
         });
       });
@@ -2392,6 +2580,9 @@ export default {
           // console.log("result=",res)
           this.requests = store.userrequest;
           this.requestvoluntarywork = store.requestVoluntary_Work;
+          this.requestvoluntarywork.sort(
+            (a, b) => this.statusOrder[a.status] - this.statusOrder[b.status]
+          );
           // console.log("userinfo=",this.requests)
         });
       });
@@ -2419,6 +2610,9 @@ export default {
           this.requests = store.userrequest;
           this.requestlearningdevelopment =
             store.requestLearning_And_Development;
+          this.requestlearningdevelopment.sort(
+            (a, b) => this.statusOrder[a.status] - this.statusOrder[b.status]
+          );
           // console.log("userinfo=",this.requests)
         });
       });
@@ -2443,6 +2637,34 @@ export default {
           // console.log("result=",res)
           this.requests = store.userrequest;
           this.request_reference = store.requestReference;
+          this.request_reference.sort(
+            (a, b) => this.statusOrder[a.status] - this.statusOrder[b.status]
+          );
+          // console.log("userinfo=",this.requests)
+        });
+      });
+    },
+
+    accept_ChangePhoto(row) {
+      const store = useDashboardStore();
+      let data = new FormData();
+      data.append("controlno", row.controlno);
+      console.log("Kuntrol Namber", row);
+      data.append("pic", row.img);
+      console.log("PICC", row.img);
+      data.append("tablename", "tblpdsupdatespic");
+      data.append("type", "add");
+      data.append("id", row.ID);
+      store.accept(data).then((res) => {
+        let data2 = new FormData();
+        data2.append("ControlNo", row.Controlno);
+        store.getsinglerequest(data2).then((res) => {
+          // console.log("result=",res)
+          this.request_pic = store.requestPic;
+          this.request_pic = store.requestPic;
+          this.request_pic.sort(
+            (a, b) => this.statusOrder[a.status] - this.statusOrder[b.status]
+          );
           // console.log("userinfo=",this.requests)
         });
       });
@@ -2463,7 +2685,9 @@ export default {
           // console.log("result=",res)
           this.requests = store.userrequest;
           this.requestSKILL = store.requestskills;
-
+          this.requestSKILL.sort(
+            (a, b) => this.statusOrder[a.status] - this.statusOrder[b.status]
+          );
           // console.log("userinfo=",this.requests)
         });
       });
@@ -2485,6 +2709,9 @@ export default {
           // console.log("result=",res)
           this.requests = store.userrequest;
           this.requestnonacademic = store.requestNon_Academic;
+          this.requestnonacademic.sort(
+            (a, b) => this.statusOrder[a.status] - this.statusOrder[b.status]
+          );
           // console.log("userinfo=",this.requests)
         });
       });
@@ -2506,6 +2733,9 @@ export default {
           // console.log("result=",res)
           this.requests = store.userrequest;
           this.requestorganization = store.request_Organization;
+          this.requestorganization.sort(
+            (a, b) => this.statusOrder[a.status] - this.statusOrder[b.status]
+          );
           // console.log("userinfo=",this.requests)
         });
       });
@@ -2526,6 +2756,9 @@ export default {
         store.getsinglerequest(data2).then((res) => {
           // console.log("result=",res)
           this.requests = store.userrequest;
+          this.requests.sort(
+            (a, b) => this.statusOrder[a.status] - this.statusOrder[b.status]
+          );
           // console.log("userinfo=",this.requests)
         });
       });
@@ -2548,6 +2781,9 @@ export default {
         data2.append("ControlNo", this.controlNo);
         store.getsinglerequest(data2).then((res) => {
           this.requests = store.userrequest;
+          this.requests.sort(
+            (a, b) => this.statusOrder[a.status] - this.statusOrder[b.status]
+          );
           console.log("userinfo=", this.requests);
         });
       });
@@ -2567,7 +2803,30 @@ export default {
         store.getsinglerequest(data2).then((res) => {
           this.requests = store.userrequest;
           this.requestChildss = store.requestChild;
-          this.requestChildss.sort((a, b) => this.statusOrder[a.status] - this.statusOrder[b.status]
+          this.requestChildss.sort(
+            (a, b) => this.statusOrder[a.status] - this.statusOrder[b.status]
+          );
+          console.log("userinfo=", this.requests);
+        });
+      });
+    },
+
+    reject_ChangePhoto() {
+      console.log("ID", this.id);
+      const store = useDashboardStore();
+      let data = new FormData();
+
+      data.append("id", this.id);
+      data.append("remarks", this.text);
+      data.append("tablename", "tblpdsupdatespic");
+      store.reject(data).then((res) => {
+        let data2 = new FormData();
+        data2.append("ControlNo", this.controlNo);
+        store.getsinglerequest(data2).then((res) => {
+          this.requests = store.requestPic;
+          this.request_pic = store.requestPic;
+          this.request_pic.sort(
+            (a, b) => this.statusOrder[a.status] - this.statusOrder[b.status]
           );
           console.log("userinfo=", this.requests);
         });
@@ -2588,6 +2847,9 @@ export default {
         store.getsinglerequest(data2).then((res) => {
           this.requests = store.userrequest;
           this.requestEducBackground = store.requestEduc_Background;
+          this.requestEducBackground.sort(
+            (a, b) => this.statusOrder[a.status] - this.statusOrder[b.status]
+          );
           console.log("userinfo=", this.requests);
         });
       });
@@ -2608,6 +2870,9 @@ export default {
           this.requests = store.userrequest;
           this.requestCivilserviceEligibility =
             store.requestCivil_service_Eligibility;
+          this.requestCivilserviceEligibility.sort(
+            (a, b) => this.statusOrder[a.status] - this.statusOrder[b.status]
+          );
           console.log("userinfo=", this.requests);
         });
       });
@@ -2627,6 +2892,9 @@ export default {
         store.getsinglerequest(data2).then((res) => {
           this.requests = store.userrequest;
           this.requestworkexperience = store.requestwork_experience;
+          this.requestworkexperience.sort(
+            (a, b) => this.statusOrder[a.status] - this.statusOrder[b.status]
+          );
           console.log("userinfo=", this.requests);
         });
       });
@@ -2647,6 +2915,9 @@ export default {
           this.requests = store.userrequest;
           this.requestlearningdevelopment =
             store.requestLearning_And_Development;
+          this.requestlearningdevelopment.sort(
+            (a, b) => this.statusOrder[a.status] - this.statusOrder[b.status]
+          );
           console.log("userinfo=", this.requests);
         });
       });
@@ -2666,6 +2937,9 @@ export default {
         store.getsinglerequest(data2).then((res) => {
           this.requests = store.userrequest;
           this.requestSKILL = store.requestskills;
+          this.requestSKILL.sort(
+            (a, b) => this.statusOrder[a.status] - this.statusOrder[b.status]
+          );
           console.log("userinfo=", this.requests);
         });
       });
@@ -2685,6 +2959,9 @@ export default {
         store.getsinglerequest(data2).then((res) => {
           this.requests = store.userrequest;
           this.requestnonacademic = store.requestNon_Academic;
+          this.requestnonacademic.sort(
+            (a, b) => this.statusOrder[a.status] - this.statusOrder[b.status]
+          );
           console.log("userinfo=", this.requests);
         });
       });
@@ -2704,6 +2981,9 @@ export default {
         store.getsinglerequest(data2).then((res) => {
           this.requests = store.userrequest;
           this.requestorganization = store.request_Organization;
+          this.requestorganization.sort(
+            (a, b) => this.statusOrder[a.status] - this.statusOrder[b.status]
+          );
           console.log("userinfo=", this.requests);
         });
       });
@@ -2723,6 +3003,9 @@ export default {
         store.getsinglerequest(data2).then((res) => {
           this.requests = store.userrequest;
           this.request_reference = store.requestReference;
+          this.request_reference.sort(
+            (a, b) => this.statusOrder[a.status] - this.statusOrder[b.status]
+          );
           console.log("userinfo=", this.requests);
         });
       });
@@ -2731,6 +3014,7 @@ export default {
 
   created() {
     this.sortStatusOrder_CHILD_Pending_Accept_Deny();
+
     // Access the controlNumber from the Vuex store
     this.controlNo = this.$route.params.controlNo;
     const store = useDashboardStore();
@@ -2748,12 +3032,18 @@ export default {
     store.getsinglerequest(data2).then((res) => {
       this.requests = store.userrequest;
       console.log("userinfo=", this.requests);
+      this.requests.sort(
+        (a, b) => this.statusOrder[a.status] - this.statusOrder[b.status]
+      );
 
       this.request_reference = store.requestReference;
       console.log("Reference123", this.request_reference);
 
       this.request_pic = store.requestPic;
       console.log("PIC", this.request_pic);
+      this.request_pic.sort(
+        (a, b) => this.statusOrder[a.status] - this.statusOrder[b.status]
+      );
 
       this.requestChildss = store.requestChild;
       this.requestChildss.sort(
@@ -2763,28 +3053,52 @@ export default {
 
       this.requestEducBackground = store.requestEduc_Background;
       console.log("EDUCATIONAL BACKGROUND", this.requestEducBackground);
+      this.requestEducBackground.sort(
+        (a, b) => this.statusOrder[a.status] - this.statusOrder[b.status]
+      );
 
       this.requestCivilserviceEligibility =
         store.requestCivil_service_Eligibility;
       console.log("CIVIL SERVICE", this.requestCivilserviceEligibility);
+      this.requestCivilserviceEligibility.sort(
+        (a, b) => this.statusOrder[a.status] - this.statusOrder[b.status]
+      );
 
       this.requestworkexperience = store.requestwork_experience;
       console.log("WORK EXPERIENCE", this.requestworkexperience);
+      this.requestworkexperience.sort(
+        (a, b) => this.statusOrder[a.status] - this.statusOrder[b.status]
+      );
 
       this.requestvoluntarywork = store.requestVoluntary_Work;
       console.log("VOLUNTARY WORK", this.requestvoluntarywork);
+      this.requestvoluntarywork.sort(
+        (a, b) => this.statusOrder[a.status] - this.statusOrder[b.status]
+      );
 
       this.requestlearningdevelopment = store.requestLearning_And_Development;
       console.log("LEARNING AND DEVELOPMENT", this.requestlearningdevelopment);
+      this.requestlearningdevelopment.sort(
+        (a, b) => this.statusOrder[a.status] - this.statusOrder[b.status]
+      );
 
       this.requestSKILL = store.requestskills;
       console.log("SKILL", this.requestSKILL);
+      this.requestSKILL.sort(
+        (a, b) => this.statusOrder[a.status] - this.statusOrder[b.status]
+      );
 
       this.requestnonacademic = store.requestNon_Academic;
       console.log("Non Academid", this.requestnonacademic);
+      this.requestnonacademic.sort(
+        (a, b) => this.statusOrder[a.status] - this.statusOrder[b.status]
+      );
 
       this.requestorganization = store.request_Organization;
       console.log("Membership in Association", this.requestorganization);
+      this.requestorganization.sort(
+        (a, b) => this.statusOrder[a.status] - this.statusOrder[b.status]
+      );
     });
   },
 };

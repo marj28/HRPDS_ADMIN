@@ -1146,7 +1146,7 @@ export default {
     return {
       users: [],
       personal: [],
-      skill:[],
+      skill: [],
       academic: [],
       organization: [],
       children: [],
@@ -1157,9 +1157,9 @@ export default {
   },
   created() {
     const userstore = useLoginStore();
-    this.skill= userstore.userinfo;
-    this.academic= userstore.userinfo;
-    this.organization= userstore.userinfo;
+    this.skill = userstore.userinfo;
+    this.academic = userstore.userinfo;
+    this.organization = userstore.userinfo;
     this.personal = userstore.userinfo.map((item) => ({ ...item }));
     if (
       this.personal[0].Surname.includes("JR") ||
@@ -1180,7 +1180,7 @@ export default {
       this.personal[0].citizenshipStatus = "byBirth";
     }
     console.log("personal = ", this.personal);
-    console.log("work experience=",userstore.experience)
+    console.log("work experience=", userstore.experience);
     // for(let i=0;i < this.personal[0].children.length;i++){
     //   this.children[i]=this.personal[0].Children[i]?this.personal[0].children[i].ChildName :''
     //   this.childbdate[i]=this.personal[0].Children[i]?this.personal[0].children[i].BirthDate : ''
@@ -1221,7 +1221,9 @@ export default {
 
       servicerecord.forEach((item) => {
         if (
-          !userstore.userexperience.some((existingItem) => existingItem.wposition == item.wposition)
+          !userstore.userexperience.some(
+            (existingItem) => existingItem.wposition == item.wposition
+          )
         ) {
           userstore.userexperience.push(item);
         }
@@ -1425,10 +1427,9 @@ td {
   margin: auto;
 }
 @media print {
- #print-area {
-     margin: 0.11 0.17 0.11 0.19 !important;
+  #print-area {
+    margin: 0.11 0.17 0.11 0.19 !important;
     width: 150%;
-
   }
 
   #btn-group {

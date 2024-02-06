@@ -31,6 +31,7 @@ export const useUserInfoStore = defineStore("UserInfo", {
       this.civilservice = res.data.civil;
       //   console.log("userinfo=",this.degree);
     },
+
     async educationdegree() {
       // `http://10.0.1.23:82/HRPORTAL/login.php`
       let res = await axios.get(`http://10.0.1.23:82/HRPORTAL/degrees.php`);
