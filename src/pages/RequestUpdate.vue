@@ -14,14 +14,19 @@
           <!--   <p>{{ controlNo }}</p> -->
           <!--  <h5 class="q-ml-lg">REQUEST UPDATE</h5> -->
         </div>
-        <div class="col-12 col-sm-6 col-md-3 col-lg-2 q-mt-md">
+        <div
+          class="col-12 offset-4 offset-sm-0 col-sm-6 col-md-3 col-lg-2 q-mt-md"
+        >
           <q-avatar size="100px" class="shadow-10">
             <q-img :src="imgurl" />
           </q-avatar>
         </div>
 
-        <div class="col-2 col-sm-2 col-md-5 col-lg-8 q-mt-md esbugbai">
+        <div
+          class="col-12 offset-sm-0 col-sm-2 col-md-5 col-lg-8 q-mt-md q-ml-sm"
+        >
           <p><b>Full Name:</b> {{ userinfo[0].fullname }}</p>
+
           <p class="q-mt-md">
             <b>Designation:</b> {{ userinfo[0].designation }}
           </p>

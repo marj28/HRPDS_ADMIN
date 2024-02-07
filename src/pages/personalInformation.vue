@@ -33,7 +33,7 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-md-6 col-xs-6">
+          <div class="col-12 col-md-6 col-xs-6">
             <q-input
               filled
               readonly
@@ -44,7 +44,7 @@
               style="text-transform: uppercase"
             />
           </div>
-          <div class="col-md-6 col-xs-6 q-pa-sm">
+          <div class="col-12 col-md-6 col-xs-6 q-pa-sm">
             <!-- <q-input filled label="Name Extension" dense class="q-pa-sm" /> -->
             <q-input
               filled
@@ -68,7 +68,7 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-md-6 col-xs-6">
+          <div class="col-12 col-md-6 col-xs-6">
             <q-input
               ref="bday"
               lazy-rules
@@ -82,7 +82,7 @@
               :rules="inputRules"
             />
           </div>
-          <div class="col-md-6 col-xs-6">
+          <div class="col-12 col-md-6 col-xs-6">
             <q-input
               filled
               readonly
@@ -96,7 +96,7 @@
         </div>
 
         <div class="row">
-          <div class="col-md-6 col-xs-6 q-pa-sm">
+          <div class="col-12 col-md-6 col-xs-6 q-pa-sm">
             <q-input
               filled
               readonly
@@ -117,7 +117,7 @@
             </q-input>
           </div>
 
-          <div class="col-md-6 col-xs-6 q-pa-sm">
+          <div class="col-12 col-md-6 col-xs-6 q-pa-sm">
             <q-input
               ref="civilstatus"
               lazy-rules
@@ -142,7 +142,7 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-md-6 col-xs-6 q-pa-sm">
+          <div class="col-12 col-md-6 col-xs-6 q-pa-sm">
             <q-input
               ref="gender"
               lazy-rules
@@ -165,7 +165,7 @@
               </template>
             </q-input>
           </div>
-          <div class="col-md-3 col-xs-3">
+          <div class="col-12 col-md-3 col-xs-3">
             <q-input
               :rules="numberValidationRule"
               filled
@@ -176,7 +176,7 @@
               v-model="personal[0].Heights"
             />
           </div>
-          <div class="col-md-3 col-xs-3">
+          <div class="col-12 col-md-3 col-xs-3">
             <q-input
               :rules="numberValidationRule"
               filled
@@ -187,7 +187,7 @@
               v-model="personal[0].Weights"
             />
           </div>
-          <div class="col-md-2 col-xs-6">
+          <div class="col-12 col-md-2 col-xs-6">
             <q-input
               style="text-transform: uppercase"
               filled
@@ -198,7 +198,7 @@
               v-model="personal[0].BloodType"
             />
           </div>
-          <div class="col-md-2 col-xs-6">
+          <div class="col-12 col-md-2 col-xs-6">
             <q-input
               filled
               readonly
@@ -208,7 +208,7 @@
               v-model="personal[0].TelNo"
             />
           </div>
-          <div class="col-md-2 col-xs-6">
+          <div class="col-12 col-md-2 col-xs-6">
             <q-input
               filled
               readonly
@@ -218,7 +218,7 @@
               v-model="personal[0].CellphoneNo"
             />
           </div>
-          <div class="col-md-6 col-xs-6">
+          <div class="col-12 col-md-6 col-xs-6">
             <q-input
               filled
               readonly
@@ -232,7 +232,7 @@
         </div>
         <q-separator inset></q-separator>
         <div class="row">
-          <div class="col-md-4 col-xs-6">
+          <div class="col-12 col-md-4 col-xs-6">
             <q-input
               style="text-transform: uppercase"
               filled
@@ -243,7 +243,7 @@
               v-model="personal[0].GSISNo"
             />
           </div>
-          <div class="col-md-4 col-xs-6">
+          <div class="col-12 col-md-4 col-xs-6">
             <q-input
               style="text-transform: uppercase"
               filled
@@ -254,7 +254,7 @@
               v-model="personal[0].PAGIBIGNo"
             />
           </div>
-          <div class="col-md-4 col-xs-6">
+          <div class="col-12 col-md-4 col-xs-6">
             <q-input
               style="text-transform: uppercase"
               filled
@@ -265,7 +265,7 @@
               v-model="personal[0].PHEALTHNo"
             />
           </div>
-          <div class="col-md-4 col-xs-6">
+          <div class="col-12 col-md-4 col-xs-6">
             <q-input
               style="text-transform: uppercase"
               filled
@@ -276,7 +276,7 @@
               v-model="personal[0].SSSNo"
             />
           </div>
-          <div class="col-md-4 col-xs-6">
+          <div class="col-12 col-md-4 col-xs-6">
             <q-input
               style="text-transform: uppercase"
               filled
@@ -287,7 +287,7 @@
               v-model="personal[0].TINNo"
             />
           </div>
-          <div class="col-md-4 col-xs-6">
+          <div class="col-12 col-md-4 col-xs-6">
             <q-input
               :disable="true"
               v-model="personal[0].ControlNo"
@@ -413,7 +413,7 @@
               </q-select>
             </div>
           </div> -->
-          <div class="col-md-6 col-xs-6 q-pa-sm">
+          <div class="col-12 col-md-6 col-xs-6 q-pa-sm">
             <label for="Address">Religious Sector: </label>
             <div class="">
               <q-input
@@ -439,7 +439,10 @@
               </q-input>
             </div>
           </div>
-          <div class="col-md-6 col-xs-6 q-pa-sm" style="margin-top: 14px">
+          <div
+            class="col-md-6 col-12 col-xs-6 q-pa-sm"
+            style="margin-top: 14px"
+          >
             <div></div>
             <div>
               <q-input
@@ -470,7 +473,7 @@
           >Residential Address:
         </label>
         <div class="row">
-          <div class="col-md-4 col-xs-6">
+          <div class="col-md-4 col-xs-12">
             <q-input
               :rules="inputRules"
               lazy-rules
@@ -488,7 +491,7 @@
               dense
             />
           </div>
-          <div class="col-md-4 col-xs-6">
+          <div class="col-md-4 col-xs-12">
             <q-input
               readonly
               lazy-rules
@@ -502,7 +505,7 @@
               dense
             />
           </div>
-          <div class="col-md-4 col-xs-6">
+          <div class="col-md-4 col-xs-12">
             <q-input
               lazy-rules
               :rules="inputRules"
@@ -516,7 +519,7 @@
               dense
             />
           </div>
-          <div class="col-md-4 col-xs-6">
+          <div class="col-md-4 col-xs-12">
             <q-select
               lazy-rules
               readonly
@@ -551,7 +554,7 @@
               dense
             />
           </div>
-          <div class="col-md-8 col-xs-6">
+          <div class="col-md-8 col-xs-12">
             <q-input
               style="text-transform: uppercase"
               v-model="personal[0].Rhouse"
@@ -562,7 +565,7 @@
               class="q-pa-sm"
             />
           </div>
-          <div class="col-md-4 col-xs-6">
+          <div class="col-md-4 col-xs-12">
             <q-input
               v-model="personal[0].Rzip"
               readonly
@@ -575,7 +578,7 @@
         </div>
 
         <div class="row">
-          <div class="col-md-4 col-xs-6">
+          <div class="col-md-4 col-xs-12">
             <q-input
               lazy-rules
               :rules="inputRules"
@@ -593,7 +596,7 @@
               dense
             />
           </div>
-          <div class="col-md-4 col-xs-6">
+          <div class="col-md-4 col-xs-12">
             <q-input
               lazy-rules
               :rules="inputRules"
@@ -607,7 +610,7 @@
               dense
             />
           </div>
-          <div class="col-md-4 col-xs-6">
+          <div class="col-md-4 col-xs-12">
             <q-input
               lazy-rules
               :rules="inputRules"
@@ -621,7 +624,7 @@
               dense
             />
           </div>
-          <div class="col-md-4 col-xs-6">
+          <div class="col-md-4 col-xs-12">
             <q-input
               lazy-rules
               readonly
@@ -656,7 +659,7 @@
               dense
             />
           </div>
-          <div class="col-md-8 col-xs-6">
+          <div class="col-md-8 col-xs-12">
             <q-input
               style="text-transform: uppercase"
               v-model="personal[0].Phouse"
@@ -667,7 +670,7 @@
               class="q-pa-sm"
             />
           </div>
-          <div class="col-md-4 col-xs-6">
+          <div class="col-md-4 col-xs-12">
             <q-input
               style="text-transform: uppercase"
               v-model="personal[0].Pzip"
