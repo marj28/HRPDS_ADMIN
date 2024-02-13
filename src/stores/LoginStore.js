@@ -49,4 +49,5 @@ export const useLoginStore = defineStore("LoginStore", {
       return 1;
     },
   },
+  persist: true,
 });

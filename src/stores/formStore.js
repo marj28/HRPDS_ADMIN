@@ -66,6 +66,7 @@ export const useMyStore = pinia.createStore({
       this.activeStep -= 1;
     },
   },
+  persist: true,
 });
 
 export { pinia };

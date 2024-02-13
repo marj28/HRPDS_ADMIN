@@ -21,6 +21,17 @@ const routes = [
         path: "/Announcement",
         component: () => import("pages/AnnouncementPage.vue"),
       },
+
+      {
+        path: "/AccountList",
+        component: () => import("pages/AccountList.vue"),
+      },
+
+      {
+        path: "/LibaRies",
+        component: () => import("pages/LibaRies.vue"),
+      },
+
       { path: "/PDS", component: () => import("pages/PDS.vue") },
 
       {
@@ -36,6 +47,11 @@ const routes = [
         // children: [
         //   { path: '', component: () => import('pages/IndexPage.vue') }
         // ]
+      },
+
+      {
+        path: "/CreateAccount",
+        component: () => import("pages/CreateAccount.vue"),
       },
     ],
   },

@@ -25,7 +25,7 @@
                     {{ title }}
                   </div>
                   <div style="font-size: x-large" class="q-my-md text-center">
-                    Administrator's Portal
+                    Administrator's Record Management System
                   </div>
                 </q-card-section>
                 <q-card-section>
@@ -83,11 +83,12 @@
                         <q-icon name="lock" />
                       </template>
                       <template v-slot:append>
-              <q-icon
-                  :name="visibilityIcon"
-                  @click="switchVisibility()"
-                  class="cursor-pointer" />
-                </template>
+                        <q-icon
+                          :name="visibilityIcon"
+                          @click="switchVisibility()"
+                          class="cursor-pointer"
+                        />
+                      </template>
                     </q-input>
                   </q-form>
                 </q-card-section>
@@ -129,7 +130,7 @@ export default defineComponent({
       passwordFieldType: "password",
       btnLabel: "LOGIN",
       visibility: false,
-    visibilityIcon: 'visibility'
+      visibilityIcon: "visibility",
     };
   },
   setup() {
@@ -146,24 +147,24 @@ export default defineComponent({
         });
       },
 
-      showLoading () {
+      showLoading() {
         $q.loading.show({
-          message: 'Please Wait'
-        })
-        },
-        hideLoading(){
-          $q.loading.hide()
-        },
+          message: "Please Wait",
+        });
+      },
+      hideLoading() {
+        $q.loading.hide();
+      },
     };
   },
   methods: {
-    switchVisibility(){
-      this.visibility = !this.visibility
-      this.passwordFieldType = this.visibility ? 'text' : 'password'
-      this.visibilityIcon =  this.visibility ? 'visibility_off' : 'visibility'
+    switchVisibility() {
+      this.visibility = !this.visibility;
+      this.passwordFieldType = this.visibility ? "text" : "password";
+      this.visibilityIcon = this.visibility ? "visibility_off" : "visibility";
     },
-    next(){
-      this.$refs['password'].focus()
+    next() {
+      this.$refs["password"].focus();
     },
     short(val) {
       return (val && val.length > 5) || "UserId must be 6 digits ex:`011790`";
@@ -173,18 +174,17 @@ export default defineComponent({
     },
 
     submit() {
-
       this.$refs.username.validate();
       this.$refs.password.validate();
       if (!this.$refs.username.hasError && !this.$refs.password.hasError) {
-        this.showLoading()
+        this.showLoading();
         const store = useLoginStore();
         const data = new FormData();
         data.append("controlno", this.username);
         data.append("password", this.password);
 
         store.userlogin(data).then((e) => {
-          this.hideLoading()
+          this.hideLoading();
           if (e == 0 || e == 2 || e == 3) {
             console.log("failed!");
             //   $q.notify({
@@ -195,7 +195,7 @@ export default defineComponent({
             this.showNotif();
           } else {
             // console.log("Success!")
-            this.$router.push({"path":"/Dashboard"});
+            this.$router.push({ path: "/Dashboard" });
           }
         });
       }

@@ -57,4 +57,5 @@ export const useRequestStore = defineStore("Request", {
       //   console.log("userinfo=",this.degree);
     },
   },
+  persist: true,
 });

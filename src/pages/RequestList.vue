@@ -7,7 +7,6 @@
             <b><p style="font-size: 20px; color: #0c0c0c">Request List</p></b>
           </div>
 
-
           <!--       <div class="col-8 q-pa-sm">
             <q-btn
               icon="camera_enhance"
@@ -50,11 +49,7 @@
           :filter="filter"
           :rows="userrequest"
           :columns="columns"
-
-
-
-          :rows-per-page-options="[5,10,15,20,100]"
-
+          :rows-per-page-options="[10]"
         >
           <template v-slot:body="props">
             <q-tr :props="props" @click="handleRowClick(props.row)">
@@ -117,7 +112,6 @@ export default defineComponent({
           align: "center",
           field: "name1",
 
-
           sortable: true,
         },
 
@@ -126,24 +120,22 @@ export default defineComponent({
           label: "Designation",
           field: "designation",
           sortable: true,
-          align: "center"
+          align: "center",
         },
-        { name: "Status", label: "Status", field: "status",align:"center" },
+        { name: "Status", label: "Status", field: "status", align: "center" },
       ],
 
-
-      userrequest:[],
+      userrequest: [],
     };
   },
 
   computed: {},
 
   created() {
-    const store=useDashboardStore();
+    const store = useDashboardStore();
 
- console.log("imgurl=",store.users);
- this.userrequest=store.users
-
+    console.log("imgurl=", store.users);
+    this.userrequest = store.users;
   },
 
   methods: {
@@ -187,17 +179,15 @@ export default defineComponent({
       this.dialogpersonal = true;
     },
   },
-  setup(){
+  setup() {
     // const store=useDashboardStore();
 
     //  console.log("imgurl=",store.users);
     //  this.userrequest=Object.values(store.users)
     return {
       // store,
-
-
-    }
-  }
+    };
+  },
 });
 </script>
 

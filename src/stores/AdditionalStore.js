@@ -227,4 +227,5 @@ export const useUserInfoStore = defineStore("UserInfo", {
       }
     },
   },
+  persist: true,
 });

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h5 class="q-ml-lg">HRPDS ADMINISTRATOR</h5>
+    <h5 class="q-ml-lg"></h5>
     <!-- <q-separator class="q-mb-lg"></q-separator> -->
     <div class="column items-center" style="">
       <div class="col" style="width: 90%">

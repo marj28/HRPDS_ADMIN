@@ -6,7 +6,7 @@
           <q-card-section class="scroll">
             <div class="text-h6">
               SPECIAL SKILLS AND HOBBIES
-          <!--     <q-btn label="Add" @click="SkillDialog = true"></q-btn> -->
+              <!--     <q-btn label="Add" @click="SkillDialog = true"></q-btn> -->
             </div>
           </q-card-section>
           <q-table
@@ -48,7 +48,7 @@
           <q-card-section class="scroll">
             <div class="text-h6">
               MEMBERSHIP IN ASSOCIATION
-             <!--  <q-btn label="Add" @click="MembershipDialog = true"></q-btn> -->
+              <!--  <q-btn label="Add" @click="MembershipDialog = true"></q-btn> -->
             </div>
           </q-card-section>
           <q-table

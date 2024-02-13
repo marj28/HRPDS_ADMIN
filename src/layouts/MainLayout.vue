@@ -60,6 +60,30 @@
             <q-item-section> ANNOUNCEMENT </q-item-section>
           </q-item>
 
+          <q-item clickable v-ripple exact to="/AccountList">
+            <q-item-section avatar>
+              <q-icon name="admin_panel_settings" />
+            </q-item-section>
+
+            <q-item-section> User Management </q-item-section>
+          </q-item>
+
+          <q-item clickable v-ripple exact to="/LibaRies">
+            <q-item-section avatar>
+              <q-icon name="book" />
+            </q-item-section>
+
+            <q-item-section> Libraries </q-item-section>
+          </q-item>
+
+          <q-item clickable v-ripple exact @click="logout()">
+            <q-item-section avatar>
+              <q-icon name="restart_alt" />
+            </q-item-section>
+
+            <q-item-section> LOG OUT </q-item-section>
+          </q-item>
+
           <!--    <q-item clickable v-ripple exact to="/SampleCodes">
             <q-item-section avatar>
               <q-icon name="campaign" />
@@ -107,7 +131,15 @@ export default defineComponent({
     };
   },
   mounted() {},
-  methods: {},
+  methods: {
+    logout() {
+      window.localStorage.clear();
+      window.localStorage.removeItem("authToken");
+      window.history.replaceState({}, document.title, "/login");
+      window.history.go(-(window.history.length - 0));
+      this.$router.replace("/");
+    },
+  },
 
   setup() {
     const store = useLoginStore();

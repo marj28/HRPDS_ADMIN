@@ -136,4 +136,5 @@ export const useDashboardStore = defineStore("DashboardStore", {
       //   console.log("userinfo=",this.degree);
     },
   },
+  persist: true,
 });

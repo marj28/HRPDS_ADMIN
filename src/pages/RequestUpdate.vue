@@ -30,7 +30,7 @@
           <p class="q-mt-md">
             <b>Designation:</b> {{ userinfo[0].designation }}
           </p>
-          <p class="uppadding"><b>Status:</b> {{ userinfo[0].status }}</p>
+          <p class="uppadding"><b>Status:</b> {{ displayStatus }}</p>
         </div>
       </div>
     </div>
@@ -73,6 +73,10 @@
                         row-key="id"
                         :rows-per-page-options="[5]"
                       >
+                        <!--   <template v-slot:body-cell-columnName="props">
+                          {{ props.row.label.toUpperCase() }}
+                        </template> -->
+
                         <template v-slot:body-cell-status="props">
                           <q-td
                             :props="props"
@@ -1319,6 +1323,7 @@ export default {
           label: "REQUEST FIELD",
           field: "label",
           sortable: true,
+          format: (val) => val.toUpperCase(),
         },
         {
           name: "datafrom",
@@ -1333,6 +1338,7 @@ export default {
           label: "DATA TO",
           field: "Dto",
           sortable: true,
+          format: (val) => val.toUpperCase(),
         },
         {
           name: "status",
@@ -1362,6 +1368,7 @@ export default {
           align: "left",
           field: "name",
           sortable: true,
+          format: (val) => val.toUpperCase(),
         },
         {
           name: "age",
@@ -1393,6 +1400,7 @@ export default {
           label: "CHILD NAME",
           field: "ChildName",
           sortable: true,
+          format: (val) => val.toUpperCase(),
         },
         {
           name: "BirthDate",
@@ -1436,6 +1444,7 @@ export default {
           label: "EDUCATION LEVEL",
           field: "Education",
           sortable: true,
+          format: (val) => val.toUpperCase(),
         },
         {
           name: "School",
@@ -1443,6 +1452,7 @@ export default {
           label: "SCHOOL NAME",
           field: "School",
           sortable: true,
+          format: (val) => val.toUpperCase(),
         },
 
         {
@@ -1451,6 +1461,7 @@ export default {
           label: "BASIC EDUCATION/DEGREE/COURSE",
           field: "Degree",
           sortable: true,
+          format: (val) => val.toUpperCase(),
         },
 
         {
@@ -1475,6 +1486,7 @@ export default {
           label: "GRADUATED",
           field: "Graduated",
           sortable: true,
+          format: (val) => val.toUpperCase(),
         },
         {
           name: "status",
@@ -1512,6 +1524,7 @@ export default {
           label: "ELIGIBILITY",
           field: "CivilServe",
           sortable: true,
+          format: (val) => val.toUpperCase(),
         },
         /*    {
           name: "Rates",
@@ -1535,6 +1548,7 @@ export default {
           label: "PLACE OF EXAMINIATION",
           field: "Place",
           sortable: true,
+          format: (val) => val.toUpperCase(),
         },
 
         {
@@ -1543,6 +1557,7 @@ export default {
           label: "LICENSE NUMBER",
           field: "Lnumber",
           sortable: true,
+          format: (val) => val.toUpperCase(),
         },
 
         {
@@ -1603,6 +1618,7 @@ export default {
           label: "POSITION TITTLE",
           field: "Wposition",
           sortable: true,
+          format: (val) => val.toUpperCase(),
         },
 
         {
@@ -1611,6 +1627,7 @@ export default {
           label: "DEPARTMENT",
           field: "Wcompany",
           sortable: true,
+          format: (val) => val.toUpperCase(),
         },
 
         {
@@ -1619,6 +1636,7 @@ export default {
           label: "MONTHLY SALARY",
           field: "Wsalary",
           sortable: true,
+          format: (val) => val.toUpperCase(),
         },
 
         {
@@ -1627,6 +1645,7 @@ export default {
           label: "SALARY GRADE",
           field: "Wgrade",
           sortable: true,
+          format: (val) => val.toUpperCase(),
         },
 
         {
@@ -1681,6 +1700,7 @@ export default {
           label: "NAME & ADDRESS OF ORGANIZATION",
           field: "Orgname",
           sortable: true,
+          format: (val) => val.toUpperCase(),
         },
         {
           name: "Datefrom",
@@ -1712,6 +1732,7 @@ export default {
           label: "POSITION",
           field: "Orgposition",
           sortable: true,
+          format: (val) => val.toUpperCase(),
         },
 
         {
@@ -1750,6 +1771,7 @@ export default {
           label: "Training",
           field: "Training",
           sortable: true,
+          format: (val) => val.toUpperCase(),
         },
         {
           name: "Datefrom",
@@ -1781,6 +1803,7 @@ export default {
           label: "TYPE",
           field: "type",
           sortable: true,
+          format: (val) => val.toUpperCase(),
         },
 
         {
@@ -1789,6 +1812,7 @@ export default {
           label: "CONDUCTED / SPONSORED BY",
           field: "Conductor",
           sortable: true,
+          format: (val) => val.toUpperCase(),
         },
 
         {
@@ -1829,6 +1853,7 @@ export default {
           field: "skill",
           format: (val) => `${val}`,
           sortable: true,
+          format: (val) => val.toUpperCase(),
         },
         {
           name: "status",
@@ -1868,6 +1893,7 @@ export default {
           field: "NonAcademic",
           format: (val) => `${val}`,
           sortable: true,
+          format: (val) => val.toUpperCase(),
         },
         {
           name: "status",
@@ -1907,6 +1933,7 @@ export default {
           field: "Organization",
           format: (val) => `${val}`,
           sortable: true,
+          format: (val) => val.toUpperCase(),
         },
         {
           name: "status",
@@ -2095,6 +2122,18 @@ export default {
   },
 
   computed: {
+    displayStatus() {
+      const originalStatus = this.userinfo[0].status;
+      if (originalStatus === "REGULAR") {
+        return "PERMANENT";
+      } else if (originalStatus === "CONTRACTUAL") {
+        return "JOB ORDER";
+      } else {
+        // Handle other cases if needed
+        return originalStatus;
+      }
+    },
+
     sortedTableData_CHILD_Pending_Accept_Deny() {
       return [...this.requestChildss].sort(
         (a, b) => this.statusOrder[a.status] - this.statusOrder[b.status]
@@ -2223,7 +2262,7 @@ export default {
       const startDate = new Date(date);
       const timeDifference = today.getTime() - startDate.getTime();
       const daysDifference =
-        Math.ceil(timeDifference / (1000 * 3600 * 24)) + " Days";
+        Math.ceil(timeDifference / (1000 * 3600 * 24)) + " DAYS";
       return daysDifference;
     },
 
@@ -2233,7 +2272,7 @@ export default {
       const startDate = new Date(date);
       const timeDifference = today.getTime() - startDate.getTime();
       const daysDifference =
-        Math.ceil(timeDifference / (1000 * 3600 * 24)) + " Days";
+        Math.ceil(timeDifference / (1000 * 3600 * 24)) + " DAYS";
       return daysDifference;
     },
 
@@ -2243,7 +2282,7 @@ export default {
       const startDate = new Date(date);
       const timeDifference = today.getTime() - startDate.getTime();
       const daysDifference =
-        Math.ceil(timeDifference / (1000 * 3600 * 24)) + " Days";
+        Math.ceil(timeDifference / (1000 * 3600 * 24)) + " DAYS";
       return daysDifference;
     },
 
@@ -2253,7 +2292,7 @@ export default {
       const startDate = new Date(date);
       const timeDifference = today.getTime() - startDate.getTime();
       const daysDifference =
-        Math.ceil(timeDifference / (1000 * 3600 * 24)) + " Days";
+        Math.ceil(timeDifference / (1000 * 3600 * 24)) + " DAYS";
       return daysDifference;
     },
 
@@ -2263,7 +2302,7 @@ export default {
       const startDate = new Date(date);
       const timeDifference = today.getTime() - startDate.getTime();
       const daysDifference =
-        Math.ceil(timeDifference / (1000 * 3600 * 24)) + " Days";
+        Math.ceil(timeDifference / (1000 * 3600 * 24)) + " DAYS";
       return daysDifference;
     },
 
@@ -2273,7 +2312,7 @@ export default {
       const startDate = new Date(date);
       const timeDifference = today.getTime() - startDate.getTime();
       const daysDifference =
-        Math.ceil(timeDifference / (1000 * 3600 * 24)) + " Days";
+        Math.ceil(timeDifference / (1000 * 3600 * 24)) + " DAYS";
       return daysDifference;
     },
 
@@ -2283,7 +2322,7 @@ export default {
       const startDate = new Date(date);
       const timeDifference = today.getTime() - startDate.getTime();
       const daysDifference =
-        Math.ceil(timeDifference / (1000 * 3600 * 24)) + " Days";
+        Math.ceil(timeDifference / (1000 * 3600 * 24)) + " DAYS";
       return daysDifference;
     },
 
@@ -2293,7 +2332,7 @@ export default {
       const startDate = new Date(date);
       const timeDifference = today.getTime() - startDate.getTime();
       const daysDifference =
-        Math.ceil(timeDifference / (1000 * 3600 * 24)) + " Days";
+        Math.ceil(timeDifference / (1000 * 3600 * 24)) + " DAYS";
       return daysDifference;
     },
 
@@ -2303,7 +2342,7 @@ export default {
       const startDate = new Date(date);
       const timeDifference = today.getTime() - startDate.getTime();
       const daysDifference =
-        Math.ceil(timeDifference / (1000 * 3600 * 24)) + " Days";
+        Math.ceil(timeDifference / (1000 * 3600 * 24)) + " DAYS";
       return daysDifference;
     },
 
@@ -2313,7 +2352,7 @@ export default {
       const startDate = new Date(date);
       const timeDifference = today.getTime() - startDate.getTime();
       const daysDifference =
-        Math.ceil(timeDifference / (1000 * 3600 * 24)) + " Days";
+        Math.ceil(timeDifference / (1000 * 3600 * 24)) + " DAYS";
       return daysDifference;
     },
 
@@ -2323,7 +2362,7 @@ export default {
       const startDate = new Date(date);
       const timeDifference = today.getTime() - startDate.getTime();
       const daysDifference =
-        Math.ceil(timeDifference / (1000 * 3600 * 24)) + " Days";
+        Math.ceil(timeDifference / (1000 * 3600 * 24)) + " DAYS";
       return daysDifference;
     },
 
