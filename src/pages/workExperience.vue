@@ -316,6 +316,8 @@ export default {
     this.ControlNo = userstore.controlno;
     const userinfostore = useUserInfoStore();
 
+
+    
     let data = new FormData();
     data.append("controlno", userstore.controlno);
     userinfostore.getworkexp(data).then((res) => {

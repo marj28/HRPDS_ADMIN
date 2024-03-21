@@ -1,9 +1,9 @@
 <template>
   <div>
     <div>
-      <h5 class="q-ml-lg">HRPDS ANNOUNCEMENT</h5>
       <div class="column items-center" style="">
         <div class="col" style="width: 90%">
+          <h5 class="">HRPDS ANNOUNCEMENT</h5>
           <q-btn
             label="CREATE"
             @click="Rowclick"
@@ -19,7 +19,7 @@
               :rows="announcement"
               :columns="columns"
               row-key="id"
-              :rows-per-page-options="[0]"
+              :rows-per-page-options="[10]"
             >
               <template v-slot:body-cell-actions="{ row }">
                 <div class="actionsbtn">
@@ -69,8 +69,6 @@
                 <div class="row">
                   <div class="col">
                     <q-file
-
-
                       style="display: none"
                       v-model="fileimage"
                       @update:model-value="handleUpload"
@@ -87,15 +85,8 @@
                   </div>
                 </div>
                 <div class="q-pt-sm">
-                  <q-img
-
-                    :src="fileimagesrc"
-                    spinner-color="white"
-                  ></q-img>
+                  <q-img :src="fileimagesrc" spinner-color="white"></q-img>
                 </div>
-
-
-              
               </q-card-section>
 
               <q-separator />
@@ -122,7 +113,7 @@
 
 <script>
 import { useDashboardStore } from "src/stores/Dashboard";
-import {ref} from 'vue'
+import { ref } from "vue";
 export default {
   data() {
     return {
@@ -156,7 +147,6 @@ export default {
   },
 
   setup() {
-
     const file = ref(null);
     const fileimage = ref(null);
     const fileimagesrc = ref("");
@@ -175,7 +165,6 @@ export default {
       fileimagesrc,
       handleUpload,
       handleUploadBtnClick,
-
     };
   },
 

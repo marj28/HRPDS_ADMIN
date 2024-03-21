@@ -7,6 +7,7 @@ export const useDashboardStore = defineStore("DashboardStore", {
     users: [],
     usereducation: [],
     announcements: [],
+    accountlists: [],
     userrequest: [],
     requestChild: [],
     requestEduc_Background: [],
@@ -24,7 +25,9 @@ export const useDashboardStore = defineStore("DashboardStore", {
     images: [],
   }),
   getters: {
+
     // doubleCount: (state) => state.counter * 2,
+    
   },
   actions: {
     async getrequest() {
@@ -43,6 +46,14 @@ export const useDashboardStore = defineStore("DashboardStore", {
       );
       this.announcements = res.data.announcement;
     },
+
+    async getaccountlist() {
+      // `http://10.0.1.23:82/HRPORTAL/login.php`
+      let res = await axios.get(`
+      http://10.0.1.23:82/hrportal/adminusers.php`);
+      this.accountlists = res.data.users;
+    },
+
     async saveannouncements(payload) {
       // `http://10.0.1.23:82/HRPORTAL/login.php`
 

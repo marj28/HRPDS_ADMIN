@@ -1,14 +1,30 @@
 <template>
   <div>
     <div>
-      <h5 class="q-ml-lg">HR ADMIN ACCOUNT LIST</h5>
       <div class="column items-center" style="">
         <div class="col" style="width: 90%">
-          <q-btn
-            label="CREATE"
-            @click="createaccount"
-            class="q-mb-sm q-mr-md text-green"
-          />
+          <h5>HR ADMIN ACCOUNT LIST</h5>
+          <div class="row">
+            <q-btn
+              label="CREATE"
+              @click="createaccount"
+              class="q-mb-sm q-mr-md text-green"
+            />
+            <div class="col-2 q-pa-sm">
+              <!--    <template v-slot:top-right> -->
+              <q-input
+                dense
+                debounce="300"
+                v-model="filter"
+                placeholder="Search"
+              >
+                <template v-slot:append>
+                  <q-icon name="search" />
+                </template>
+              </q-input>
+              <!--    </template> -->
+            </div>
+          </div>
           <q-card class="q-pa-sm" style="text-align: center">
             <q-table
               class="my-sticky-header-table"
@@ -16,28 +32,29 @@
               bordered
               title="Account List"
               dense
-              :rows="announcement"
+              :filter="filter"
+              :rows="accountlist"
               :columns="columns"
               row-key="id"
-              :rows-per-page-options="[0]"
+              :rows-per-page-options="[10]"
             >
               <template v-slot:body-cell-actions="{ row }">
-                <div class="actionsbtn">
+                <div class="actionsbtn q-gutter-lg">
                   <q-btn
-                    icon="edit"
                     flat
                     round
-                    color="secondary"
-                    @click="editItem(row)"
+                    color="green"
+                    @click="accept_NonAcademic(row)"
                   >
+                    EDIT
                   </q-btn>
                   <q-btn
-                    icon="delete"
                     flat
                     round
                     color="deep-orange"
-                    @click="deleteItem(row)"
+                    @click="deleteItem_Non_Academic(row)"
                   >
+                    DELETE
                   </q-btn>
                 </div>
               </template>
@@ -117,6 +134,7 @@ import { ref } from "vue";
 export default {
   data() {
     return {
+      filter: "",
       id: "",
       announcementname: "",
       CreationDialog: false,
@@ -125,10 +143,10 @@ export default {
       imageUrl: null,
       columns: [
         {
-          name: "lastname",
+          name: "Surname",
           align: "left",
           label: "Last Name",
-          field: "lastname",
+          field: "Surname",
           sortable: true,
         },
         {
@@ -159,18 +177,20 @@ export default {
           field: "designation",
           sortable: true,
         },
-        /*   {
+
+        {
           name: "actions",
           label: "ACTIONS",
           field: "actions",
           align: "center",
-        }, */
+        },
       ],
       rows: [
         {
           test: "Test Sample 1",
         },
       ],
+      accountlist: [],
     };
   },
 
@@ -198,9 +218,9 @@ export default {
 
   created() {
     const store = useDashboardStore();
-    store.getannouncements().then((res) => {
-      this.announcement = store.announcements;
-      console.log("announcement=", this.announcement);
+    store.getaccountlist().then((res) => {
+      this.accountlist = store.accountlists;
+      console.log("Account List=", this.accountlist);
     });
   },
   methods: {

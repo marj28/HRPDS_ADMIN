@@ -147,6 +147,16 @@ export default defineComponent({
         });
       },
 
+      showNotifsixdigits() {
+        $q.notify({
+          icon: "error",
+          color: "negative",
+          message: "User ID Must be at Least 6 Digits",
+          position: "center",
+          timeout: "2000",
+        });
+      },
+
       showLoading() {
         $q.loading.show({
           message: "Please Wait",
@@ -174,6 +184,11 @@ export default defineComponent({
     },
 
     submit() {
+      if (this.username.length < 6) {
+        console.log("Email must be at least 6 characters long");
+        this.showNotifsixdigits();
+        return;
+      }
       this.$refs.username.validate();
       this.$refs.password.validate();
       if (!this.$refs.username.hasError && !this.$refs.password.hasError) {
